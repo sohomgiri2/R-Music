@@ -518,79 +518,63 @@
                 </div>
             </div>
 
-            <div id="vaultGallerySection" class="hidden space-y-4">
+            <div id="vaultMenuSection" class="hidden text-center py-6 space-y-4">
+                <div class="w-14 h-14 rounded-full bg-theme-500/20 text-theme-400 border border-theme-500/40 flex items-center justify-center text-2xl mx-auto neon-glow">
+                    <i class="fa-solid fa-folder-open"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white">Select Vault Category</h3>
+                <p class="text-xs text-gray-400">Choose which encrypted offline media repository to access.</p>
+                
+                <div class="max-w-xs mx-auto space-y-3 pt-2">
+                    <button id="vaultOptionPhotoBtn" class="w-full py-3 rounded-xl bg-theme-500/20 hover:bg-theme-500/30 border border-theme-500/40 text-theme-400 font-extrabold text-xs transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-images"></i>
+                        <span>Photos Gallery (20 Slots)</span>
+                    </button>
+                    <button id="vaultOptionVideoBtn" class="w-full py-3 rounded-xl bg-theme-500/20 hover:bg-theme-500/30 border border-theme-500/40 text-theme-400 font-extrabold text-xs transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-video"></i>
+                        <span>Videos Gallery (10 Slots)</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="vaultPhotoGallerySection" class="hidden space-y-4">
                 <div class="flex items-center justify-between border-b border-gray-800 pb-3">
                     <h3 class="text-sm font-extrabold text-theme-400 flex items-center space-x-2 uppercase tracking-wider">
                         <i class="fa-solid fa-images"></i>
-                        <span>Encrypted Offline Vault Gallery (10 Slots)</span>
+                        <span>Encrypted Offline Photos (20 Slots)</span>
                     </h3>
-                    <button id="vaultLockBtn" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-lg">
-                        <i class="fa-solid fa-lock"></i> Lock Vault
-                    </button>
+                    <div class="flex items-center space-x-2">
+                        <button id="backToVaultMenuBtn1" class="text-xs text-gray-400 hover:text-white bg-gray-900 border border-gray-800 px-3 py-1 rounded-lg">
+                            <i class="fa-solid fa-arrow-left"></i> Menu
+                        </button>
+                        <button id="vaultLockBtn1" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-lg">
+                            <i class="fa-solid fa-lock"></i> Lock
+                        </button>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 max-h-[60vh] overflow-y-auto p-1">
-                    <div class="bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group">
-                        <div class="w-full h-28 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                            <img src="./photo1.png" alt="Vault Photo 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\pid=\'rect\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
-                        </div>
-                        <span class="text-[10px] text-gray-400 mt-2 font-mono">photo1.png</span>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-[60vh] overflow-y-auto p-1" id="vaultPhotoGrid">
                     </div>
-                    <div class="bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group">
-                        <div class="w-full h-28 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                            <img src="./photo2.png" alt="Vault Photo 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
-                        </div>
-                        <span class="text-[10px] text-gray-400 mt-2 font-mono">photo2.png</span>
-                    </div>
-                    <div class="bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group">
-                        <div class="w-full h-28 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                            <img src="./photo3.png" alt="Vault Photo 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
-                        </div>
-                        <span class="text-[10px] text-gray-400 mt-2 font-mono">photo3.png</span>
-                    </div>
-                    <div class="bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group">
-                        <div class="w-full h-28 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                            <img src="./photo4.png" alt="Vault Photo 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
-                        </div>
-                        <span class="text-[10px] text-gray-400 mt-2 font-mono">photo4.png</span>
-                    </div>
-                    <div class="bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group">
-                        <div class="w-full h-28 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                            <img src="./photo5.png" alt="Vault Photo 5" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
-                        </div>
-                        <span class="text-[10px] text-gray-400 mt-2 font-mono">photo5.png</span>
-                    </div>
-                    <div class="bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group">
-                        <div class="w-full h-28 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                            <img src="./photo6.png" alt="Vault Photo 6" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
-                        </div>
-                        <span class="text-[10px] text-gray-400 mt-2 font-mono">photo6.png</span>
-                    </div>
-                    <div class="bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group">
-                        <div class="w-full h-28 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                            <img src="./photo7.png" alt="Vault Photo 7" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
-                        </div>
-                        <span class="text-[10px] text-gray-400 mt-2 font-mono">photo7.png</span>
-                    </div>
-                    <div class="bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group">
-                        <div class="w-full h-28 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                            <img src="./photo8.png" alt="Vault Photo 8" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
-                        </div>
-                        <span class="text-[10px] text-gray-400 mt-2 font-mono">photo8.png</span>
-                    </div>
-                    <div class="bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group">
-                        <div class="w-full h-28 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                            <img src="./photo9.png" alt="Vault Photo 9" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
-                        </div>
-                        <span class="text-[10px] text-gray-400 mt-2 font-mono">photo9.png</span>
-                    </div>
-                    <div class="bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group">
-                        <div class="w-full h-28 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                            <img src="./photo10.png" alt="Vault Photo 10" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
-                        </div>
-                        <span class="text-[10px] text-gray-400 mt-2 font-mono">photo10.png</span>
+            </div>
+
+            <div id="vaultVideoGallerySection" class="hidden space-y-4">
+                <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+                    <h3 class="text-sm font-extrabold text-theme-400 flex items-center space-x-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-video"></i>
+                        <span>Encrypted Offline Videos (10 Slots)</span>
+                    </h3>
+                    <div class="flex items-center space-x-2">
+                        <button id="backToVaultMenuBtn2" class="text-xs text-gray-400 hover:text-white bg-gray-900 border border-gray-800 px-3 py-1 rounded-lg">
+                            <i class="fa-solid fa-arrow-left"></i> Menu
+                        </button>
+                        <button id="vaultLockBtn2" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-lg">
+                            <i class="fa-solid fa-lock"></i> Lock
+                        </button>
                     </div>
                 </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[60vh] overflow-y-auto p-1" id="vaultVideoGrid">
+                    </div>
             </div>
         </div>
     </div>
@@ -658,6 +642,7 @@
 
     <script>
         let songs = [];
+        let favorites = JSON.parse(localStorage.getItem('r_music_favorites') || '[]');
         let currentSongIndex = -1;
         let isPlaying = false;
         let isShuffle = false;
@@ -768,14 +753,18 @@
 
             files.forEach((f, i) => {
                 if (f.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|flac)$/i.test(f.name)) {
+                    const cleanTitle = f.name.replace(/\.[^/.]+$/, "");
                     const trackData = {
-                        id: "local_" + Date.now() + "_" + i + "_" + Math.random().toString(36).substr(2, 4),
-                        title: f.name.replace(/\.[^/.]+$/, ""),
+                        id: "local_" + cleanTitle + "_" + i,
+                        title: cleanTitle,
                         artist: "Local Storage Folder",
                         url: URL.createObjectURL(f),
                         fileObj: f
                     };
-                    songs.push(trackData);
+                    // Prevent duplicates based on title and filename
+                    if (!songs.some(s => s.title === trackData.title)) {
+                        songs.push(trackData);
+                    }
                 }
             });
 
@@ -1028,20 +1017,30 @@
         document.getElementById('fullScreenPlayerBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.remove('hidden');
         document.getElementById('closeFullScreenBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.add('hidden');
 
-        // Secret Vault Logic
+        // Secret Vault Logic with 20 Photo Slots and 10 Video Slots + Menu Entry Options
         const secretVaultTrigger = document.getElementById('secretVaultTrigger');
         const secretVaultModal = document.getElementById('secretVaultModal');
         const closeVaultBtn = document.getElementById('closeVaultBtn');
         const vaultAuthSection = document.getElementById('vaultAuthSection');
-        const vaultGallerySection = document.getElementById('vaultGallerySection');
+        const vaultMenuSection = document.getElementById('vaultMenuSection');
+        const vaultPhotoGallerySection = document.getElementById('vaultPhotoGallerySection');
+        const vaultVideoGallerySection = document.getElementById('vaultVideoGallerySection');
         const vaultPasswordInput = document.getElementById('vaultPasswordInput');
         const vaultUnlockBtn = document.getElementById('vaultUnlockBtn');
-        const vaultLockBtn = document.getElementById('vaultLockBtn');
+        
+        const vaultOptionPhotoBtn = document.getElementById('vaultOptionPhotoBtn');
+        const vaultOptionVideoBtn = document.getElementById('vaultOptionVideoBtn');
+        const backToVaultMenuBtn1 = document.getElementById('backToVaultMenuBtn1');
+        const backToVaultMenuBtn2 = document.getElementById('backToVaultMenuBtn2');
+        const vaultLockBtn1 = document.getElementById('vaultLockBtn1');
+        const vaultLockBtn2 = document.getElementById('vaultLockBtn2');
 
         secretVaultTrigger.onclick = () => {
             secretVaultModal.classList.remove('hidden');
             vaultAuthSection.classList.remove('hidden');
-            vaultGallerySection.classList.add('hidden');
+            vaultMenuSection.classList.add('hidden');
+            vaultPhotoGallerySection.classList.add('hidden');
+            vaultVideoGallerySection.classList.add('hidden');
             vaultPasswordInput.value = '';
         };
 
@@ -1052,7 +1051,7 @@
         vaultUnlockBtn.onclick = () => {
             if (vaultPasswordInput.value === 'Rihana') {
                 vaultAuthSection.classList.add('hidden');
-                vaultGallerySection.classList.remove('hidden');
+                vaultMenuSection.classList.remove('hidden');
             } else {
                 alert("Incorrect password! Access denied.");
                 vaultPasswordInput.value = '';
@@ -1063,41 +1062,164 @@
             if(e.key === 'Enter') vaultUnlockBtn.click();
         };
 
-        vaultLockBtn.onclick = () => {
-            vaultGallerySection.classList.add('hidden');
+        vaultOptionPhotoBtn.onclick = () => {
+            vaultMenuSection.classList.add('hidden');
+            vaultPhotoGallerySection.classList.remove('hidden');
+            populatePhotoSlots();
+        };
+
+        vaultOptionVideoBtn.onclick = () => {
+            vaultMenuSection.classList.add('hidden');
+            vaultVideoGallerySection.classList.remove('hidden');
+            populateVideoSlots();
+        };
+
+        backToVaultMenuBtn1.onclick = () => {
+            vaultPhotoGallerySection.classList.add('hidden');
+            vaultMenuSection.classList.remove('hidden');
+        };
+
+        backToVaultMenuBtn2.onclick = () => {
+            vaultVideoGallerySection.classList.add('hidden');
+            vaultMenuSection.classList.remove('hidden');
+        };
+
+        const lockVaultAction = () => {
+            vaultPhotoGallerySection.classList.add('hidden');
+            vaultVideoGallerySection.classList.add('hidden');
+            vaultMenuSection.classList.add('hidden');
             vaultAuthSection.classList.remove('hidden');
             vaultPasswordInput.value = '';
         };
 
+        vaultLockBtn1.onclick = lockVaultAction;
+        vaultLockBtn2.onclick = lockVaultAction;
+
+        function populatePhotoSlots() {
+            const grid = document.getElementById('vaultPhotoGrid');
+            grid.innerHTML = '';
+            for(let i = 1; i <= 20; i++) {
+                const item = document.createElement('div');
+                item.className = 'bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group';
+                item.innerHTML = `
+                    <div class="w-full h-24 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
+                        <img src="./photo${i}.png" alt="Vault Photo ${i}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-2 font-mono">photo${i}.png</span>
+                `;
+                grid.appendChild(item);
+            }
+        }
+
+        function populateVideoSlots() {
+            const grid = document.getElementById('vaultVideoGrid');
+            grid.innerHTML = '';
+            for(let i = 1; i <= 10; i++) {
+                const item = document.createElement('div');
+                item.className = 'bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-3 group';
+                item.innerHTML = `
+                    <div class="w-full h-32 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center border border-gray-800">
+                        <video src="./video${i}.mp4" class="w-full h-full object-cover" muted preload="metadata" onerror="this.style.display='none'"></video>
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-all pointer-events-none">
+                            <i class="fa-solid fa-play text-theme-400 text-lg"></i>
+                        </div>
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-2 font-mono">video${i}.mp4</span>
+                `;
+                grid.appendChild(item);
+            }
+        }
+
+        // Playlist Permanent Favorite & Remove System
         function renderTrackList(searchTerm = '') {
             const list = document.getElementById('trackList');
             const empty = document.getElementById('emptyState');
             list.innerHTML = '';
 
-            let filteredSongs = songs.filter(s => s.title.toLowerCase().includes(searchTerm));
+            // Merge active imported songs with permanent favorite objects if stored in external persistent storage (localStorage)
+            let combinedMap = new Map();
+            songs.forEach(s => combinedMap.set(s.title, s));
+            favorites.forEach(favTitle => {
+                if(!combinedMap.has(favTitle)) {
+                    combinedMap.set(favTitle, {
+                        id: "fav_" + favTitle,
+                        title: favTitle,
+                        artist: "Permanent Favorite Storage",
+                        url: "", // Permanent reference placeholder until re-imported or played from device
+                        fileObj: null,
+                        isFavoriteOnly: true
+                    });
+                }
+            });
+
+            let displayTracks = Array.from(combinedMap.values());
+            let filteredSongs = displayTracks.filter(s => s.title.toLowerCase().includes(searchTerm));
 
             if (filteredSongs.length === 0) {
                 if(empty) empty.style.display = 'block';
-                document.getElementById('songCount').textContent = songs.length + ' Tracks';
+                document.getElementById('songCount').textContent = displayTracks.length + ' Tracks';
                 return;
             } else { if(empty) empty.style.display = 'none'; }
 
             filteredSongs.forEach((s) => {
-                const originalIndex = songs.findIndex(orig => orig.id === s.id);
+                const isFav = favorites.includes(s.title);
+                const isCurrent = (songs[currentSongIndex] && songs[currentSongIndex].title === s.title);
+                
                 const item = document.createElement('div');
-                item.className = `p-3 rounded-xl text-xs cursor-pointer flex items-center justify-between transition-all ${originalIndex === currentSongIndex ? 'bg-theme-500/20 text-theme-400 font-bold border border-theme-500/30' : 'bg-gray-950/80 hover:bg-gray-900 text-gray-300 border border-gray-800/60'}`;
+                item.className = `p-3 rounded-xl text-xs flex items-center justify-between transition-all ${isCurrent ? 'bg-theme-500/20 text-theme-400 font-bold border border-theme-500/30' : 'bg-gray-950/80 hover:bg-gray-900 text-gray-300 border border-gray-800/60'}`;
+                
                 item.innerHTML = `
-                    <div class="flex items-center space-x-3 overflow-hidden">
+                    <div class="flex items-center space-x-3 overflow-hidden cursor-pointer flex-1" title="Play Track">
                         <i class="fa-solid fa-music text-theme-400"></i>
-                        <p class="truncate font-semibold">${s.title}</p>
+                        <p class="truncate font-semibold">${s.title} ${s.isFavoriteOnly ? '<span class="text-[9px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded ml-1">Favorite Saved</span>' : ''}</p>
                     </div>
-                    <span class="text-[10px] text-gray-500 font-mono">${s.artist}</span>
+                    <div class="flex items-center space-x-2 ml-2">
+                        <button title="Favorite Song" class="fav-btn px-2 py-1 rounded-lg text-xs transition-all ${isFav ? 'text-amber-400 bg-amber-500/20 border border-amber-500/30' : 'text-gray-400 hover:text-amber-400 bg-gray-900 border border-gray-800'}">
+                            <i class="fa-solid fa-star"></i>
+                        </button>
+                        <button title="Remove Song" class="remove-btn px-2 py-1 rounded-lg text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
                 `;
-                item.onclick = () => { loadSong(originalIndex); playAudio(); };
+
+                // Song click to play if url exists, otherwise prompt to re-import
+                item.querySelector('.flex-1').onclick = () => {
+                    const realIndex = songs.findIndex(orig => orig.title === s.title);
+                    if(realIndex !== -1) {
+                        loadSong(realIndex);
+                        playAudio();
+                    } else {
+                        alert(`"${s.title}" is saved in permanent favorites storage! Please import your folder/file to play its audio stream.`);
+                    }
+                };
+
+                // Favorite option button
+                item.querySelector('.fav-btn').onclick = (e) => {
+                    e.stopPropagation();
+                    if(favorites.includes(s.title)) {
+                        favorites = favorites.filter(fav => fav !== s.title);
+                    } else {
+                        favorites.push(s.title);
+                    }
+                    localStorage.setItem('r_music_favorites', JSON.stringify(favorites));
+                    renderTrackList(searchTerm);
+                };
+
+                // Remove option button
+                item.querySelector('.remove-btn').onclick = (e) => {
+                    e.stopPropagation();
+                    songs = songs.filter(orig => orig.title !== s.title);
+                    favorites = favorites.filter(fav => fav !== s.title);
+                    localStorage.setItem('r_music_favorites', JSON.stringify(favorites));
+                    if(currentSongIndex >= songs.length) currentSongIndex = songs.length - 1;
+                    renderTrackList(searchTerm);
+                };
+
                 list.appendChild(item);
             });
 
-            document.getElementById('songCount').textContent = songs.length + " Tracks";
+            document.getElementById('songCount').textContent = displayTracks.length + " Tracks";
         }
 
         function switchTab(tabId) {
