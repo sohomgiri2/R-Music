@@ -41,35 +41,11 @@
             --glow: rgba(14, 165, 233, 0.45);
         }
 
-        /* Real Liquid Glass Theme Overhaul */
-        [data-theme="liquid"] { 
-            --color-400: #38bdf8; 
-            --color-500: #0ea5e9; 
-            --color-600: #0284c7; 
-            --bg-card: rgba(15, 23, 42, 0.35);
-            --border-card: rgba(255, 255, 255, 0.18); 
-            --glow: rgba(56, 189, 248, 0.5); 
-        }
+        [data-theme="liquid"] { --color-400: #38bdf8; --color-500: #0ea5e9; --color-600: #0284c7; --bg-card: rgba(15, 23, 42, 0.35); --border-card: rgba(255, 255, 255, 0.18); --glow: rgba(56, 189, 248, 0.5); }
         [data-theme="cyan"] { --color-400: #22d3ee; --color-500: #06b6d4; --color-600: #0891b2; --border-card: rgba(34, 211, 238, 0.25); --glow: rgba(6, 182, 212, 0.35); }
         [data-theme="emerald"] { --color-400: #34d399; --color-500: #10b981; --color-600: #059669; --border-card: rgba(16, 185, 129, 0.25); --glow: rgba(16, 185, 129, 0.4); }
         [data-theme="purple"] { --color-400: #c084fc; --color-500: #a855f7; --color-600: #9333ea; --border-card: rgba(168, 85, 247, 0.25); --glow: rgba(168, 85, 247, 0.4); }
         [data-theme="amber"] { --color-400: #fbbf24; --color-500: #f59e0b; --color-600: #d97706; --border-card: rgba(245, 158, 11, 0.25); --glow: rgba(245, 158, 11, 0.4); }
-        [data-theme="rose"] { --color-400: #fb7185; --color-500: #f43f5e; --color-600: #e11d48; --border-card: rgba(244, 63, 94, 0.25); --glow: rgba(244, 63, 94, 0.4); }
-        [data-theme="violet"] { --color-400: #a78bfa; --color-500: #8b5cf6; --color-600: #7c3aed; --border-card: rgba(139, 92, 246, 0.25); --glow: rgba(139, 92, 246, 0.4); }
-        [data-theme="blue"] { --color-400: #60a5fa; --color-500: #3b82f6; --color-600: #2563eb; --border-card: rgba(59, 130, 246, 0.25); --glow: rgba(59, 130, 246, 0.4); }
-        [data-theme="crimson"] { --color-400: #f87171; --color-500: #ef4444; --color-600: #dc2626; --border-card: rgba(239, 68, 68, 0.25); --glow: rgba(239, 68, 68, 0.4); }
-        [data-theme="gold"] { --color-400: #facc15; --color-500: #eab308; --color-600: #ca8a04; --border-card: rgba(234, 179, 8, 0.25); --glow: rgba(234, 179, 8, 0.4); }
-        [data-theme="teal"] { --color-400: #2dd4bf; --color-500: #14b8a6; --color-600: #0d9488; --border-card: rgba(20, 184, 166, 0.25); --glow: rgba(20, 184, 166, 0.4); }
-        [data-theme="indigo"] { --color-400: #818cf8; --color-500: #6366f1; --color-600: #4f46e5; --border-card: rgba(99, 102, 241, 0.25); --glow: rgba(99, 102, 241, 0.4); }
-        [data-theme="fuchsia"] { --color-400: #e879f9; --color-500: #d946ef; --color-600: #c026d3; --border-card: rgba(217, 70, 239, 0.25); --glow: rgba(217, 70, 239, 0.4); }
-        [data-theme="lime"] { --color-400: #acc333; --color-500: #84cc16; --color-600: #65a30d; --border-card: rgba(132, 204, 22, 0.25); --glow: rgba(132, 204, 22, 0.4); }
-        [data-theme="orange"] { --color-400: #fb923c; --color-500: #f97316; --color-600: #ea580c; --border-card: rgba(249, 115, 22, 0.25); --glow: rgba(249, 115, 22, 0.4); }
-        [data-theme="sky"] { --color-400: #38bdf8; --color-500: #0ea5e9; --color-600: #0284c7; --border-card: rgba(14, 165, 233, 0.25); --glow: rgba(14, 165, 233, 0.4); }
-        [data-theme="pink"] { --color-400: #f472b6; --color-500: #ec4899; --color-600: #db2777; --border-card: rgba(236, 72, 153, 0.25); --glow: rgba(236, 72, 153, 0.4); }
-        [data-theme="mint"] { --color-400: #5eead4; --color-500: #2dd4bf; --color-600: #0f766e; --border-card: rgba(94, 234, 212, 0.25); --glow: rgba(94, 234, 212, 0.4); }
-        [data-theme="sunset"] { --color-400: #fda4af; --color-500: #f43f5e; --color-600: #be123c; --border-card: rgba(244, 63, 94, 0.25); --glow: rgba(244, 63, 94, 0.4); }
-        [data-theme="neon"] { --color-400: #4ade80; --color-500: #22c55e; --color-600: #16a34a; --border-card: rgba(34, 197, 94, 0.25); --glow: rgba(34, 197, 94, 0.4); }
-        [data-theme="matrix"] { --color-400: #4ade80; --color-500: #15803d; --color-600: #14532d; --border-card: rgba(74, 222, 128, 0.25); --glow: rgba(74, 222, 128, 0.4); }
 
         body {
             background-color: var(--bg-main);
@@ -127,9 +103,7 @@
             cursor: pointer;
         }
         
-        .mob-tab-active {
-            color: var(--color-400) !important;
-        }
+        .mob-tab-active { color: var(--color-400) !important; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between overflow-x-hidden select-none pb-16 md:pb-0">
@@ -178,76 +152,41 @@
         </nav>
 
         <div class="flex items-center space-x-2">
-            <button id="fullScreenPlayerBtn" title="Immersive Fullscreen Mode" class="w-8 h-8 rounded-full bg-gray-900/80 border border-white/10 flex items-center justify-center text-theme-400 hover:text-white transition-all text-xs">
-                <i class="fa-solid fa-expand"></i>
-            </button>
-
-            <button id="sleepTimerBtn" title="Sleep Timer" class="w-8 h-8 rounded-full bg-gray-900/80 border border-white/10 flex items-center justify-center text-amber-400 transition-all text-xs">
-                <i class="fa-solid fa-moon"></i>
-            </button>
-
+            <button id="fullScreenPlayerBtn" title="Immersive Fullscreen" class="w-8 h-8 rounded-full bg-gray-900/80 border border-white/10 flex items-center justify-center text-theme-400 text-xs"><i class="fa-solid fa-expand"></i></button>
+            <button id="sleepTimerBtn" title="Sleep Timer" class="w-8 h-8 rounded-full bg-gray-900/80 border border-white/10 flex items-center justify-center text-amber-400 text-xs"><i class="fa-solid fa-moon"></i></button>
             <label class="cursor-pointer bg-theme-500 hover:bg-theme-400 text-black font-extrabold px-3 py-1.5 rounded-full text-xs transition-all shadow-md neon-glow flex items-center space-x-1">
-                <i class="fa-solid fa-folder-plus"></i>
-                <span>Import Folder</span>
+                <i class="fa-solid fa-folder-plus"></i><span>Import Folder</span>
                 <input type="file" id="fileInput" webkitdirectory directory multiple class="hidden">
             </label>
-
-            <button id="openThemeModalBtn" title="Change Theme" class="w-8 h-8 rounded-full bg-gray-900/80 hover:bg-gray-800 border border-white/10 flex items-center justify-center text-theme-400 transition-all">
-                <i class="fa-solid fa-palette text-xs"></i>
-            </button>
+            <button id="openThemeModalBtn" title="Change Theme" class="w-8 h-8 rounded-full bg-gray-900/80 border border-white/10 flex items-center justify-center text-theme-400"><i class="fa-solid fa-palette text-xs"></i></button>
         </div>
     </header>
 
     <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-950/90 backdrop-blur-xl px-2 py-2 border-t border-white/10 flex justify-around items-center text-xs">
-        <button id="mobTab-playerTab" class="mob-tab-btn mob-tab-active flex flex-col items-center transition-all">
-            <i class="fa-solid fa-play text-base"></i>
-            <span class="text-[9px] mt-0.5">Player</span>
-        </button>
-        <button id="mobTab-playlistTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
-            <i class="fa-solid fa-list-ul text-base"></i>
-            <span class="text-[9px] mt-0.5">Playlists</span>
-        </button>
-        <button id="mobTab-favoritesTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
-            <i class="fa-solid fa-heart text-base text-pink-400"></i>
-            <span class="text-[9px] mt-0.5">Favorites</span>
-        </button>
-        <button id="mobTab-studioTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
-            <i class="fa-solid fa-sliders text-base"></i>
-            <span class="text-[9px] mt-0.5">Studio</span>
-        </button>
-        <button id="mobTab-toolsTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
-            <i class="fa-solid fa-toolbox text-base"></i>
-            <span class="text-[9px] mt-0.5">Tools</span>
-        </button>
-        <button id="mobTab-aboutTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
-            <i class="fa-solid fa-circle-info text-base"></i>
-            <span class="text-[9px] mt-0.5">About</span>
-        </button>
+        <button id="mobTab-playerTab" class="mob-tab-btn mob-tab-active flex flex-col items-center"><i class="fa-solid fa-play text-base"></i><span class="text-[9px] mt-0.5">Player</span></button>
+        <button id="mobTab-playlistTab" class="mob-tab-btn text-gray-400 flex flex-col items-center"><i class="fa-solid fa-list-ul text-base"></i><span class="text-[9px] mt-0.5">Playlists</span></button>
+        <button id="mobTab-favoritesTab" class="mob-tab-btn text-gray-400 flex flex-col items-center"><i class="fa-solid fa-heart text-base text-pink-400"></i><span class="text-[9px] mt-0.5">Favorites</span></button>
+        <button id="mobTab-studioTab" class="mob-tab-btn text-gray-400 flex flex-col items-center"><i class="fa-solid fa-sliders text-base"></i><span class="text-[9px] mt-0.5">Studio</span></button>
+        <button id="mobTab-toolsTab" class="mob-tab-btn text-gray-400 flex flex-col items-center"><i class="fa-solid fa-toolbox text-base"></i><span class="text-[9px] mt-0.5">Tools</span></button>
+        <button id="mobTab-aboutTab" class="mob-tab-btn text-gray-400 flex flex-col items-center"><i class="fa-solid fa-circle-info text-base"></i><span class="text-[9px] mt-0.5">About</span></button>
     </div>
 
     <main class="flex-1 max-w-[1400px] w-full mx-auto p-3 sm:p-5">
-
         <div id="playerTab" class="page-tab flex justify-center">
             <section class="max-w-xl w-full flex flex-col space-y-4">
                 <div class="glass-card rounded-3xl p-5 sm:p-7 relative overflow-hidden flex flex-col items-center justify-between shadow-2xl border border-white/20">
                     <div class="w-full flex justify-between items-center z-10 mb-2">
-                        <span id="sourceBadge" class="text-[9px] font-extrabold bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full border border-theme-500/30 uppercase tracking-wider">
-                            OFFLINE ENGINE READY
-                        </span>
+                        <span id="sourceBadge" class="text-[9px] font-extrabold bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full border border-theme-500/30 uppercase tracking-wider">OFFLINE ENGINE READY</span>
                         <div class="flex items-center space-x-2">
-                            <button id="favoriteToggleBtn" title="Toggle Favorite" class="text-gray-400 hover:text-pink-400 text-lg transition-colors">
-                                <i class="fa-regular fa-heart" id="favIcon"></i>
-                            </button>
-                            <span id="timerDisplay" class="text-[9px] text-amber-400 font-mono hidden">
-                                <i class="fa-solid fa-clock"></i> <span id="timerCountdown">00:00</span>
-                            </span>
+                            <button id="favoriteToggleBtn" class="text-gray-400 hover:text-pink-400 text-lg transition-colors"><i class="fa-regular fa-heart" id="favIcon"></i></button>
+                            <span id="timerDisplay" class="text-[9px] text-amber-400 font-mono hidden"><i class="fa-solid fa-clock"></i> <span id="timerCountdown">00:00</span></span>
                         </div>
                     </div>
 
                     <div class="relative my-2 flex items-center justify-center w-full h-48 sm:h-56 z-10">
                         <canvas id="particleCanvas" class="absolute inset-0 z-0 rounded-2xl w-full h-full opacity-90"></canvas>
-                        <div id="djScratchWheel" class="relative w-36 h-36 sm:w-48 sm:h-48 rounded-full dj-turntable flex items-center justify-center border-4 border-gray-700/80 z-10 cursor-pointer shadow-2xl" title="Scrape & Spin Disc">
-                            <img id="albumArt" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='1'><circle cx='12' cy='12' r='10'/></svg>" alt="Cover Art" class="w-full h-full object-cover rounded-full opacity-75 animate-spin-slow paused pointer-events-none">
+                        <div id="djScratchWheel" class="relative w-36 h-36 sm:w-48 sm:h-48 rounded-full dj-turntable flex items-center justify-center border-4 border-gray-700/80 z-10 cursor-pointer shadow-2xl">
+                            <img id="albumArt" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='1'><circle cx='12' cy='12' r='10'/></svg>" class="w-full h-full object-cover rounded-full opacity-75 animate-spin-slow paused pointer-events-none">
                             <div class="absolute w-12 h-12 rounded-full bg-black border-2 border-theme-500 flex items-center justify-center shadow-2xl">
                                 <div class="w-3.5 h-3.5 rounded-full bg-theme-400 animate-pulse"></div>
                             </div>
@@ -257,12 +196,8 @@
                     <div class="w-full h-8 flex items-end justify-center space-x-1 z-10 px-4 my-2" id="visualizerBars"></div>
 
                     <div class="text-center z-10 w-full px-2 mt-1">
-                        <h2 id="currentTitle" class="font-extrabold text-lg sm:text-xl text-white truncate">
-                            R Music Workstation Pro
-                        </h2>
-                        <p id="currentArtist" class="text-xs text-gray-400 truncate mt-0.5">
-                            Import music folder to begin
-                        </p>
+                        <h2 id="currentTitle" class="font-extrabold text-lg sm:text-xl text-white truncate">R Music Workstation Pro</h2>
+                        <p id="currentArtist" class="text-xs text-gray-400 truncate mt-0.5">Import music folder to begin</p>
                     </div>
 
                     <div class="w-full z-10 space-y-1 mt-3">
@@ -274,29 +209,25 @@
                     </div>
 
                     <div class="flex items-center justify-around w-full z-10 my-3 text-xs text-gray-400 border-y border-white/10 py-2">
-                        <button id="shuffleBtn" class="hover:text-theme-400 transition-colors" title="Shuffle"><i class="fa-solid fa-shuffle"></i></button>
-                        <button id="loopABtn" class="px-2 py-0.5 rounded bg-gray-900/60 border border-white/10 hover:text-white" title="Loop Point A">Set A</button>
-                        <button id="loopBBtn" class="px-2 py-0.5 rounded bg-gray-900/60 border border-white/10 hover:text-white" title="Loop Point B">Set B</button>
-                        <button id="clearABBtn" class="text-red-400 hover:text-red-300" title="Reset A-B Loop">Reset AB</button>
-                        <button id="repeatBtn" class="hover:text-theme-400 transition-colors" title="Repeat Track"><i class="fa-solid fa-repeat"></i></button>
+                        <button id="shuffleBtn" class="hover:text-theme-400"><i class="fa-solid fa-shuffle"></i></button>
+                        <button id="loopABtn" class="px-2 py-0.5 rounded bg-gray-900/60 border border-white/10 hover:text-white">Set A</button>
+                        <button id="loopBBtn" class="px-2 py-0.5 rounded bg-gray-900/60 border border-white/10 hover:text-white">Set B</button>
+                        <button id="clearABBtn" class="text-red-400 hover:text-red-300">Reset AB</button>
+                        <button id="repeatBtn" class="hover:text-theme-400"><i class="fa-solid fa-repeat"></i></button>
                     </div>
 
                     <div class="flex flex-col items-center space-y-3 w-full z-10">
                         <div class="flex items-center justify-center space-x-4 sm:space-x-6">
-                            <button id="skipBackwardBtn" title="Skip Backward" class="text-gray-300 hover:text-white transition-colors p-2 flex flex-col items-center">
+                            <button id="skipBackwardBtn" class="text-gray-300 hover:text-white p-2 flex flex-col items-center">
                                 <i class="fa-solid fa-rotate-left text-lg"></i>
                                 <span id="skipBackLabel" class="text-[9px] font-mono mt-0.5 text-theme-400">-10s</span>
                             </button>
-                            <button id="prevBtn" title="Previous Track" class="text-gray-300 hover:text-white transition-colors p-2">
-                                <i class="fa-solid fa-backward-step text-xl sm:text-2xl"></i>
-                            </button>
-                            <button id="playPauseBtn" title="Play / Pause" class="w-14 h-14 rounded-full bg-theme-500 hover:bg-theme-400 text-black flex items-center justify-center shadow-2xl neon-glow active:scale-95 transition-all">
+                            <button id="prevBtn" class="text-gray-300 hover:text-white p-2"><i class="fa-solid fa-backward-step text-xl sm:text-2xl"></i></button>
+                            <button id="playPauseBtn" class="w-14 h-14 rounded-full bg-theme-500 hover:bg-theme-400 text-black flex items-center justify-center shadow-2xl neon-glow active:scale-95 transition-all">
                                 <i class="fa-solid fa-play text-xl ml-0.5"></i>
                             </button>
-                            <button id="nextBtn" title="Next Track" class="text-gray-300 hover:text-white transition-colors p-2">
-                                <i class="fa-solid fa-forward-step text-xl sm:text-2xl"></i>
-                            </button>
-                            <button id="skipForwardBtn" title="Skip Forward" class="text-gray-300 hover:text-white transition-colors p-2 flex flex-col items-center">
+                            <button id="nextBtn" class="text-gray-300 hover:text-white p-2"><i class="fa-solid fa-forward-step text-xl sm:text-2xl"></i></button>
+                            <button id="skipForwardBtn" class="text-gray-300 hover:text-white p-2 flex flex-col items-center">
                                 <i class="fa-solid fa-rotate-right text-lg"></i>
                                 <span id="skipFwdLabel" class="text-[9px] font-mono mt-0.5 text-theme-400">+10s</span>
                             </button>
@@ -307,26 +238,13 @@
                                 <i class="fa-solid fa-volume-high text-gray-400"></i>
                                 <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.8" class="w-full h-1 bg-gray-900/80 rounded-lg appearance-none cursor-pointer accent-theme-500">
                             </div>
-
                             <div class="flex items-center space-x-2 bg-gray-900/60 border border-white/10 rounded-lg px-2 py-1">
-                                <span class="text-[10px] text-gray-400">Skip Step:</span>
-                                <select id="skipStepSelect" class="bg-transparent text-theme-400 font-bold text-xs focus:outline-none">
-                                    <option value="1">1s</option>
-                                    <option value="2">2s</option>
-                                    <option value="5">5s</option>
-                                    <option value="10" selected>10s</option>
-                                </select>
-                            </div>
-
-                            <div class="flex items-center space-x-1 bg-gray-900/60 border border-white/10 rounded-lg px-2 py-1">
                                 <span class="text-[10px] text-gray-400">Speed:</span>
                                 <select id="playbackRate" class="bg-transparent text-theme-400 font-bold text-xs focus:outline-none">
-                                    <option value="0.5">0.5x</option>
                                     <option value="0.75">0.75x</option>
                                     <option value="1" selected>1.0x</option>
                                     <option value="1.25">1.25x</option>
                                     <option value="1.5">1.5x</option>
-                                    <option value="2">2.0x</option>
                                 </select>
                             </div>
                         </div>
@@ -339,53 +257,32 @@
             <div class="glass-card rounded-2xl p-5 flex flex-col space-y-4">
                 <div class="flex items-center justify-between">
                     <h2 class="text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
-                        <i class="fa-solid fa-list-ul"></i>
-                        <span>Default Library & 2 Custom Playlists</span>
+                        <i class="fa-solid fa-list-ul"></i><span>Default Library & Custom Playlists</span>
                     </h2>
                     <span id="songCount" class="text-[10px] bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full font-mono border border-theme-500/30">0 Tracks</span>
                 </div>
-
                 <div class="grid grid-cols-3 gap-2">
-                    <button id="selectDefaultBtn" class="py-2.5 px-2 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-1.5 truncate">
-                        <i class="fa-solid fa-folder-open"></i>
-                        <span class="truncate">Default Library</span>
-                    </button>
-                    <button id="selectPlaylist1Btn" class="py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900/60 text-gray-400 border border-white/10 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate">
-                        <i class="fa-solid fa-compact-disc"></i>
-                        <span id="playlist1Name" class="truncate">Playlist 1</span>
-                    </button>
-                    <button id="selectPlaylist2Btn" class="py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900/60 text-gray-400 border border-white/10 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate">
-                        <i class="fa-solid fa-compact-disc"></i>
-                        <span id="playlist2Name" class="truncate">Playlist 2</span>
-                    </button>
+                    <button id="selectDefaultBtn" class="py-2.5 px-2 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md">Default Library</button>
+                    <button id="selectPlaylist1Btn" class="py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900/60 text-gray-400 border border-white/10"><span id="playlist1Name">Playlist 1</span></button>
+                    <button id="selectPlaylist2Btn" class="py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900/60 text-gray-400 border border-white/10"><span id="playlist2Name">Playlist 2</span></button>
                 </div>
-
                 <div class="flex items-center justify-between bg-gray-950/60 p-3 rounded-xl border border-white/10">
+                    <span id="activePlaylistTitle" class="font-extrabold text-xs text-white uppercase tracking-wider">Viewing: Default Library</span>
                     <div class="flex items-center space-x-2">
-                        <span id="activePlaylistTitle" class="font-extrabold text-xs text-white uppercase tracking-wider">Viewing: Default Library</span>
-                    </div>
-                    <div id="playlistActionControls" class="flex items-center space-x-2">
-                        <button id="renamePlaylistBtn" class="text-[11px] text-theme-400 bg-theme-500/10 border border-theme-500/30 px-2.5 py-1 rounded-lg hover:bg-theme-500/20 hidden">
-                            <i class="fa-solid fa-pen"></i> Rename
-                        </button>
-                        <button id="clearCurrentPlaylistBtn" class="text-[11px] text-red-400 bg-red-500/10 border border-red-500/20 px-2.5 py-1 rounded-lg hover:bg-red-500/20">
-                            <i class="fa-solid fa-trash"></i> Clear Section
-                        </button>
+                        <button id="renamePlaylistBtn" class="text-[11px] text-theme-400 bg-theme-500/10 border border-theme-500/30 px-2.5 py-1 rounded-lg hidden"><i class="fa-solid fa-pen"></i> Rename</button>
+                        <button id="clearCurrentPlaylistBtn" class="text-[11px] text-red-400 bg-red-500/10 border border-red-500/20 px-2.5 py-1 rounded-lg"><i class="fa-solid fa-trash"></i> Clear</button>
                     </div>
                 </div>
-
                 <div class="flex gap-2">
                     <div class="relative flex-1">
                         <input type="text" id="songSearchInput" placeholder="🔍 Search track name..." class="w-full bg-gray-950/60 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500 pl-8">
                         <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-3 text-gray-500 text-xs"></i>
                     </div>
-                    <label class="cursor-pointer bg-theme-500/20 text-theme-400 hover:bg-theme-500/30 border border-theme-500/30 font-semibold px-4 py-2 rounded-xl text-xs flex items-center space-x-1.5 transition-all">
-                        <i class="fa-solid fa-plus"></i>
-                        <span>Add Songs</span>
+                    <label class="cursor-pointer bg-theme-500/20 text-theme-400 hover:bg-theme-500/30 border border-theme-500/30 font-semibold px-4 py-2 rounded-xl text-xs flex items-center space-x-1.5">
+                        <i class="fa-solid fa-plus"></i><span>Add Songs</span>
                         <input type="file" id="playlistSongInput" multiple accept="audio/*" class="hidden">
                     </label>
                 </div>
-
                 <div id="trackList" class="max-h-[340px] overflow-y-auto space-y-2 pr-1">
                     <div id="emptyState" class="text-center py-10 text-gray-500">
                         <i class="fa-solid fa-list-ul text-3xl mb-2 opacity-40"></i>
@@ -399,17 +296,14 @@
             <div class="glass-card rounded-2xl p-5 flex flex-col space-y-4 border border-pink-500/30">
                 <div class="flex items-center justify-between">
                     <h2 class="text-sm uppercase font-extrabold text-pink-400 flex items-center space-x-2">
-                        <i class="fa-solid fa-heart"></i>
-                        <span>Favorites Collection (Persisted)</span>
+                        <i class="fa-solid fa-heart"></i><span>Favorites Collection</span>
                     </h2>
                     <span id="favSongCount" class="text-[10px] bg-pink-500/20 text-pink-300 px-2.5 py-1 rounded-full font-mono border border-pink-500/30">0 Tracks</span>
                 </div>
-                <p class="text-[11px] text-gray-400">All songs you favorite will remain securely stored here even after refreshing the page.</p>
-
                 <div id="favTrackList" class="max-h-[380px] overflow-y-auto space-y-2 pr-1">
                     <div id="favEmptyState" class="text-center py-10 text-gray-500">
-                        <i class="fa-regular fa-heart text-3xl mb-2 opacity-40 text-pink-400"></i>
-                        <p class="text-xs">No favorite songs added yet.<br>Click the heart icon on any player track to save it here!</p>
+                        <i class="regular fa-heart text-3xl mb-2 opacity-40 text-pink-400"></i>
+                        <p class="text-xs">No favorite songs added yet.</p>
                     </div>
                 </div>
             </div>
@@ -419,12 +313,9 @@
             <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between">
                 <div class="flex items-center justify-between mb-3">
                     <h2 class="text-xs sm:text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
-                        <i class="fa-solid fa-sliders"></i>
-                        <span>10-Band Graphic Equalizer</span>
+                        <i class="fa-solid fa-sliders"></i><span>10-Band Graphic Equalizer</span>
                     </h2>
-                    <button id="resetEqBtn" class="text-xs bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/40 px-2.5 py-1 rounded-lg font-bold transition-all">
-                        Reset EQ
-                    </button>
+                    <button id="resetEqBtn" class="text-xs bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/40 px-2.5 py-1 rounded-lg font-bold">Reset EQ</button>
                 </div>
                 <div id="studioEqContainer" class="grid grid-cols-5 sm:grid-cols-10 gap-2 min-h-[180px] p-4 bg-gray-950/60 rounded-xl border border-white/10 overflow-x-auto"></div>
             </div>
@@ -432,26 +323,39 @@
             <div class="glass-card rounded-2xl p-4 sm:p-5 space-y-4">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xs sm:text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
-                        <i class="fa-solid fa-cube"></i>
-                        <span>Vocal & Instrumental Extractor (DSP Phase Cancellation)</span>
+                        <i class="fa-solid fa-cube"></i><span>Vocal & Instrument DSP Processor</span>
                     </h2>
-                    <button id="resetAudioFxBtn" class="text-xs bg-gray-800/80 hover:bg-gray-700 text-gray-300 px-2.5 py-1 rounded-lg font-bold transition-all border border-white/10">
-                        Reset Audio FX
-                    </button>
+                    <button id="resetAudioFxBtn" class="text-xs bg-gray-800/80 hover:bg-gray-700 text-gray-300 px-2.5 py-1 rounded-lg font-bold border border-white/10">Reset FX</button>
                 </div>
 
                 <div class="space-y-4 pt-2">
-                    <div class="bg-gray-950/60 p-3.5 rounded-xl border border-white/10 space-y-3">
+                    <div class="bg-gray-950/60 p-3.5 rounded-xl border border-white/10 space-y-2.5">
                         <p class="text-[11px] font-bold text-white flex items-center space-x-2">
                             <i class="fa-solid fa-microphone-lines text-theme-400"></i>
-                            <span>Vocal Removal / Isolation Slider</span>
+                            <span>Vocal / Instrument Mode (Default Mode Active)</span>
                         </p>
-                        <div class="flex items-center space-x-3">
-                            <span class="text-[10px] text-gray-400">Karaoke (No Vocals)</span>
-                            <input type="range" id="vocalSplitSlider" min="0" max="1" value="0" step="0.05" class="w-full h-1.5 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
-                            <span class="text-[10px] text-gray-400">Original</span>
+                        
+                        <div class="grid grid-cols-2 gap-2 pt-1 text-xs">
+                            <label class="cursor-pointer bg-theme-500/20 border border-theme-500/40 hover:bg-theme-500/30 p-2.5 rounded-xl flex items-center space-x-2 transition-all">
+                                <input type="radio" name="vocalMode" value="default" checked class="accent-theme-500">
+                                <span class="font-bold text-white">Default (Stereo)</span>
+                            </label>
+                            
+                            <label class="cursor-pointer bg-gray-900/80 border border-white/10 hover:bg-gray-900 p-2.5 rounded-xl flex items-center space-x-2 transition-all">
+                                <input type="radio" name="vocalMode" value="remove_vocal" class="accent-theme-500">
+                                <span class="font-semibold text-gray-300">Remove Vocals</span>
+                            </label>
+
+                            <label class="cursor-pointer bg-gray-900/80 border border-white/10 hover:bg-gray-900 p-2.5 rounded-xl flex items-center space-x-2 transition-all">
+                                <input type="radio" name="vocalMode" value="remove_instrument" class="accent-theme-500">
+                                <span class="font-semibold text-gray-300">Remove Instruments</span>
+                            </label>
+
+                            <label class="cursor-pointer bg-gray-900/80 border border-white/10 hover:bg-gray-900 p-2.5 rounded-xl flex items-center space-x-2 transition-all">
+                                <input type="radio" name="vocalMode" value="increase_vocal" class="accent-theme-500">
+                                <span class="font-semibold text-gray-300">Boost Vocals</span>
+                            </label>
                         </div>
-                        <p class="text-[10px] text-gray-400 text-center">Slide towards Karaoke to phase-cancel center channel vocals.</p>
                     </div>
 
                     <div>
@@ -464,7 +368,7 @@
 
                     <div>
                         <div class="flex justify-between text-xs font-semibold text-gray-300 mb-1.5">
-                            <span>Pitch Shift Tuning:</span>
+                            <span>Pitch Tuning:</span>
                             <span id="pitchVal" class="text-theme-400 font-mono">1.0x</span>
                         </div>
                         <input type="range" id="pitchSlider" min="0.5" max="1.5" value="1" step="0.05" class="w-full h-1.5 bg-gray-900/80 rounded-lg appearance-none cursor-pointer accent-theme-500">
@@ -475,59 +379,24 @@
 
         <div id="toolsTab" class="page-tab hidden glass-card rounded-2xl p-5 max-w-xl mx-auto space-y-4">
             <h2 class="text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
-                <i class="fa-solid fa-toolbox"></i>
-                <span>Advanced Offline Audio Utilities</span>
+                <i class="fa-solid fa-toolbox"></i><span>Advanced Offline Audio Utilities</span>
             </h2>
             <div class="space-y-3 text-xs">
                 <div class="bg-gray-950/60 p-4 rounded-xl border border-white/10 space-y-3">
                     <p class="font-bold text-white flex items-center space-x-2">
-                        <i class="fa-solid fa-scissors text-amber-400"></i>
-                        <span>Working Audio Trimmer / Ringtone Maker</span>
+                        <i class="fa-solid fa-scissors text-amber-400"></i><span>Working Audio Trimmer / Ringtone Maker</span>
                     </p>
-                    <p class="text-gray-400">Mark start and end times or input seconds manually to clip the active track and download it instantly.</p>
-                    
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label class="text-[10px] text-gray-400">Start Time (sec):</label>
+                            <label class="text-[10px] text-gray-400">Start (sec):</label>
                             <input type="number" id="trimStartInput" value="0" step="0.1" class="w-full bg-gray-900/80 border border-white/10 rounded-lg p-2 text-white font-mono">
                         </div>
                         <div>
-                            <label class="text-[10px] text-gray-400">End Time (sec):</label>
+                            <label class="text-[10px] text-gray-400">End (sec):</label>
                             <input type="number" id="trimEndInput" value="10" step="0.1" class="w-full bg-gray-900/80 border border-white/10 rounded-lg p-2 text-white font-mono">
                         </div>
                     </div>
-
-                    <div class="flex gap-2 pt-1">
-                        <button id="markStartBtn" class="flex-1 px-3 py-2 rounded-lg bg-gray-900/80 border border-white/10 text-gray-200 font-bold">Current as Start</button>
-                        <button id="markEndBtn" class="flex-1 px-3 py-2 rounded-lg bg-gray-900/80 border border-white/10 text-gray-200 font-bold">Current as End</button>
-                    </div>
-
-                    <button id="exportTrimBtn" class="w-full px-3 py-2.5 rounded-lg bg-theme-500 hover:bg-theme-400 text-black font-extrabold shadow flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-download"></i>
-                        <span>Download Trimmed Audio Clip</span>
-                    </button>
-                </div>
-
-                <div class="bg-gray-950/60 p-4 rounded-xl border border-white/10 space-y-2">
-                    <p class="font-bold text-white flex items-center space-x-2">
-                        <i class="fa-solid fa-wand-magic-sparkles text-cyan-400"></i>
-                        <span>Quick Audio Normalizer & Booster</span>
-                    </p>
-                    <p class="text-gray-400">Optimize audio volume levels dynamically for silent imported tracks.</p>
-                    <button id="normalizeAudioBtn" class="w-full px-3 py-2 rounded-lg bg-gray-900/80 hover:bg-gray-800 text-theme-400 font-bold border border-theme-500/30">
-                        Apply Volume Normalization
-                    </button>
-                </div>
-
-                <div class="bg-gray-950/60 p-4 rounded-xl border border-white/10 space-y-2">
-                    <p class="font-bold text-white flex items-center space-x-2">
-                        <i class="fa-solid fa-circle-info text-cyan-400"></i>
-                        <span>Active Track Metadata Inspector</span>
-                    </p>
-                    <div id="metaInspectorBox" class="text-gray-400 space-y-1 font-mono text-[11px]">
-                        <p>File Name: <span class="text-white">None</span></p>
-                        <p>Format: <span class="text-white">Unknown</span></p>
-                    </div>
+                    <button id="exportTrimBtn" class="w-full px-3 py-2.5 rounded-lg bg-theme-500 text-black font-extrabold shadow"><i class="fa-solid fa-download"></i> Download Trimmed Clip</button>
                 </div>
             </div>
         </div>
@@ -535,186 +404,56 @@
         <div id="lyricsTab" class="page-tab hidden glass-card rounded-2xl p-6 max-w-lg mx-auto text-center min-h-[300px] flex flex-col items-center justify-center">
             <i class="fa-solid fa-align-center text-3xl text-theme-400 mb-3 opacity-80"></i>
             <h2 class="text-base font-bold text-white mb-2">Synced Lyrics Scroller</h2>
-            <textarea id="customLyricsInput" placeholder="Paste custom song lyrics here to view while playing..." class="w-full bg-gray-950/60 border border-white/10 rounded-xl p-3 text-xs text-white mb-3 focus:outline-none focus:border-theme-500 h-24"></textarea>
-            <p id="lyricsDisplay" class="text-xs sm:text-sm text-gray-300 leading-relaxed font-medium whitespace-pre-line">
-                (Play a track to view details and custom notes)
-            </p>
+            <textarea id="customLyricsInput" placeholder="Paste custom lyrics here..." class="w-full bg-gray-950/60 border border-white/10 rounded-xl p-3 text-xs text-white mb-3 h-24 focus:outline-none"></textarea>
+            <p id="lyricsDisplay" class="text-xs sm:text-sm text-gray-300 leading-relaxed font-medium whitespace-pre-line">(Play a track to view details)</p>
         </div>
 
         <div id="aboutTab" class="page-tab hidden glass-card rounded-2xl p-6 max-w-md mx-auto text-center space-y-4 border border-theme-500/30">
-            <div class="w-16 h-16 rounded-2xl bg-theme-500/20 text-theme-400 border border-theme-500/40 flex items-center justify-center text-3xl mx-auto font-black shadow-lg neon-glow">
+            <div class="w-16 h-16 rounded-2xl bg-theme-500/25 text-theme-400 border border-theme-500/40 flex items-center justify-center text-3xl mx-auto font-black shadow-lg neon-glow">
                 <i class="fa-solid fa-compact-disc"></i>
             </div>
             <div>
-                <h2 class="text-xl font-black text-white tracking-tight">R Music Suite Ultimate Pro</h2>
-                <span class="text-[10px] bg-theme-500/20 text-theme-400 border border-theme-500/40 px-2 py-0.5 rounded-full uppercase tracking-widest font-mono mt-1 inline-block">v2.6 Stable Build</span>
+                <h2 class="text-xl font-black text-white">R Music Suite Ultimate Pro</h2>
+                <span class="text-[10px] bg-theme-500/20 text-theme-400 px-2 py-0.5 rounded-full uppercase tracking-widest font-mono mt-1 inline-block">v2.6 Stable</span>
             </div>
-            
-            <div class="bg-gray-900/60 border border-white/10 p-4 rounded-xl space-y-2.5 text-left">
-                <p class="text-[10px] text-theme-400 uppercase font-extrabold tracking-wider">Creator & Developer Info</p>
-                <div class="flex items-center justify-between text-sm">
-                    <span class="text-gray-400 font-medium">Lead Developer:</span>
-                    <span class="font-extrabold text-white">Sohom Giri</span>
-                </div>
-                <div class="flex items-center justify-between text-sm">
-                    <span class="text-gray-400 font-medium">Instagram Contact:</span>
-                    <a href="https://instagram.com/itz_sg_063" target="_blank" class="text-pink-400 hover:underline font-bold flex items-center space-x-1">
-                        <i class="fa-brands fa-instagram"></i>
-                        <span>@itz_sg_063</span>
-                    </a>
-                </div>
-                <div class="pt-2 border-t border-white/10 mt-2">
-                    <button id="secretVaultTrigger" class="w-full py-2 px-3 rounded-lg bg-gray-950/60 hover:bg-gray-900 text-gray-400 hover:text-gray-200 text-xs font-mono transition-all flex items-center justify-center space-x-2 border border-white/10">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <span>System Diagnostics</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="text-[11px] text-gray-400 pt-2 border-t border-white/10">
-                <p>✨ Built for high performance, local web audio management, and custom studio workflows.</p>
+            <div class="bg-gray-900/60 border border-white/10 p-4 rounded-xl space-y-2 text-left text-xs">
+                <p class="text-theme-400 font-extrabold uppercase">Developer Info</p>
+                <div class="flex justify-between"><span class="text-gray-400">Lead:</span><span class="text-white font-bold">Sohom Giri</span></div>
+                <div class="flex justify-between"><span class="text-gray-400">Instagram:</span><a href="https://instagram.com/itz_sg_063" target="_blank" class="text-pink-400 font-bold">@itz_sg_063</a></div>
             </div>
         </div>
     </main>
 
-    <div id="secretVaultModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="glass-card rounded-2xl max-w-2xl w-full p-6 border border-theme-500/40 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button id="closeVaultBtn" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            
-            <div id="vaultAuthSection" class="text-center py-6 space-y-4">
-                <div class="w-14 h-14 rounded-full bg-theme-500/20 text-theme-400 border border-theme-500/40 flex items-center justify-center text-2xl mx-auto neon-glow">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-                <h3 class="text-lg font-bold text-white">Secure Verification Portal</h3>
-                <p class="text-xs text-gray-400">Enter access key to decrypt protected offline assets.</p>
-                
-                <div class="max-w-xs mx-auto space-y-3 pt-2">
-                    <input type="password" id="vaultPasswordInput" placeholder="Enter password..." class="w-full bg-gray-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-center text-white tracking-widest focus:outline-none focus:border-theme-500">
-                    <button id="vaultUnlockBtn" class="w-full py-2.5 rounded-xl bg-theme-500 hover:bg-theme-400 text-black font-extrabold text-xs transition-all shadow neon-glow">
-                        Decrypt Vault
-                    </button>
-                </div>
-            </div>
-
-            <div id="vaultMenuSection" class="hidden text-center py-6 space-y-4">
-                <div class="w-14 h-14 rounded-full bg-theme-500/20 text-theme-400 border border-theme-500/40 flex items-center justify-center text-2xl mx-auto neon-glow">
-                    <i class="fa-solid fa-folder-open"></i>
-                </div>
-                <h3 class="text-lg font-bold text-white">Select Vault Category</h3>
-                <p class="text-xs text-gray-400">Choose which encrypted offline media repository to access.</p>
-                
-                <div class="max-w-xs mx-auto space-y-3 pt-2">
-                    <button id="vaultOptionPhotoBtn" class="w-full py-3 rounded-xl bg-theme-500/20 hover:bg-theme-500/30 border border-theme-500/40 text-theme-400 font-extrabold text-xs transition-all flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-images"></i>
-                        <span>Photos Gallery (20 Slots)</span>
-                    </button>
-                    <button id="vaultOptionVideoBtn" class="w-full py-3 rounded-xl bg-theme-500/20 hover:bg-theme-500/30 border border-theme-500/40 text-theme-400 font-extrabold text-xs transition-all flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-video"></i>
-                        <span>Videos Gallery (10 Slots)</span>
-                    </button>
-                </div>
-            </div>
-
-            <div id="vaultPhotoGallerySection" class="hidden space-y-4">
-                <div class="flex items-center justify-between border-b border-white/10 pb-3">
-                    <h3 class="text-sm font-extrabold text-theme-400 flex items-center space-x-2 uppercase tracking-wider">
-                        <i class="fa-solid fa-images"></i>
-                        <span>Encrypted Offline Photos (20 Slots)</span>
-                    </h3>
-                    <div class="flex items-center space-x-2">
-                        <button id="backToVaultMenuBtn1" class="text-xs text-gray-400 hover:text-white bg-gray-900/80 border border-white/10 px-3 py-1 rounded-lg">
-                            <i class="fa-solid fa-arrow-left"></i> Menu
-                        </button>
-                        <button id="vaultLockBtn1" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-lg">
-                            <i class="fa-solid fa-lock"></i> Lock
-                        </button>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-[60vh] overflow-y-auto p-1" id="vaultPhotoGrid"></div>
-            </div>
-
-            <div id="vaultVideoGallerySection" class="hidden space-y-4">
-                <div class="flex items-center justify-between border-b border-white/10 pb-3">
-                    <h3 class="text-sm font-extrabold text-theme-400 flex items-center space-x-2 uppercase tracking-wider">
-                        <i class="fa-solid fa-video"></i>
-                        <span>Encrypted Offline Videos (10 Slots)</span>
-                    </h3>
-                    <div class="flex items-center space-x-2">
-                        <button id="backToVaultMenuBtn2" class="text-xs text-gray-400 hover:text-white bg-gray-900/80 border border-white/10 px-3 py-1 rounded-lg">
-                            <i class="fa-solid fa-arrow-left"></i> Menu
-                        </button>
-                        <button id="vaultLockBtn2" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-lg">
-                            <i class="fa-solid fa-lock"></i> Lock
-                        </button>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[60vh] overflow-y-auto p-1" id="vaultVideoGrid"></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="fullScreenPlayerModal" class="fixed inset-0 bg-black/95 z-50 hidden flex flex-col items-center justify-between p-6 sm:p-10 backdrop-blur-3xl">
-        <div class="w-full flex justify-between items-center text-xs text-gray-400 border-b border-white/10 pb-4">
-            <span class="flex items-center space-x-2 text-theme-400 font-extrabold uppercase tracking-widest text-[10px]">
-                <i class="fa-solid fa-compact-disc animate-spin-slow"></i>
-                <span>IMMERSIVE FULLSCREEN MODE</span>
-            </span>
-            <button id="closeFullScreenBtn" class="text-gray-400 hover:text-white p-2 text-2xl transition-all">
-                <i class="fa-solid fa-compress"></i>
-            </button>
-        </div>
-
-        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full dj-turntable flex items-center justify-center border-8 border-gray-800 neon-glow my-auto">
-            <img id="fsAlbumArt" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='1'><circle cx='12' cy='12' r='10'/></svg>" class="w-full h-full object-cover rounded-full opacity-75 animate-spin-slow paused">
-            <div class="absolute inset-0 border-4 border-dashed border-theme-500/30 rounded-full animate-spin-slow"></div>
-        </div>
-
-        <div class="text-center space-y-2 max-w-lg w-full">
-            <h2 id="fsTitle" class="text-2xl sm:text-3xl font-black text-white tracking-wide truncate">Track Title</h2>
-            <p id="fsArtist" class="text-sm text-theme-400 font-semibold truncate">Artist Name</p>
-        </div>
-
-        <div class="w-full max-w-xl space-y-4 pt-4 border-t border-white/10">
-            <div class="flex items-center justify-center space-x-8">
-                <button id="fsPrevBtn" class="text-gray-300 hover:text-white text-2xl"><i class="fa-solid fa-backward-step"></i></button>
-                <button id="fsPlayPauseBtn" class="w-14 h-14 rounded-full bg-theme-500 text-black flex items-center justify-center text-xl shadow-xl neon-glow"><i class="fa-solid fa-play"></i></button>
-                <button id="fsNextBtn" class="text-gray-300 hover:text-white text-2xl"><i class="fa-solid fa-forward-step"></i></button>
-            </div>
-        </div>
-    </div>
-
     <div id="themeModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="glass-card rounded-2xl max-w-md w-full p-5 border border-white/10 shadow-2xl relative max-h-[85vh] overflow-y-auto">
-            <button id="closeThemeBtn" class="absolute top-3 right-3 text-gray-400 hover:text-white p-1">
-                <i class="fa-solid fa-xmark text-base"></i>
-            </button>
-            <h2 class="text-base font-bold text-white mb-3">Choose Theme Palette (21 Options)</h2>
+        <div class="glass-card rounded-2xl max-w-md w-full p-5 border border-white/10 relative">
+            <button id="closeThemeBtn" class="absolute top-3 right-3 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            <h2 class="text-base font-bold text-white mb-3">Choose Theme Palette</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
-                <button onclick="setAppTheme('liquid')" class="p-2.5 rounded-xl bg-gray-950/60 border border-sky-400 text-sky-300 font-bold">Liquid Glass (Real)</button>
+                <button onclick="setAppTheme('liquid')" class="p-2.5 rounded-xl bg-gray-950/60 border border-sky-400 text-sky-300 font-bold">Liquid Glass</button>
                 <button onclick="setAppTheme('cyan')" class="p-2.5 rounded-xl bg-gray-950/60 border border-cyan-500 text-cyan-400 font-bold">Cyan</button>
                 <button onclick="setAppTheme('emerald')" class="p-2.5 rounded-xl bg-gray-950/60 border border-emerald-500 text-emerald-400 font-bold">Emerald</button>
                 <button onclick="setAppTheme('purple')" class="p-2.5 rounded-xl bg-gray-950/60 border border-purple-500 text-purple-400 font-bold">Purple</button>
                 <button onclick="setAppTheme('amber')" class="p-2.5 rounded-xl bg-gray-950/60 border border-amber-500 text-amber-400 font-bold">Amber</button>
-                <button onclick="setAppTheme('rose')" class="p-2.5 rounded-xl bg-gray-950/60 border border-rose-500 text-rose-400 font-bold">Rose</button>
-                <button onclick="setAppTheme('violet')" class="p-2.5 rounded-xl bg-gray-950/60 border border-violet-500 text-violet-400 font-bold">Violet</button>
-                <button onclick="setAppTheme('blue')" class="p-2.5 rounded-xl bg-gray-950/60 border border-blue-500 text-blue-400 font-bold">Electric Blue</button>
-                <button onclick="setAppTheme('crimson')" class="p-2.5 rounded-xl bg-gray-950/60 border border-red-500 text-red-400 font-bold">Crimson</button>
-                <button onclick="setAppTheme('gold')" class="p-2.5 rounded-xl bg-gray-950/60 border border-yellow-500 text-yellow-400 font-bold">Gold</button>
-                <button onclick="setAppTheme('teal')" class="p-2.5 rounded-xl bg-gray-950/60 border border-teal-500 text-teal-400 font-bold">Teal</button>
-                <button onclick="setAppTheme('indigo')" class="p-2.5 rounded-xl bg-gray-950/60 border border-indigo-500 text-indigo-400 font-bold">Indigo</button>
-                <button onclick="setAppTheme('fuchsia')" class="p-2.5 rounded-xl bg-gray-950/60 border border-fuchsia-500 text-fuchsia-400 font-bold">Fuchsia</button>
-                <button onclick="setAppTheme('lime')" class="p-2.5 rounded-xl bg-gray-950/60 border border-lime-500 text-lime-400 font-bold">Lime</button>
-                <button onclick="setAppTheme('orange')" class="p-2.5 rounded-xl bg-gray-950/60 border border-orange-500 text-orange-400 font-bold">Orange</button>
-                <button onclick="setAppTheme('pink')" class="p-2.5 rounded-xl bg-gray-950/60 border border-pink-500 text-pink-400 font-bold">Pink</button>
-                <button onclick="setAppTheme('mint')" class="p-2.5 rounded-xl bg-gray-950/60 border border-teal-300 text-teal-300 font-bold">Mint</button>
-                <button onclick="setAppTheme('sunset')" class="p-2.5 rounded-xl bg-gray-950/60 border border-rose-400 text-rose-300 font-bold">Sunset</button>
-                <button onclick="setAppTheme('neon')" class="p-2.5 rounded-xl bg-gray-950/60 border border-green-400 text-green-400 font-bold">Neon Green</button>
-                <button onclick="setAppTheme('matrix')" class="p-2.5 rounded-xl bg-gray-950/60 border border-emerald-600 text-emerald-500 font-bold">Matrix</button>
             </div>
+        </div>
+    </div>
+
+    <div id="fullScreenPlayerModal" class="fixed inset-0 bg-black/95 z-50 hidden flex flex-col items-center justify-between p-6 backdrop-blur-3xl">
+        <div class="w-full flex justify-between items-center text-xs text-gray-400 border-b border-white/10 pb-4">
+            <span class="text-theme-400 font-extrabold uppercase tracking-widest text-[10px]">IMMERSIVE FULLSCREEN</span>
+            <button id="closeFullScreenBtn" class="text-gray-400 hover:text-white text-xl"><i class="fa-solid fa-compress"></i></button>
+        </div>
+        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full dj-turntable flex items-center justify-center border-8 border-gray-800 neon-glow my-auto">
+            <img id="fsAlbumArt" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='1'><circle cx='12' cy='12' r='10'/></svg>" class="w-full h-full object-cover rounded-full opacity-75 animate-spin-slow paused">
+        </div>
+        <div class="text-center space-y-1">
+            <h2 id="fsTitle" class="text-xl font-black text-white">Track Title</h2>
+            <p id="fsArtist" class="text-xs text-theme-400 font-semibold">Artist Name</p>
+        </div>
+        <div class="flex items-center space-x-6 pb-6">
+            <button id="fsPrevBtn" class="text-gray-300 text-xl"><i class="fa-solid fa-backward-step"></i></button>
+            <button id="fsPlayPauseBtn" class="w-12 h-12 rounded-full bg-theme-500 text-black flex items-center justify-center shadow-xl"><i class="fa-solid fa-play"></i></button>
+            <button id="fsNextBtn" class="text-gray-300 text-xl"><i class="fa-solid fa-forward-step"></i></button>
         </div>
     </div>
 
@@ -735,7 +474,7 @@
         let skipStep = 10;
 
         let audioCtx = null, audioSource = null, analyser = null, bassFilter = null;
-        let splitterNode = null, mergerNode = null, karaokeGainNode = null, invertNodeLeft = null, invertNodeRight = null;
+        let splitterNode = null, mergerNode = null, karaokeGainNode = null, vocalBoostNode = null;
         let eqFilters = [];
         const FREQUENCIES = [60, 250, 500, 1000, 2000, 4000, 8000, 12000, 14000, 16000];
 
@@ -768,44 +507,31 @@
             bassFilter.frequency.value = 180;
             bassFilter.gain.value = 0;
 
-            // Working Professional DSP Phase Cancellation Vocal Splitter / Extractor Chain
+            // Advanced DSP Chain for Vocal Modes
             splitterNode = audioCtx.createChannelSplitter(2);
             mergerNode = audioCtx.createChannelMerger(2);
             karaokeGainNode = audioCtx.createGain();
-            karaokeGainNode.gain.value = 0.0; // 0 = normal stereo, 1 = maximum center vocal cancellation (Karaoke)
+            karaokeGainNode.gain.value = 0.0; 
 
             let inverterL = audioCtx.createGain();
             let inverterR = audioCtx.createGain();
             inverterL.gain.value = -1.0;
             inverterR.gain.value = -1.0;
 
-            let centerSumNode = audioCtx.createGain();
-            centerSumNode.gain.value = 0.5;
-
-            // Connect audio flow: Source -> Splitter
             audioSource.connect(splitterNode);
-
-            // Direct pass channels
             splitterNode.connect(mergerNode, 0, 0);
             splitterNode.connect(mergerNode, 1, 1);
 
-            // Phase cancellation subtraction network for center channel vocals
-            splitterNode.connect(inverterL, 1); // Right channel inverted
-            splitterNode.connect(inverterR, 0); // Left channel inverted
+            splitterNode.connect(inverterL, 1);
+            splitterNode.connect(inverterR, 0);
 
             let subMerge = audioCtx.createChannelMerger(2);
             inverterL.connect(subMerge, 0, 0);
             inverterR.connect(subMerge, 0, 1);
 
-            let intermediateGain = audioCtx.createGain();
-            intermediateGain.gain.value = 0.0; // Dynamic vocal isolation control multiplier
-            
-            // Link to vocal separation slider reference
-            window.karaokeControlNode = intermediateGain;
-
-            subMerge.connect(intermediateGain);
-            intermediateGain.connect(mergerNode, 0, 0);
-            intermediateGain.connect(mergerNode, 0, 1);
+            subMerge.connect(karaokeGainNode);
+            karaokeGainNode.connect(mergerNode, 0, 0);
+            karaokeGainNode.connect(mergerNode, 0, 1);
 
             let lastNode = mergerNode;
             lastNode.connect(bassFilter);
@@ -828,20 +554,37 @@
             initVisualizerBars();
         }
 
+        // Handle Vocal Mode Selection Radio Buttons
+        document.querySelectorAll('input[name="vocalMode"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                initAudioEngine();
+                const mode = e.target.value;
+                
+                // Highlight UI label styling
+                document.querySelectorAll('input[name="vocalMode"]').forEach(r => {
+                    r.closest('label').className = "cursor-pointer bg-gray-900/80 border border-white/10 hover:bg-gray-900 p-2.5 rounded-xl flex items-center space-x-2 transition-all";
+                    r.nextElementSibling.className = "font-semibold text-gray-300";
+                });
+                e.target.closest('label').className = "cursor-pointer bg-theme-500/20 border border-theme-500/40 hover:bg-theme-500/30 p-2.5 rounded-xl flex items-center space-x-2 transition-all";
+                e.target.nextElementSibling.className = "font-bold text-white";
+
+                if (mode === 'default') {
+                    karaokeGainNode.gain.value = 0.0;
+                } else if (mode === 'remove_vocal') {
+                    karaokeGainNode.gain.value = 1.0; // Karaoke mode
+                } else if (mode === 'remove_instrument') {
+                    karaokeGainNode.gain.value = 0.5; // Isolate center channel vocals
+                } else if (mode === 'increase_vocal') {
+                    karaokeGainNode.gain.value = 0.85; // Boost vocals relative to mix
+                }
+            });
+        });
+
         document.getElementById('studioBassSlider').addEventListener('input', (e) => {
             initAudioEngine();
             const gainVal = parseFloat(e.target.value);
             document.getElementById('studioBassVal').textContent = gainVal + " dB";
             if (bassFilter) bassFilter.gain.value = gainVal;
-        });
-
-        // Fixed Working Vocal Extractor Slider
-        document.getElementById('vocalSplitSlider').addEventListener('input', (e) => {
-            initAudioEngine();
-            const val = parseFloat(e.target.value); // 0 to 1
-            if(window.karaokeControlNode) {
-                window.karaokeControlNode.gain.value = val * 0.95; // Phase cancellation strength
-            }
         });
 
         document.getElementById('pitchSlider').addEventListener('input', (e) => {
@@ -850,27 +593,6 @@
             audio.preservesPitch = true;
             audio.playbackRate = val;
         });
-
-        document.getElementById('normalizeAudioBtn').onclick = () => {
-            initAudioEngine();
-            alert("Audio volume normalized and boosted successfully!");
-        };
-
-        document.getElementById('skipStepSelect').addEventListener('change', (e) => {
-            skipStep = parseInt(e.target.value);
-            document.getElementById('skipBackLabel').textContent = `-${skipStep}s`;
-            document.getElementById('skipFwdLabel').textContent = `+${skipStep}s`;
-        });
-
-        document.getElementById('skipBackwardBtn').onclick = () => {
-            if (!audio.duration) return;
-            audio.currentTime = Math.max(0, audio.currentTime - skipStep);
-        };
-
-        document.getElementById('skipForwardBtn').onclick = () => {
-            if (!audio.duration) return;
-            audio.currentTime = Math.min(audio.duration, audio.currentTime + skipStep);
-        };
 
         document.getElementById('fileInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
@@ -892,9 +614,7 @@
             });
 
             updatePlaylistUI();
-            if (currentSongIndex === -1 && songs.length > 0) {
-                loadSong(0);
-            }
+            if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
         });
 
         const defaultBtn = document.getElementById('selectDefaultBtn');
@@ -909,22 +629,22 @@
             pl1NameSpan.textContent = playlistNames[0];
             pl2NameSpan.textContent = playlistNames[1];
 
-            defaultBtn.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900/60 text-gray-400 border border-white/10 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate";
-            btn1.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900/60 text-gray-400 border border-white/10 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate";
-            btn2.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900/60 text-gray-400 border border-white/10 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate";
+            defaultBtn.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900/60 text-gray-400 border border-white/10";
+            btn1.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900/60 text-gray-400 border border-white/10";
+            btn2.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900/60 text-gray-400 border border-white/10";
 
             if (activeSection === 'default') {
-                defaultBtn.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-1.5 truncate";
+                defaultBtn.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md";
                 activePlaylistTitle.textContent = "Viewing: Default Library";
                 renameBtn.classList.add('hidden');
                 songs = defaultLibrarySongs;
             } else if (activeSection === 'pl1') {
-                btn1.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-1.5 truncate";
+                btn1.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md";
                 activePlaylistTitle.textContent = `Viewing: ${playlistNames[0]}`;
                 renameBtn.classList.remove('hidden');
                 songs = customPlaylists.pl1;
             } else {
-                btn2.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-1.5 truncate";
+                btn2.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md";
                 activePlaylistTitle.textContent = `Viewing: ${playlistNames[1]}`;
                 renameBtn.classList.remove('hidden');
                 songs = customPlaylists.pl2;
@@ -936,17 +656,6 @@
         defaultBtn.onclick = () => { activeSection = 'default'; updatePlaylistUI(); };
         btn1.onclick = () => { activeSection = 'pl1'; updatePlaylistUI(); };
         btn2.onclick = () => { activeSection = 'pl2'; updatePlaylistUI(); };
-
-        renameBtn.onclick = () => {
-            let currentName = activeSection === 'pl1' ? playlistNames[0] : playlistNames[1];
-            let newName = prompt("Enter new name for this playlist:", currentName);
-            if (!newName || !newName.trim()) return;
-            if (activeSection === 'pl1') playlistNames[0] = newName.trim();
-            else playlistNames[1] = newName.trim();
-
-            localStorage.setItem('r_music_playlist_names', JSON.stringify(playlistNames));
-            updatePlaylistUI();
-        };
 
         document.getElementById('playlistSongInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
@@ -961,43 +670,15 @@
                         artist: activeSection === 'default' ? "Default Library" : "Playlist Track",
                         url: URL.createObjectURL(f)
                     };
-                    if (activeSection === 'default') {
-                        if (!defaultLibrarySongs.some(s => s.title === trackData.title)) defaultLibrarySongs.push(trackData);
-                    } else if (activeSection === 'pl1') {
-                        if (!customPlaylists.pl1.some(s => s.title === trackData.title)) customPlaylists.pl1.push(trackData);
-                    } else {
-                        if (!customPlaylists.pl2.some(s => s.title === trackData.title)) customPlaylists.pl2.push(trackData);
-                    }
+                    if (activeSection === 'default') defaultLibrarySongs.push(trackData);
+                    else if (activeSection === 'pl1') customPlaylists.pl1.push(trackData);
+                    else customPlaylists.pl2.push(trackData);
                 }
             });
 
-            if (activeSection !== 'default') {
-                localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
-            }
+            if (activeSection !== 'default') localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
             updatePlaylistUI();
             if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
-        });
-
-        document.getElementById('clearCurrentPlaylistBtn').onclick = () => {
-            if (confirm("Are you sure you want to clear all tracks from this section?")) {
-                if (activeSection === 'default') defaultLibrarySongs = [];
-                else if (activeSection === 'pl1') customPlaylists.pl1 = [];
-                else customPlaylists.pl2 = [];
-
-                if (activeSection !== 'default') {
-                    localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
-                }
-                audio.pause();
-                isPlaying = false;
-                currentSongIndex = -1;
-                document.getElementById('currentTitle').textContent = "R Music Workstation Pro";
-                document.getElementById('currentArtist').textContent = "Import folder or add songs";
-                updatePlaylistUI();
-            }
-        };
-
-        document.getElementById('songSearchInput').addEventListener('input', (e) => {
-            renderTrackList(e.target.value.trim().toLowerCase());
         });
 
         function loadSong(index) {
@@ -1009,22 +690,15 @@
             document.getElementById('currentArtist').textContent = track.artist;
             document.getElementById('fsTitle').textContent = track.title;
             document.getElementById('fsArtist').textContent = track.artist;
-            
-            const customNote = document.getElementById('customLyricsInput').value;
-            document.getElementById('lyricsDisplay').textContent = customNote ? customNote : `Now Playing:\n${track.title}`;
-            
             updateFavoriteButtonState();
             renderTrackList();
-            renderFavoritesList();
         }
 
         function playAudio() {
             initAudioEngine();
             if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-            
             audio.volume = 0.8;
             audio.play();
-
             isPlaying = true;
             document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause text-xl"></i>';
             document.getElementById('fsPlayPauseBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
@@ -1051,22 +725,13 @@
 
         document.getElementById('prevBtn').onclick = () => {
             if (songs.length === 0) return;
-            let idx = currentSongIndex - 1;
-            if (idx < 0) idx = songs.length - 1;
-            loadSong(idx); playAudio();
+            loadSong((currentSongIndex - 1 + songs.length) % songs.length);
+            playAudio();
         };
-        document.getElementById('fsPrevBtn').onclick = () => document.getElementById('prevBtn').click();
-
         document.getElementById('nextBtn').onclick = () => {
             if (songs.length === 0) return;
-            let idx = isShuffle ? Math.floor(Math.random() * songs.length) : (currentSongIndex + 1) % songs.length;
-            loadSong(idx); playAudio();
-        };
-        document.getElementById('fsNextBtn').onclick = () => document.getElementById('nextBtn').click();
-
-        audio.onended = () => {
-            if (isRepeat) { loadSong(currentSongIndex); playAudio(); }
-            else { document.getElementById('nextBtn').click(); }
+            loadSong((currentSongIndex + 1) % songs.length);
+            playAudio();
         };
 
         const favoriteToggleBtn = document.getElementById('favoriteToggleBtn');
@@ -1078,29 +743,16 @@
 
         function updateFavoriteButtonState() {
             if (currentSongIndex === -1 || !songs[currentSongIndex]) return;
-            const track = songs[currentSongIndex];
-            if (isTrackFavorite(track)) {
-                favIcon.className = "fa-solid fa-heart text-pink-400";
-            } else {
-                favIcon.className = "fa-regular fa-heart text-gray-400";
-            }
+            if (isTrackFavorite(songs[currentSongIndex])) favIcon.className = "fa-solid fa-heart text-pink-400";
+            else favIcon.className = "fa-regular fa-heart text-gray-400";
         }
 
         favoriteToggleBtn.onclick = () => {
-            if (currentSongIndex === -1 || !songs[currentSongIndex]) {
-                return alert("No active song playing to favorite!");
-            }
+            if (currentSongIndex === -1 || !songs[currentSongIndex]) return alert("No active song!");
             const track = songs[currentSongIndex];
             const existingIdx = favoriteSongs.findIndex(f => f.title === track.title);
-
-            if (existingIdx !== -1) {
-                favoriteSongs.splice(existingIdx, 1);
-                alert(`Removed "${track.title}" from Favorites.`);
-            } else {
-                favoriteSongs.push({ ...track });
-                alert(`Added "${track.title}" to Favorites!`);
-            }
-
+            if (existingIdx !== -1) favoriteSongs.splice(existingIdx, 1);
+            else favoriteSongs.push({ ...track });
             localStorage.setItem('r_music_favorites', JSON.stringify(favoriteSongs));
             updateFavoriteButtonState();
             renderFavoritesList();
@@ -1111,394 +763,62 @@
             const list = document.getElementById('favTrackList');
             const empty = document.getElementById('favEmptyState');
             list.innerHTML = '';
-
             if (favoriteSongs.length === 0) {
                 if (empty) empty.style.display = 'block';
                 document.getElementById('favSongCount').textContent = '0 Tracks';
                 return;
-            } else {
-                if (empty) empty.style.display = 'none';
-            }
+            } else { if (empty) empty.style.display = 'none'; }
 
             favoriteSongs.forEach((s) => {
                 const item = document.createElement('div');
-                item.className = 'p-3 rounded-xl text-xs flex items-center justify-between bg-gray-950/80 hover:bg-gray-900 text-gray-300 border border-white/10 transition-all';
-                item.innerHTML = `
-                    <div class="flex items-center space-x-3 overflow-hidden cursor-pointer flex-1" title="Play Favorite">
-                        <i class="fa-solid fa-heart text-pink-400"></i>
-                        <p class="truncate font-semibold">${s.title}</p>
-                    </div>
-                    <div class="flex items-center space-x-2 ml-2">
-                        <button title="Remove from Favorites" class="remove-fav-btn px-2 py-1 rounded-lg text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                `;
-
-                item.querySelector('.flex-1').onclick = () => {
-                    songs = favoriteSongs;
-                    let realIndex = favoriteSongs.findIndex(orig => orig.title === s.title);
-                    if(realIndex !== -1) {
-                        loadSong(realIndex);
-                        playAudio();
-                    }
-                };
-
-                item.querySelector('.remove-fav-btn').onclick = (e) => {
-                    e.stopPropagation();
-                    favoriteSongs = favoriteSongs.filter(orig => orig.title !== s.title);
-                    localStorage.setItem('r_music_favorites', JSON.stringify(favoriteSongs));
-                    updateFavoriteButtonState();
-                    renderFavoritesList();
-                    renderTrackList();
-                };
-
+                item.className = 'p-3 rounded-xl text-xs flex items-center justify-between bg-gray-950/80 text-gray-300 border border-white/10';
+                item.innerHTML = `<span class="truncate font-semibold cursor-pointer flex-1">${s.title}</span>`;
+                item.querySelector('span').onclick = () => { songs = favoriteSongs; loadSong(favoriteSongs.findIndex(x => x.title === s.title)); playAudio(); };
                 list.appendChild(item);
             });
-
             document.getElementById('favSongCount').textContent = favoriteSongs.length + " Tracks";
         }
-
-        document.getElementById('loopABtn').onclick = () => { loopA = audio.currentTime; alert(`Loop Point A set at ${formatTime(loopA)}`); };
-        document.getElementById('loopBBtn').onclick = () => { loopB = audio.currentTime; alert(`Loop Point B set at ${formatTime(loopB)}`); };
-        document.getElementById('clearABBtn').onclick = () => { loopA = null; loopB = null; alert("A-B Loop Reset!"); };
 
         audio.ontimeupdate = () => {
             if (audio.duration) {
                 document.getElementById('progressBar').value = (audio.currentTime / audio.duration) * 100;
                 document.getElementById('currentTime').textContent = formatTime(audio.currentTime);
                 document.getElementById('durationTime').textContent = formatTime(audio.duration);
-
-                if (loopA !== null && loopB !== null && audio.currentTime >= loopB) {
-                    audio.currentTime = loopA;
-                }
             }
         };
 
         document.getElementById('progressBar').oninput = (e) => {
             if (audio.duration) audio.currentTime = (e.target.value / 100) * audio.duration;
         };
-
         document.getElementById('volumeSlider').oninput = (e) => { audio.volume = e.target.value; };
-        document.getElementById('playbackRate').onchange = (e) => { audio.playbackRate = parseFloat(e.target.value); };
-
-        document.getElementById('djScratchWheel').onclick = () => {
-            if(!isPlaying) return;
-            audio.currentTime = Math.max(0, audio.currentTime - 2);
-        };
-
-        document.getElementById('sleepTimerBtn').onclick = () => {
-            const mins = prompt("Enter Sleep Timer duration in minutes:", "15");
-            if(!mins || isNaN(mins)) return;
-            let seconds = parseInt(mins) * 60;
-            const display = document.getElementById('timerDisplay');
-            const countdown = document.getElementById('timerCountdown');
-            display.classList.remove('hidden');
-
-            if(sleepTimerRef) clearInterval(sleepTimerRef);
-            sleepTimerRef = setInterval(() => {
-                seconds--;
-                let m = Math.floor(seconds / 60), s = seconds % 60;
-                countdown.textContent = `${m}:${s < 10 ? '0':''}${s}`;
-                if(seconds <= 0) {
-                    clearInterval(sleepTimerRef);
-                    audio.pause();
-                    isPlaying = false;
-                    display.classList.add('hidden');
-                }
-            }, 1000);
-            alert(`Sleep timer set for ${mins} minutes!`);
-        };
-
-        document.getElementById('markStartBtn').onclick = () => {
-            document.getElementById('trimStartInput').value = audio.currentTime.toFixed(1);
-        };
-        document.getElementById('markEndBtn').onclick = () => {
-            document.getElementById('trimEndInput').value = audio.currentTime.toFixed(1);
-        };
-
-        document.getElementById('exportTrimBtn').onclick = () => {
-            if(currentSongIndex === -1 || !songs[currentSongIndex]) {
-                return alert("Please select or play a track first!");
-            }
-            const startSec = parseFloat(document.getElementById('trimStartInput').value) || 0;
-            const endSec = parseFloat(document.getElementById('trimEndInput').value) || 10;
-
-            if(endSec <= startSec) {
-                return alert("End time must be greater than start time!");
-            }
-
-            fetch(songs[currentSongIndex].url)
-                .then(res => res.arrayBuffer())
-                .then(arrayBuffer => {
-                    const tempAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    tempAudioCtx.decodeAudioData(arrayBuffer, function(audioBuffer) {
-                        const sampleRate = audioBuffer.sampleRate;
-                        const startFrame = Math.floor(startSec * sampleRate);
-                        const endFrame = Math.min(Math.floor(endSec * sampleRate), audioBuffer.length);
-                        const frameCount = endFrame - startFrame;
-
-                        const trimmedBuffer = tempAudioCtx.createBuffer(audioBuffer.numberOfChannels, frameCount, sampleRate);
-                        for (let ch = 0; ch < audioBuffer.numberOfChannels; ch++) {
-                            const channelData = audioBuffer.getChannelData(ch);
-                            const trimmedData = trimmedBuffer.getChannelData(ch);
-                            for (let i = 0; i < frameCount; i++) {
-                                trimmedData[i] = channelData[startFrame + i];
-                            }
-                        }
-
-                        const wavBlob = bufferToWave(trimmedBuffer, frameCount);
-                        const url = URL.createObjectURL(wavBlob);
-                        const a = document.createElement('a');
-                        a.style.display = 'none';
-                        a.href = url;
-                        a.download = `${songs[currentSongIndex].title}_trimmed_${startSec}s-${endSec}s.wav`;
-                        document.body.appendChild(a);
-                        a.click();
-                        setTimeout(() => { document.body.removeChild(a); window.URL.revokeObjectURL(url); }, 100);
-                        alert("Trimmed audio clip downloaded successfully!");
-                    }, function(err) {
-                        alert("Error processing audio file buffer!");
-                    });
-                }).catch(err => alert("Could not fetch file stream for trimming!"));
-        };
-
-        function bufferToWave(abBuffer, len) {
-            let numOfChan = abBuffer.numberOfChannels,
-                length = len * numOfChan * 2 + 44,
-                buffer = new ArrayBuffer(length),
-                view = new DataView(buffer),
-                channels = [], sampleRate = abBuffer.sampleRate,
-                offset = 0, pos = 0;
-
-            function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
-            function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
-
-            setUint32(0x46464952); // "RIFF"
-            setUint32(length - 8);
-            setUint32(0x45564157); // "WAVE"
-            setUint32(0x20746d66); // "fmt " chunk
-            setUint32(16);
-            setUint16(1);
-            setUint16(numOfChan);
-            setUint32(sampleRate);
-            setUint32(sampleRate * 2 * numOfChan);
-            setUint16(numOfChan * 2);
-            setUint16(16);
-            setUint32(0x61746164); // "data"
-            setUint32(length - pos - 4);
-
-            for (let i = 0; i < abBuffer.numberOfChannels; i++) channels.push(abBuffer.getChannelData(i));
-
-            while (pos < length) {
-                for (let i = 0; i < numOfChan; i++) {
-                    let sample = Math.max(-1, Math.min(1, channels[i][offset]));
-                    sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767);
-                    view.setInt16(pos, sample, true);
-                    pos += 2;
-                }
-                offset++;
-            }
-            return new Blob([buffer], { type: "audio/wav" });
-        }
-
-        document.getElementById('fullScreenPlayerBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.remove('hidden');
-        document.getElementById('closeFullScreenBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.add('hidden');
-
-        const secretVaultTrigger = document.getElementById('secretVaultTrigger');
-        const secretVaultModal = document.getElementById('secretVaultModal');
-        const closeVaultBtn = document.getElementById('closeVaultBtn');
-        const vaultAuthSection = document.getElementById('vaultAuthSection');
-        const vaultMenuSection = document.getElementById('vaultMenuSection');
-        const vaultPhotoGallerySection = document.getElementById('vaultPhotoGallerySection');
-        const vaultVideoGallerySection = document.getElementById('vaultVideoGallerySection');
-        const vaultPasswordInput = document.getElementById('vaultPasswordInput');
-        const vaultUnlockBtn = document.getElementById('vaultUnlockBtn');
-        
-        const vaultOptionPhotoBtn = document.getElementById('vaultOptionPhotoBtn');
-        const vaultOptionVideoBtn = document.getElementById('vaultOptionVideoBtn');
-        const backToVaultMenuBtn1 = document.getElementById('backToVaultMenuBtn1');
-        const backToVaultMenuBtn2 = document.getElementById('backToVaultMenuBtn2');
-        const vaultLockBtn1 = document.getElementById('vaultLockBtn1');
-        const vaultLockBtn2 = document.getElementById('vaultLockBtn2');
-
-        secretVaultTrigger.onclick = () => {
-            secretVaultModal.classList.remove('hidden');
-            vaultAuthSection.classList.remove('hidden');
-            vaultMenuSection.classList.add('hidden');
-            vaultPhotoGallerySection.classList.add('hidden');
-            vaultVideoGallerySection.classList.add('hidden');
-            vaultPasswordInput.value = '';
-        };
-
-        closeVaultBtn.onclick = () => {
-            secretVaultModal.classList.add('hidden');
-        };
-
-        vaultUnlockBtn.onclick = () => {
-            if (vaultPasswordInput.value === 'Rihana') {
-                vaultAuthSection.classList.add('hidden');
-                vaultMenuSection.classList.remove('hidden');
-            } else {
-                alert("Incorrect password! Access denied.");
-                vaultPasswordInput.value = '';
-            }
-        };
-
-        vaultPasswordInput.onkeydown = (e) => {
-            if(e.key === 'Enter') vaultUnlockBtn.click();
-        };
-
-        vaultOptionPhotoBtn.onclick = () => {
-            vaultMenuSection.classList.add('hidden');
-            vaultPhotoGallerySection.classList.remove('hidden');
-            populatePhotoSlots();
-        };
-
-        vaultOptionVideoBtn.onclick = () => {
-            vaultMenuSection.classList.add('hidden');
-            vaultVideoGallerySection.classList.remove('hidden');
-            populateVideoSlots();
-        };
-
-        backToVaultMenuBtn1.onclick = () => {
-            vaultPhotoGallerySection.classList.add('hidden');
-            vaultMenuSection.classList.remove('hidden');
-        };
-
-        backToVaultMenuBtn2.onclick = () => {
-            vaultVideoGallerySection.classList.add('hidden');
-            vaultMenuSection.classList.remove('hidden');
-        };
-
-        const lockVaultAction = () => {
-            vaultPhotoGallerySection.classList.add('hidden');
-            vaultVideoGallerySection.classList.add('hidden');
-            vaultMenuSection.classList.add('hidden');
-            vaultAuthSection.classList.remove('hidden');
-            vaultPasswordInput.value = '';
-        };
-
-        vaultLockBtn1.onclick = lockVaultAction;
-        vaultLockBtn2.onclick = lockVaultAction;
-
-        function populatePhotoSlots() {
-            const grid = document.getElementById('vaultPhotoGrid');
-            grid.innerHTML = '';
-            for(let i = 1; i <= 20; i++) {
-                const item = document.createElement('div');
-                item.className = 'bg-gray-950/80 border border-white/10 rounded-xl overflow-hidden flex flex-col items-center p-2 group';
-                item.innerHTML = `
-                    <div class="w-full h-24 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                        <img src="./p${i}.jpg" alt="Vault Photo p${i}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
-                    </div>
-                    <span class="text-[10px] text-gray-400 mt-2 font-mono">p${i}.jpg</span>
-                `;
-                grid.appendChild(item);
-            }
-        }
-
-        function populateVideoSlots() {
-            const grid = document.getElementById('vaultVideoGrid');
-            grid.innerHTML = '';
-            for(let i = 1; i <= 10; i++) {
-                const item = document.createElement('div');
-                item.className = 'bg-gray-950/80 border border-white/10 rounded-xl overflow-hidden flex flex-col items-center p-3 group';
-                item.innerHTML = `
-                    <div class="w-full h-32 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center border border-white/10">
-                        <video src="./v${i}.mp4" class="w-full h-full object-cover" muted preload="metadata" onerror="this.style.display='none'"></video>
-                        <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-all pointer-events-none">
-                            <i class="fa-solid fa-play text-theme-400 text-lg"></i>
-                        </div>
-                    </div>
-                    <span class="text-[10px] text-gray-400 mt-2 font-mono">v${i}.mp4</span>
-                `;
-                grid.appendChild(item);
-            }
-        }
 
         function renderTrackList(searchTerm = '') {
             const list = document.getElementById('trackList');
             const empty = document.getElementById('emptyState');
             list.innerHTML = '';
-
             let filteredSongs = songs.filter(s => s.title.toLowerCase().includes(searchTerm));
-
-            if (filteredSongs.length === 0) {
-                if(empty) empty.style.display = 'block';
-                document.getElementById('songCount').textContent = songs.length + ' Tracks';
-                return;
-            } else { if(empty) empty.style.display = 'none'; }
+            if (filteredSongs.length === 0) { if(empty) empty.style.display = 'block'; return; }
+            else { if(empty) empty.style.display = 'none'; }
 
             filteredSongs.forEach((s) => {
                 const isCurrent = (songs[currentSongIndex] && songs[currentSongIndex].title === s.title);
-                const isFav = isTrackFavorite(s);
-                
                 const item = document.createElement('div');
                 item.className = `p-3 rounded-xl text-xs flex items-center justify-between transition-all ${isCurrent ? 'bg-theme-500/20 text-theme-400 font-bold border border-theme-500/30' : 'bg-gray-950/80 hover:bg-gray-900 text-gray-300 border border-white/10'}`;
-                
                 item.innerHTML = `
-                    <div class="flex items-center space-x-3 overflow-hidden cursor-pointer flex-1" title="Play Track">
+                    <div class="flex items-center space-x-3 overflow-hidden cursor-pointer flex-1">
                         <i class="fa-solid fa-music text-theme-400"></i>
                         <p class="truncate font-semibold">${s.title}</p>
                     </div>
-                    <div class="flex items-center space-x-2 ml-2">
-                        <button title="Favorite Track" class="list-fav-btn px-2 py-1 rounded-lg text-xs ${isFav ? 'text-pink-400 bg-pink-500/20 border border-pink-500/30' : 'text-gray-400 hover:text-pink-400 bg-gray-900 border border-white/10'}">
-                            <i class="${isFav ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
-                        </button>
-                        <button title="Remove Song" class="remove-btn px-2 py-1 rounded-lg text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
                 `;
-
-                item.querySelector('.flex-1').onclick = () => {
-                    let realIndex = songs.findIndex(orig => orig.title === s.title);
-                    if(realIndex !== -1) {
-                        loadSong(realIndex);
-                        playAudio();
-                    }
-                };
-
-                item.querySelector('.list-fav-btn').onclick = (e) => {
-                    e.stopPropagation();
-                    const existingIdx = favoriteSongs.findIndex(f => f.title === s.title);
-                    if (existingIdx !== -1) {
-                        favoriteSongs.splice(existingIdx, 1);
-                    } else {
-                        favoriteSongs.push({ ...s });
-                    }
-                    localStorage.setItem('r_music_favorites', JSON.stringify(favoriteSongs));
-                    updateFavoriteButtonState();
-                    renderFavoritesList();
-                    renderTrackList(searchTerm);
-                };
-
-                item.querySelector('.remove-btn').onclick = (e) => {
-                    e.stopPropagation();
-                    if (activeSection === 'default') {
-                        defaultLibrarySongs = defaultLibrarySongs.filter(orig => orig.title !== s.title);
-                    } else if (activeSection === 'pl1') {
-                        customPlaylists.pl1 = customPlaylists.pl1.filter(orig => orig.title !== s.title);
-                        localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
-                    } else {
-                        customPlaylists.pl2 = customPlaylists.pl2.filter(orig => orig.title !== s.title);
-                        localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
-                    }
-                    updatePlaylistUI();
-                    if(currentSongIndex >= songs.length) currentSongIndex = songs.length - 1;
-                };
-
+                item.querySelector('.flex-1').onclick = () => { loadSong(songs.findIndex(orig => orig.title === s.title)); playAudio(); };
                 list.appendChild(item);
             });
-
             document.getElementById('songCount').textContent = songs.length + " Tracks";
         }
 
         function switchTab(tabId) {
             document.querySelectorAll('.page-tab').forEach(tab => tab.classList.add('hidden'));
-            const activeTab = document.getElementById(tabId);
-            if(activeTab) activeTab.classList.remove('hidden');
+            document.getElementById(tabId)?.classList.remove('hidden');
         }
 
         document.querySelectorAll('.nav-tab-btn').forEach(btn => {
@@ -1506,11 +826,7 @@
         });
 
         ['playerTab', 'playlistTab', 'favoritesTab', 'studioTab', 'toolsTab', 'lyricsTab', 'aboutTab'].forEach(t => {
-            const mobBtn = document.getElementById(`mobTab-${t}`);
-            if (mobBtn) mobBtn.onclick = () => {
-                switchTab(t);
-                setMobileTabActive(`mobTab-${t}`);
-            };
+            document.getElementById(`mobTab-${t}`)?.addEventListener('click', () => { switchTab(t); setMobileTabActive(`mobTab-${t}`); });
         });
 
         function initVisualizerBars() {
@@ -1518,7 +834,7 @@
             container.innerHTML = '';
             for(let i=0; i<16; i++) {
                 const bar = document.createElement('div');
-                bar.className = 'w-1.5 bg-theme-500/80 rounded-t transition-all duration-75';
+                bar.className = 'w-1.5 bg-theme-500/80 rounded-t';
                 bar.style.height = '4px';
                 container.appendChild(bar);
             }
@@ -1529,10 +845,8 @@
             if (analyser && isPlaying) {
                 const data = new Uint8Array(analyser.frequencyBinCount);
                 analyser.getByteFrequencyData(data);
-                const bars = document.querySelectorAll('#visualizerBars div');
-                bars.forEach((bar, idx) => {
-                    const h = (data[idx * 2] / 255) * 28;
-                    bar.style.height = Math.max(4, h) + 'px';
+                document.querySelectorAll('#visualizerBars div').forEach((bar, idx) => {
+                    bar.style.height = Math.max(4, (data[idx * 2] / 255) * 28) + 'px';
                 });
             }
         }
@@ -1551,31 +865,23 @@
                     <input type="range" min="-12" max="12" value="0" step="0.5" class="eq-slider accent-theme-500">
                     <span class="text-[9px] text-theme-400 font-bold font-mono band-val">0</span>
                 `;
-                const slider = wrap.querySelector('input');
-                const valDisp = wrap.querySelector('.band-val');
-                slider.oninput = (e) => {
-                    const gainVal = parseFloat(e.target.value);
-                    valDisp.textContent = gainVal;
-                    if (eqFilters[idx]) eqFilters[idx].gain.value = gainVal;
+                wrap.querySelector('input').oninput = (e) => {
+                    wrap.querySelector('.band-val').textContent = e.target.value;
+                    if (eqFilters[idx]) eqFilters[idx].gain.value = parseFloat(e.target.value);
                 };
                 container.appendChild(wrap);
             });
         }
 
-        document.getElementById('resetEqBtn').onclick = () => {
-            eqFilters.forEach(f => f.gain.value = 0);
-            buildStudioEqUI();
-        };
-
+        document.getElementById('resetEqBtn').onclick = () => { eqFilters.forEach(f => f.gain.value = 0); buildStudioEqUI(); };
         document.getElementById('resetAudioFxBtn').onclick = () => {
+            document.querySelector('input[name="vocalMode"][value="default"]').click();
             document.getElementById('studioBassSlider').value = 0;
             document.getElementById('studioBassVal').textContent = "0 dB";
-            document.getElementById('vocalSplitSlider').value = 0;
-            if(window.karaokeControlNode) window.karaokeControlNode.gain.value = 0;
             document.getElementById('pitchSlider').value = 1;
             document.getElementById('pitchVal').textContent = "1.0x";
             audio.playbackRate = 1;
-            if(bassFilter) bassFilter.gain.value = 0;
+            if (bassFilter) bassFilter.gain.value = 0;
         };
 
         function formatTime(s) {
@@ -1587,6 +893,8 @@
         window.setAppTheme = function(t) { document.documentElement.setAttribute('data-theme', t); };
         document.getElementById('openThemeModalBtn').onclick = () => document.getElementById('themeModal').classList.remove('hidden');
         document.getElementById('closeThemeBtn').onclick = () => document.getElementById('themeModal').classList.add('hidden');
+        document.getElementById('fullScreenPlayerBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.remove('hidden');
+        document.getElementById('closeFullScreenBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.add('hidden');
 
         updatePlaylistUI();
         renderFavoritesList();
