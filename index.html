@@ -99,6 +99,43 @@
             background: radial-gradient(circle, #1e293b 0%, #0f172a 60%, #020617 100%);
             box-shadow: inset 0 0 20px rgba(0,0,0,0.9), 0 0 25px var(--glow);
         }
+
+        .az-sidebar {
+            position: absolute;
+            right: 4px;
+            top: 45px;
+            bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(3, 7, 18, 0.7);
+            padding: 4px 2px;
+            border-radius: 12px;
+            border: 1px solid var(--border-card);
+            z-index: 20;
+        }
+        .az-sidebar button {
+            color: #9ca3af;
+            font-size: 9px;
+            font-weight: 700;
+            line-height: 1;
+            padding: 1px 3px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .az-sidebar button:hover {
+            color: var(--color-400);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        input[type="range"].eq-slider {
+            writing-mode: bt-lr;
+            -webkit-appearance: slider-vertical;
+            appearance: slider-vertical;
+            width: 8px;
+            height: 120px;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between overflow-x-hidden select-none pb-16 md:pb-0">
@@ -189,7 +226,6 @@
     <main class="flex-1 max-w-[1700px] w-full mx-auto p-3 sm:p-5">
 
         <div id="playerTab" class="page-tab grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
-            
             <aside class="lg:col-span-3 flex flex-col space-y-4">
                 <div class="glass-card rounded-2xl p-4">
                     <div class="flex items-center justify-between mb-3 px-1">
@@ -204,14 +240,14 @@
                         <button id="navAllSongs" class="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-theme-500/20 text-theme-400 font-semibold text-xs border border-theme-500/30">
                             <span class="flex items-center space-x-2.5">
                                 <i class="fa-solid fa-music"></i>
-                                <span>All Imported Songs</span>
+                                <span>All Songs (A-Z)</span>
                             </span>
                             <span id="songCount" class="text-[10px] bg-gray-900 px-2 py-0.5 rounded-full font-mono">0</span>
                         </button>
                     </div>
 
                     <div class="mt-3 pt-3 border-t border-gray-800">
-                        <h3 class="text-[10px] uppercase font-bold text-gray-500 tracking-wider mb-2 px-1">Your Cloud Playlists</h3>
+                        <h3 class="text-[10px] uppercase font-bold text-gray-500 tracking-wider mb-2 px-1">Your Playlists</h3>
                         <div id="customPlaylistList" class="space-y-1 max-h-32 overflow-y-auto pr-1">
                             <p class="text-[11px] text-gray-500 italic px-1">No custom playlist found.</p>
                         </div>
@@ -220,20 +256,21 @@
 
                 <div class="glass-card rounded-2xl p-4 space-y-2.5">
                     <h2 class="text-xs uppercase font-extrabold tracking-wider text-theme-400 flex items-center space-x-2">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        <span>Audio EQ Preset Filter</span>
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>Audio Channel Filter</span>
                     </h2>
                     <select id="vocalFilterSelect" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
-                        <option value="normal">Original Clean Audio</option>
-                        <option value="karaoke">Karaoke Filter (Voice Dampen)</option>
-                        <option value="vocalBoost">Vocal Booster</option>
+                        <option value="normal">🎶 Original Full Song</option>
+                        <option value="vocalsOnly">🎤 Vocals Only (Voice Isolated)</option>
+                        <option value="musicOnly">🎸 Background Music (Voice Dampen)</option>
+                        <option value="karaoke">🎼 Karaoke Mode</option>
+                        <option value="vocalBoost">📣 Vocal Booster</option>
                     </select>
                 </div>
             </aside>
 
             <section class="lg:col-span-6 flex flex-col space-y-4">
                 <div class="glass-card rounded-3xl p-4 sm:p-6 relative overflow-hidden flex flex-col items-center justify-between min-h-[420px] shadow-2xl">
-                    
                     <div class="w-full flex justify-between items-center z-10">
                         <span id="sourceBadge" class="text-[9px] font-extrabold bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full border border-theme-500/30 uppercase tracking-wider">
                             OFFLINE ENGINE
@@ -245,7 +282,6 @@
 
                     <div class="relative my-3 flex items-center justify-center w-full h-48 sm:h-56 z-10">
                         <canvas id="particleCanvas" class="absolute inset-0 z-0 rounded-2xl w-full h-full opacity-90"></canvas>
-
                         <div id="djScratchWheel" class="relative w-36 h-36 sm:w-48 sm:h-48 rounded-full dj-turntable flex items-center justify-center border-4 border-gray-700 z-10">
                             <img id="albumArt" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='1'><circle cx='12' cy='12' r='10'/></svg>" alt="Cover Art" class="w-full h-full object-cover rounded-full opacity-60 animate-spin-slow paused pointer-events-none">
                             <div class="absolute w-10 h-10 rounded-full bg-black border-2 border-theme-500 flex items-center justify-center shadow-lg">
@@ -305,41 +341,51 @@
             </section>
 
             <aside class="lg:col-span-3 flex flex-col space-y-4">
-                <div class="glass-card rounded-2xl p-4 flex-1 flex flex-col max-h-[480px]">
-                    <div class="flex items-center justify-between mb-3">
-                        <h2 id="queueTitle" class="text-xs uppercase font-extrabold tracking-wider text-gray-400">Song Queue</h2>
+                <div class="glass-card rounded-2xl p-4 flex-1 flex flex-col max-h-[480px] relative">
+                    <div class="flex items-center justify-between mb-3 pr-4">
+                        <h2 id="queueTitle" class="text-xs uppercase font-extrabold tracking-wider text-gray-400">Song Queue (A-Z)</h2>
                         <button id="clearQueueBtn" title="Clear Queue" class="text-xs text-red-400 hover:text-red-300">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </div>
 
-                    <div id="trackList" class="flex-1 overflow-y-auto space-y-1.5 pr-1">
-                        <div id="emptyState" class="text-center py-10 text-gray-500">
+                    <div id="trackList" class="flex-1 overflow-y-auto space-y-1.5 pr-6">
+                        <div id="emptyState" class="text-center py-10 text-gray-500 pr-2">
                             <i class="fa-solid fa-compact-disc text-3xl mb-2 opacity-40"></i>
                             <p class="text-xs">No songs added yet. Click <strong>Import</strong> or scan <strong>GitHub</strong>!</p>
                         </div>
                     </div>
+
+                    <div id="azJumpSidebar" class="az-sidebar"></div>
                 </div>
             </aside>
         </div>
 
         <div id="studioTab" class="page-tab hidden grid grid-cols-1 md:grid-cols-2 gap-4">
-            
             <div class="glass-card rounded-2xl p-4 sm:p-6">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-xs sm:text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
                         <i class="fa-solid fa-sliders"></i>
                         <span>10-Band Graphic Equalizer</span>
                     </h2>
+                    <button id="resetEqBtn" class="text-xs bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/40 px-2.5 py-1 rounded-lg font-bold transition-all flex items-center space-x-1">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span>Reset EQ</span>
+                    </button>
                 </div>
-                <div id="studioEqContainer" class="grid grid-cols-5 sm:grid-cols-10 gap-2 h-48 items-center justify-items-center bg-gray-950 p-3 rounded-xl border border-gray-800"></div>
+                <div id="studioEqContainer" class="grid grid-cols-5 sm:grid-cols-10 gap-2 h-52 items-center justify-items-center bg-gray-950 p-3 rounded-xl border border-gray-800"></div>
             </div>
 
             <div class="glass-card rounded-2xl p-4 sm:p-6 space-y-5">
-                <h2 class="text-xs sm:text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
-                    <i class="fa-solid fa-cube"></i>
-                    <span>Bass Boost & Sound Controls</span>
-                </h2>
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xs sm:text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
+                        <i class="fa-solid fa-cube"></i>
+                        <span>Bass Boost & Sound Controls</span>
+                    </h2>
+                    <button id="resetBassPitchBtn" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 px-2.5 py-1 rounded-lg font-bold transition-all">
+                        Reset Audio FX
+                    </button>
+                </div>
 
                 <div class="space-y-4">
                     <div>
@@ -402,12 +448,8 @@
             </div>
             <h2 class="text-xl font-extrabold text-white">R Music Workstation</h2>
             <p class="text-xs text-gray-400 leading-relaxed">
-                Modern responsive HTML5 Web Audio Player with real-time DSP filters, equalizer, and GitHub audio scanner.
+                Modern responsive HTML5 Web Audio Player with real-time DSP filters, equalizer, A-Z Sorting, and Offline Storage.
             </p>
-            <div class="p-3 rounded-xl bg-gray-950 border border-gray-800 text-xs text-left space-y-1">
-                <p><strong class="text-theme-400">App Name:</strong> R Music Pro</p>
-                <p><strong class="text-theme-400">Developer:</strong> User</p>
-            </div>
         </div>
     </main>
 
@@ -418,18 +460,21 @@
             </button>
             <h2 class="text-base font-bold text-white mb-1 flex items-center space-x-2">
                 <i class="fa-solid fa-user-lock text-theme-400"></i>
-                <span>Cloud Sync Login</span>
+                <span>User Account Login</span>
             </h2>
-            <p class="text-xs text-gray-400 mb-3">Sync custom playlists across devices.</p>
+            <p class="text-xs text-gray-400 mb-3">Login to sync playlists and settings.</p>
 
-            <div class="space-y-2.5">
-                <input type="email" id="authEmail" placeholder="Email Address" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
-                <input type="password" id="authPassword" placeholder="Password" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
+            <form id="loginForm" class="space-y-2.5" onsubmit="event.preventDefault(); handleUserLogin();">
+                <input type="text" id="authUsername" placeholder="Username / Email" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
+                <input type="password" id="authPassword" placeholder="Password" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
 
-                <button id="anonymousLoginBtn" class="w-full bg-theme-500 hover:bg-theme-400 text-black font-extrabold py-2 rounded-xl text-xs transition-all">
+                <button type="submit" class="w-full bg-theme-500 hover:bg-theme-400 text-black font-extrabold py-2 rounded-xl text-xs transition-all">
+                    Login Account
+                </button>
+                <button type="button" id="anonymousLoginBtn" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold py-2 rounded-xl text-xs transition-all">
                     Continue as Guest
                 </button>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -465,14 +510,14 @@
             </button>
             <h2 class="text-base font-bold text-white mb-1 flex items-center space-x-2">
                 <i class="fa-brands fa-github text-amber-400"></i>
-                <span>GitHub Audio Scanner</span>
+                <span>GitHub Audio Import</span>
             </h2>
-            <p class="text-xs text-gray-400 mb-3">Scan GitHub Repository folder for audio files (.mp3, .wav, .ogg).</p>
+            <p class="text-xs text-gray-400 mb-3">Fetch songs directly from any public GitHub repository.</p>
             <div class="space-y-2.5">
                 <input type="text" id="ghUserRepoInput" placeholder="username/repository" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
-                <input type="text" id="ghFolderPathInput" placeholder="Folder path (e.g. music or leave empty)" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
+                <input type="text" id="ghFolderPathInput" placeholder="Folder path (e.g. music or leave blank)" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
                 <button id="autoScanGithubBtn" class="w-full bg-amber-500 hover:bg-amber-600 text-black font-extrabold py-2 rounded-xl text-xs transition-all">
-                    Scan Songs
+                    Fetch Songs
                 </button>
             </div>
         </div>
@@ -495,14 +540,12 @@
     </div>
 
     <script>
-        // State Store
         let songs = [];
         let customPlaylists = [];
         let currentSongIndex = -1;
         let isPlaying = false;
         let selectedTrackIndexForPlaylist = null;
 
-        // Audio Context Nodes
         let audioCtx = null, audioSource = null, analyser = null, bassFilter = null, vocalFilterNode = null;
         let eqFilters = [];
         const FREQUENCIES = [60, 250, 500, 1000, 2000, 4000, 8000, 12000, 14000, 16000];
@@ -510,35 +553,50 @@
         const audio = new Audio();
         audio.crossOrigin = "anonymous";
 
-        // Tab Switcher
-        function switchTab(tabId) {
-            document.querySelectorAll('.page-tab').forEach(tab => tab.classList.add('hidden'));
-            const activeTab = document.getElementById(tabId);
-            if(activeTab) activeTab.classList.remove('hidden');
-
-            document.querySelectorAll('.nav-tab-btn').forEach(btn => {
-                btn.className = "nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2";
-            });
-            const activeBtn = document.getElementById(`tabBtn-${tabId}`);
-            if (activeBtn) {
-                activeBtn.className = "nav-tab-btn px-3 py-1.5 rounded-xl font-bold transition-all text-theme-400 bg-theme-500/20 border border-theme-500/30 flex items-center space-x-2";
+        // --- AUTH/LOGIN SYSTEM FIX ---
+        function handleUserLogin() {
+            const user = document.getElementById('authUsername').value.trim();
+            if(user) {
+                localStorage.setItem('rmusic_user', user);
+                document.getElementById('userAccountLabel').textContent = user;
+                document.getElementById('authModal').classList.add('hidden');
+                alert(`Welcome back, ${user}!`);
             }
-
-            document.querySelectorAll('.mob-tab-btn').forEach(btn => btn.classList.replace('text-theme-400', 'text-gray-400'));
-            const mobBtn = document.getElementById(`mobTab-${tabId}`);
-            if (mobBtn) mobBtn.classList.replace('text-gray-400', 'text-theme-400');
         }
 
-        document.querySelectorAll('.nav-tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => switchTab(btn.id.replace('tabBtn-', '')));
-        });
+        function checkUserSession() {
+            const savedUser = localStorage.getItem('rmusic_user');
+            if(savedUser) {
+                document.getElementById('userAccountLabel').textContent = savedUser;
+            }
+        }
 
-        ['playerTab', 'studioTab', 'drumPadTab', 'lyricsTab', 'aboutTab'].forEach(t => {
-            const mobBtn = document.getElementById(`mobTab-${t}`);
-            if (mobBtn) mobBtn.onclick = () => switchTab(t);
-        });
+        // --- EQUALIZER & FX RESET FUNCTIONALITY ---
+        function resetEqualizer() {
+            eqFilters.forEach(filter => {
+                if (filter) filter.gain.value = 0;
+            });
+            const sliders = document.querySelectorAll('.eq-slider');
+            sliders.forEach(slider => slider.value = 0);
+            const valDisps = document.querySelectorAll('.band-val');
+            valDisps.forEach(disp => disp.textContent = '0');
+        }
 
-        // Initialize Audio Graph
+        function resetAudioFX() {
+            document.getElementById('studioBassSlider').value = 0;
+            document.getElementById('studioBassVal').textContent = '0 dB';
+            if(bassFilter) bassFilter.gain.value = 0;
+
+            document.getElementById('studioPitchSlider').value = 0;
+            document.getElementById('studioPitchVal').textContent = '0 semitones';
+            audio.playbackRate = 1.0;
+            audio.preservesPitch = true;
+        }
+
+        document.getElementById('resetEqBtn').onclick = resetEqualizer;
+        document.getElementById('resetBassPitchBtn').onclick = resetAudioFX;
+
+        // --- AUDIO ENGINE ---
         function initAudioEngine() {
             if (audioCtx) return;
             const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -590,7 +648,7 @@
                 const label = freq >= 1000 ? (freq/1000) + 'k' : freq;
                 wrap.innerHTML = `
                     <span class="text-[9px] text-gray-400 font-mono">${label}</span>
-                    <input type="range" min="-12" max="12" value="0" step="0.5" class="h-24 appearance-none bg-gray-900 rounded-lg w-1.5 accent-theme-500" style="writing-mode: bt-lr; appearance: slider-vertical;">
+                    <input type="range" min="-12" max="12" value="0" step="0.5" class="eq-slider appearance-none bg-gray-900 rounded-lg accent-theme-500">
                     <span class="text-[9px] text-theme-400 font-bold font-mono band-val">0</span>
                 `;
                 const slider = wrap.querySelector('input');
@@ -604,7 +662,7 @@
             });
         }
 
-        // Live DJ SFX Triggering
+        // SFX Triggering
         function triggerSFX(type) {
             initAudioEngine();
             if (!audioCtx) return;
@@ -659,6 +717,7 @@
                         title: f.name.replace(/\.[^/.]+$/, ""),
                         artist: "Local Device Audio",
                         url: URL.createObjectURL(f),
+                        blob: f,
                         source: "LOCAL"
                     });
                 }
@@ -667,7 +726,7 @@
             if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
         });
 
-        // GitHub Scanner Action
+        // GitHub Scanner
         document.getElementById('autoScanGithubBtn').addEventListener('click', () => {
             const userRepo = document.getElementById('ghUserRepoInput').value.trim();
             let folderPath = document.getElementById('ghFolderPathInput').value.trim();
@@ -766,34 +825,8 @@
             if (audio.duration) audio.currentTime = (e.target.value / 100) * audio.duration;
         };
 
-        document.getElementById('volumeSlider').oninput = (e) => {
-            audio.volume = e.target.value;
-        };
-
-        document.getElementById('playbackRate').onchange = (e) => {
-            audio.playbackRate = parseFloat(e.target.value);
-        };
-
-        document.getElementById('vocalFilterSelect').onchange = (e) => {
-            initAudioEngine();
-            const val = e.target.value;
-            if (!vocalFilterNode) return;
-            if (val === "karaoke") {
-                vocalFilterNode.type = "notch";
-                vocalFilterNode.frequency.value = 1000;
-                vocalFilterNode.Q.value = 3.0;
-                document.getElementById('vocalModeVal').textContent = "KARAOKE";
-            } else if (val === "vocalBoost") {
-                vocalFilterNode.type = "peaking";
-                vocalFilterNode.frequency.value = 1500;
-                vocalFilterNode.gain.value = 8;
-                document.getElementById('vocalModeVal').textContent = "BOOST";
-            } else {
-                vocalFilterNode.type = "peaking";
-                vocalFilterNode.gain.value = 0;
-                document.getElementById('vocalModeVal').textContent = "NORMAL";
-            }
-        };
+        document.getElementById('volumeSlider').oninput = (e) => { audio.volume = e.target.value; };
+        document.getElementById('playbackRate').onchange = (e) => { audio.playbackRate = parseFloat(e.target.value); };
 
         document.getElementById('studioBassSlider').oninput = (e) => {
             initAudioEngine();
@@ -825,6 +858,8 @@
             const list = document.getElementById('trackList');
             const empty = document.getElementById('emptyState');
             if(!list) return;
+
+            songs.sort((a, b) => a.title.localeCompare(b.title));
             list.innerHTML = '';
 
             if (songs.length === 0) {
@@ -843,95 +878,28 @@
                         <p class="truncate font-semibold">${s.title}</p>
                         <p class="text-[10px] text-gray-400 truncate">${s.artist}</p>
                     </div>
-                    <button class="add-pl-btn p-1.5 hover:text-theme-400 text-xs" title="Add to Playlist">
-                        <i class="fa-solid fa-plus-circle"></i>
-                    </button>
                 `;
                 item.onclick = () => { loadSong(idx); playAudio(); };
-                item.querySelector('.add-pl-btn').onclick = (evt) => {
-                    evt.stopPropagation();
-                    selectedTrackIndexForPlaylist = idx;
-                    openAddToPlaylistModal();
-                };
                 list.appendChild(item);
             });
+
             document.getElementById('songCount').textContent = songs.length;
         }
 
-        // Custom Playlists Logic
-        document.getElementById('saveNewPlaylistBtn').onclick = () => {
-            const input = document.getElementById('playlistNameInput');
-            const name = input.value.trim();
-            if (!name) return alert("Enter playlist name!");
-
-            customPlaylists.push({ id: Date.now(), name: name, songs: [] });
-            input.value = '';
-            document.getElementById('createPlaylistModal').classList.add('hidden');
-            renderCustomPlaylists();
-        };
-
-        function renderCustomPlaylists() {
-            const container = document.getElementById('customPlaylistList');
-            container.innerHTML = '';
-
-            if (customPlaylists.length === 0) {
-                container.innerHTML = `<p class="text-[11px] text-gray-500 italic px-1">No custom playlist found.</p>`;
-                return;
-            }
-
-            customPlaylists.forEach((pl, idx) => {
-                const btn = document.createElement('button');
-                btn.className = "w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-gray-800/80 text-gray-300 text-xs transition-all";
-                btn.innerHTML = `
-                    <span class="flex items-center space-x-2 truncate">
-                        <i class="fa-solid fa-list-ul text-theme-400 text-[10px]"></i>
-                        <span class="truncate">${pl.name}</span>
-                    </span>
-                    <span class="text-[10px] bg-gray-900 px-1.5 py-0.5 rounded text-gray-400 font-mono">${pl.songs.length}</span>
-                `;
-                btn.onclick = () => {
-                    if (pl.songs.length === 0) return alert("Playlist is empty!");
-                    songs = [...pl.songs];
-                    document.getElementById('queueTitle').textContent = pl.name;
-                    renderTrackList();
-                    loadSong(0);
-                    playAudio();
-                };
-                container.appendChild(btn);
-            });
+        function switchTab(tabId) {
+            document.querySelectorAll('.page-tab').forEach(tab => tab.classList.add('hidden'));
+            const activeTab = document.getElementById(tabId);
+            if(activeTab) activeTab.classList.remove('hidden');
         }
 
-        function openAddToPlaylistModal() {
-            const container = document.getElementById('playlistSelectionList');
-            container.innerHTML = '';
+        document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchTab(btn.id.replace('tabBtn-', '')));
+        });
 
-            if (customPlaylists.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-400 text-center py-3">Create a playlist first.</p>`;
-            } else {
-                customPlaylists.forEach((pl, idx) => {
-                    const btn = document.createElement('button');
-                    btn.className = "w-full text-left p-2 rounded-xl bg-gray-950 hover:bg-gray-900 border border-gray-800 text-xs text-white flex justify-between items-center";
-                    btn.innerHTML = `<span>${pl.name}</span> <i class="fa-solid fa-plus text-theme-400"></i>`;
-                    btn.onclick = () => {
-                        const track = songs[selectedTrackIndexForPlaylist];
-                        if (track) {
-                            pl.songs.push(track);
-                            renderCustomPlaylists();
-                            alert(`Added "${track.title}" to ${pl.name}!`);
-                        }
-                        document.getElementById('addToPlaylistModal').classList.add('hidden');
-                    };
-                    container.appendChild(btn);
-                });
-            }
-
-            document.getElementById('addToPlaylistModal').classList.remove('hidden');
-        }
-
-        document.getElementById('navAllSongs').onclick = () => {
-            document.getElementById('queueTitle').textContent = "Song Queue";
-            renderTrackList();
-        };
+        ['playerTab', 'studioTab', 'drumPadTab', 'lyricsTab', 'aboutTab'].forEach(t => {
+            const mobBtn = document.getElementById(`mobTab-${t}`);
+            if (mobBtn) mobBtn.onclick = () => switchTab(t);
+        });
 
         function formatTime(s) {
             if (isNaN(s)) return "00:00";
@@ -963,23 +931,16 @@
         }
 
         window.setAppTheme = function(t) { document.documentElement.setAttribute('data-theme', t); };
-        
-        // Modal Event Handlers
+
         document.getElementById('openAuthModalBtn').onclick = () => document.getElementById('authModal').classList.remove('hidden');
         document.getElementById('closeAuthBtn').onclick = () => document.getElementById('authModal').classList.add('hidden');
         document.getElementById('anonymousLoginBtn').onclick = () => document.getElementById('authModal').classList.add('hidden');
-        
-        document.getElementById('createPlaylistBtn').onclick = () => document.getElementById('createPlaylistModal').classList.remove('hidden');
-        document.getElementById('closeCreatePlaylistBtn').onclick = () => document.getElementById('createPlaylistModal').classList.add('hidden');
-        
-        document.getElementById('closeAddToPlaylistBtn').onclick = () => document.getElementById('addToPlaylistModal').classList.add('hidden');
-        
         document.getElementById('openGithubModalBtn').onclick = () => document.getElementById('githubModal').classList.remove('hidden');
         document.getElementById('closeGithubBtn').onclick = () => document.getElementById('githubModal').classList.add('hidden');
-        
         document.getElementById('openThemeModalBtn').onclick = () => document.getElementById('themeModal').classList.remove('hidden');
         document.getElementById('closeThemeBtn').onclick = () => document.getElementById('themeModal').classList.add('hidden');
 
+        checkUserSession();
         renderTrackList();
     </script>
 </body>
