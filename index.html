@@ -288,23 +288,35 @@
                     </div>
 
                     <div class="flex flex-col items-center space-y-3 w-full z-10">
-                        <div class="flex items-center justify-center space-x-4">
-                            <button id="prevBtn" title="Previous Track" class="text-gray-300 hover:text-white transition-colors p-2">
-                                <i class="fa-solid fa-backward-step text-xl sm:text-2xl"></i>
+                        <div class="flex items-center justify-center space-x-3 sm:space-x-4">
+                            <button onclick="skipTime(-1)" title="Skip Backwards" class="text-gray-300 hover:text-theme-400 transition-colors p-2 flex flex-col items-center">
+                                <i class="fa-solid fa-rotate-left text-lg"></i>
+                                <span class="text-[9px] font-mono mt-0.5" id="skipBackLabel">-10s</span>
                             </button>
+
+                            <button id="prevBtn" title="Previous Track" class="text-gray-300 hover:text-white transition-colors p-1">
+                                <i class="fa-solid fa-backward-step text-lg sm:text-xl"></i>
+                            </button>
+
                             <button id="playPauseBtn" title="Play / Pause" class="w-14 h-14 rounded-full bg-theme-500 hover:bg-theme-400 text-black flex items-center justify-center shadow-2xl neon-glow active:scale-95 transition-all">
                                 <i class="fa-solid fa-play text-xl ml-0.5"></i>
                             </button>
-                            <button id="nextBtn" title="Next Track" class="text-gray-300 hover:text-white transition-colors p-2">
-                                <i class="fa-solid fa-forward-step text-xl sm:text-2xl"></i>
+
+                            <button id="nextBtn" title="Next Track" class="text-gray-300 hover:text-white transition-colors p-1">
+                                <i class="fa-solid fa-forward-step text-lg sm:text-xl"></i>
                             </button>
-                            <div class="flex items-center space-x-1.5 ml-2 bg-gray-900/90 border border-gray-800 px-2 py-1.5 rounded-xl hidden">
-                                <span class="text-[10px] text-gray-400 font-bold">Editable Skip:</span>
-                                <input type="number" id="customSkipInput" value="10" min="1" max="60" class="w-10 bg-gray-950 text-center text-theme-400 font-mono text-xs rounded border border-gray-800 focus:outline-none">
-                                <span class="text-[10px] text-gray-400">s</span>
-                                <button id="customSkipMinus" class="px-1.5 py-0.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded text-[10px] font-mono">-</button>
-                                <button id="customSkipPlus" class="px-1.5 py-0.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded text-[10px] font-mono">+</button>
-                            </div>
+
+                            <button onclick="skipTime(1)" title="Skip Forward" class="text-gray-300 hover:text-theme-400 transition-colors p-2 flex flex-col items-center">
+                                <i class="fa-solid fa-rotate-right text-lg"></i>
+                                <span class="text-[9px] font-mono mt-0.5" id="skipForwardLabel">+10s</span>
+                            </button>
+                        </div>
+
+                        <div class="flex items-center justify-center space-x-2 bg-gray-950/90 border border-gray-800 px-3 py-1.5 rounded-xl w-full max-w-xs">
+                            <span class="text-[10px] text-gray-400 font-bold whitespace-nowrap">Skip Time (Sec):</span>
+                            <input type="number" id="customSkipInput" value="10" min="1" max="120" class="w-12 bg-gray-900 text-center text-theme-400 font-mono text-xs rounded border border-gray-800 focus:outline-none">
+                            <button id="customSkipMinus" class="px-2 py-0.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded text-xs font-mono font-bold">-</button>
+                            <button id="customSkipPlus" class="px-2 py-0.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded text-xs font-mono font-bold">+</button>
                         </div>
 
                         <div class="flex items-center justify-between w-full pt-3 border-t border-gray-800/80 px-2 text-xs">
@@ -796,39 +808,35 @@
         const audio = new Audio();
         audio.crossOrigin = "anonymous";
 
-        function skipTime(sec) {
-            if(!audio.duration) return;
-            audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + sec));
-        }
-
-        // Custom Editable Skip Handlers & Dynamic Label Updates
+        // Dynamic Editable Skip Handlers & Labels Update
         const customSkipInput = document.getElementById('customSkipInput');
+        const skipBackLabel = document.getElementById('skipBackLabel');
+        const skipForwardLabel = document.getElementById('skipForwardLabel');
 
         function updateSkipLabels() {
             let val = parseInt(customSkipInput.value) || 10;
             if(val < 1) val = 1;
-            if(val > 60) val = 60;
+            if(val > 120) val = 120;
+            skipBackLabel.textContent = `-${val}s`;
+            skipForwardLabel.textContent = `+${val}s`;
         }
 
         customSkipInput.addEventListener('input', updateSkipLabels);
 
         document.getElementById('customSkipPlus').onclick = () => {
-            customSkipInput.value = Math.min(60, parseInt(customSkipInput.value || 10) + 1);
+            customSkipInput.value = Math.min(120, parseInt(customSkipInput.value || 10) + 5);
             updateSkipLabels();
         };
         document.getElementById('customSkipMinus').onclick = () => {
-            customSkipInput.value = Math.max(1, parseInt(customSkipInput.value || 10) - 1);
+            customSkipInput.value = Math.max(1, parseInt(customSkipInput.value || 10) - 5);
             updateSkipLabels();
         };
 
-        window.skipTime = function(multiplier) {
+        window.skipTime = function(direction) {
             if(!audio.duration) return;
-            let dynamicSec = multiplier;
-            if (Math.abs(multiplier) === 10) {
-                let editableVal = parseInt(customSkipInput.value) || 10;
-                dynamicSec = multiplier > 0 ? editableVal : -editableVal;
-            }
-            audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + dynamicSec));
+            let skipSec = parseInt(customSkipInput.value) || 10;
+            let targetSec = audio.currentTime + (direction * skipSec);
+            audio.currentTime = Math.max(0, Math.min(audio.duration, targetSec));
         };
 
         function setMobileTabActive(activeId) {
@@ -1284,26 +1292,16 @@
 
         document.getElementById('prevBtn').onclick = () => {
             if (songs.length === 0) return;
-            const skipSec = parseInt(customSkipInput.value) || 10;
-            if(audio.duration && audio.currentTime > 3) {
-                audio.currentTime = Math.max(0, audio.currentTime - skipSec);
-            } else {
-                let idx = currentSongIndex - 1;
-                if (idx < 0) idx = songs.length - 1;
-                loadSong(idx); playAudio();
-            }
+            let idx = currentSongIndex - 1;
+            if (idx < 0) idx = songs.length - 1;
+            loadSong(idx); playAudio();
         };
         document.getElementById('fsPrevBtn').onclick = () => document.getElementById('prevBtn').click();
 
         document.getElementById('nextBtn').onclick = () => {
             if (songs.length === 0) return;
-            const skipSec = parseInt(customSkipInput.value) || 10;
-            if(audio.duration && audio.currentTime < audio.duration - 3) {
-                audio.currentTime = Math.min(audio.duration, audio.currentTime + skipSec);
-            } else {
-                let idx = isShuffle ? Math.floor(Math.random() * songs.length) : (currentSongIndex + 1) % songs.length;
-                loadSong(idx); playAudio();
-            }
+            let idx = isShuffle ? Math.floor(Math.random() * songs.length) : (currentSongIndex + 1) % songs.length;
+            loadSong(idx); playAudio();
         };
         document.getElementById('fsNextBtn').onclick = () => document.getElementById('nextBtn').click();
 
