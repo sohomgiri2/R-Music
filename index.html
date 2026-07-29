@@ -279,12 +279,12 @@
                     </div>
 
                     <div class="grid grid-cols-6 gap-1.5 w-full z-10 my-2">
-                        <button onclick="skipTime(-10)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">-10s</button>
-                        <button onclick="skipTime(-5)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">-5s</button>
                         <button onclick="skipTime(-2)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">-2s</button>
-                        <button onclick="skipTime(2)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">+2s</button>
+                        <button onclick="skipTime(-5)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">-5s</button>
+                        <button onclick="skipTime(-10)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">-<span id="skipMinusDisplay">10</span>s</button>
+                        <button onclick="skipTime(10)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">+<span id="skipPlusDisplay">10</span>s</button>
                         <button onclick="skipTime(5)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">+5s</button>
-                        <button onclick="skipTime(10)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">+10s</button>
+                        <button onclick="skipTime(2)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">+2s</button>
                     </div>
 
                     <div class="flex items-center justify-around w-full z-10 my-2 text-xs text-gray-400 border-y border-gray-800/60 py-2">
@@ -307,8 +307,8 @@
                                 <i class="fa-solid fa-forward-step text-xl sm:text-2xl"></i>
                             </button>
                             <div class="flex items-center space-x-1.5 ml-2 bg-gray-900/90 border border-gray-800 px-2 py-1.5 rounded-xl">
-                                <span class="text-[10px] text-gray-400 font-bold">Custom Skip:</span>
-                                <input type="number" id="customSkipInput" value="5" min="1" max="60" class="w-10 bg-gray-950 text-center text-theme-400 font-mono text-xs rounded border border-gray-800 focus:outline-none">
+                                <span class="text-[10px] text-gray-400 font-bold">Editable Skip:</span>
+                                <input type="number" id="customSkipInput" value="10" min="1" max="60" class="w-10 bg-gray-950 text-center text-theme-400 font-mono text-xs rounded border border-gray-800 focus:outline-none">
                                 <span class="text-[10px] text-gray-400">s</span>
                                 <button id="customSkipMinus" class="px-1.5 py-0.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded text-[10px] font-mono">-</button>
                                 <button id="customSkipPlus" class="px-1.5 py-0.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded text-[10px] font-mono">+</button>
@@ -809,14 +809,39 @@
             audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + sec));
         }
 
-        // Custom Skip increment/decrement handlers
+        // Custom Editable Skip Handlers & Dynamic Label Updates
+        const customSkipInput = document.getElementById('customSkipInput');
+        const skipMinusDisplay = document.getElementById('skipMinusDisplay');
+        const skipPlusDisplay = document.getElementById('skipPlusDisplay');
+
+        function updateSkipLabels() {
+            let val = parseInt(customSkipInput.value) || 10;
+            if(val < 1) val = 1;
+            if(val > 60) val = 60;
+            skipMinusDisplay.textContent = val;
+            skipPlusDisplay.textContent = val;
+        }
+
+        customSkipInput.addEventListener('input', updateSkipLabels);
+
         document.getElementById('customSkipPlus').onclick = () => {
-            const input = document.getElementById('customSkipInput');
-            input.value = Math.min(60, parseInt(input.value || 5) + 1);
+            customSkipInput.value = Math.min(60, parseInt(customSkipInput.value || 10) + 1);
+            updateSkipLabels();
         };
         document.getElementById('customSkipMinus').onclick = () => {
-            const input = document.getElementById('customSkipInput');
-            input.value = Math.max(1, parseInt(input.value || 5) - 1);
+            customSkipInput.value = Math.max(1, parseInt(customSkipInput.value || 10) - 1);
+            updateSkipLabels();
+        };
+
+        // Redefined standard skip buttons to handle dynamic editable value vs fixed 2s and 5s
+        window.skipTime = function(multiplier) {
+            if(!audio.duration) return;
+            let dynamicSec = multiplier;
+            if (Math.abs(multiplier) === 10) {
+                let editableVal = parseInt(customSkipInput.value) || 10;
+                dynamicSec = multiplier > 0 ? editableVal : -editableVal;
+            }
+            audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + dynamicSec));
         };
 
         function setMobileTabActive(activeId) {
@@ -916,7 +941,6 @@
                 if(!isPlaying || !is8dActive || !stereoPannerNode) return;
                 const freqRate = parseFloat(speedSlider.value) || 0.2;
                 pannerAngle += (freqRate * 0.1);
-                // Sine wave panning calculation between -1 (left) and +1 (right)
                 stereoPannerNode.pan.value = Math.sin(pannerAngle * Math.PI * 2);
             }, 50);
         }
@@ -930,7 +954,6 @@
             document.getElementById('speed8dVal').textContent = parseFloat(e.target.value).toFixed(2) + " Hz";
         });
 
-        // Quick Mute Button Logic
         let previousVolume = 0.8;
         document.getElementById('quickMuteBtn').onclick = () => {
             if (audio.volume > 0) {
@@ -945,7 +968,6 @@
             }
         };
 
-        // Party Strobe Light FX Toggle Logic
         let strobeActive = false;
         let strobeInterval = null;
         document.getElementById('partyStrobeBtn').onclick = () => {
@@ -964,7 +986,6 @@
             }
         };
 
-        // Sort Playlist Alphabetically Handler
         document.getElementById('sortPlaylistBtn').onclick = () => {
             if(songs.length === 0) return;
             songs.sort((a, b) => a.title.localeCompare(b.title));
@@ -972,7 +993,6 @@
             alert("Playlist sorted alphabetically A-Z!");
         };
 
-        // Export Favorites JSON Handler
         document.getElementById('exportFavoritesJsonBtn').onclick = () => {
             if(favoriteSongs.length === 0) return alert("No favorites to export!");
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(favoriteSongs, null, 2));
@@ -984,7 +1004,6 @@
             dlAnchorElem.remove();
         };
 
-        // EQ Preset Selector Handler
         document.getElementById('eqPresetSelect').onchange = (e) => {
             const preset = e.target.value;
             initAudioEngine();
@@ -1004,9 +1023,8 @@
             }
         };
 
-        // Stereo Panner Slider Handler
         document.getElementById('stereoPanSlider').addEventListener('input', (e) => {
-            if(is8dActive) return; // Disable manual pan override when 8D is running
+            if(is8dActive) return;
             initAudioEngine();
             const val = parseFloat(e.target.value);
             document.getElementById('stereoPanVal').textContent = val === 0 ? "Center (0.0)" : (val < 0 ? `Left (${val})` : `Right (+${val})`);
@@ -1015,7 +1033,6 @@
             }
         });
 
-        // Sine Wave Tone Generator Handler
         document.getElementById('toneFreqSlider').addEventListener('input', (e) => {
             document.getElementById('toneFreqVal').textContent = e.target.value + " Hz";
         });
@@ -1278,7 +1295,7 @@
 
         document.getElementById('prevBtn').onclick = () => {
             if (songs.length === 0) return;
-            const skipSec = parseFloat(document.getElementById('customSkipInput').value) || 5;
+            const skipSec = parseInt(customSkipInput.value) || 10;
             if(audio.duration && audio.currentTime > 3) {
                 audio.currentTime = Math.max(0, audio.currentTime - skipSec);
             } else {
@@ -1291,7 +1308,7 @@
 
         document.getElementById('nextBtn').onclick = () => {
             if (songs.length === 0) return;
-            const skipSec = parseFloat(document.getElementById('customSkipInput').value) || 5;
+            const skipSec = parseInt(customSkipInput.value) || 10;
             if(audio.duration && audio.currentTime < audio.duration - 3) {
                 audio.currentTime = Math.min(audio.duration, audio.currentTime + skipSec);
             } else {
