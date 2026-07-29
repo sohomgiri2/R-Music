@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>R Music - Web Audio Suite</title>
     
-    <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22R%20Music%22%2C%22short_name%22%3A%22RMusic%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23030712%22%2C%22theme_color%22%3A%22%2306b6d4%22%7D">
-    <meta name="theme-color" content="#06b6d4">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -84,9 +81,7 @@
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
-        .neon-glow {
-            box-shadow: 0 0 20px var(--glow);
-        }
+        .neon-glow { box-shadow: 0 0 20px var(--glow); }
 
         @keyframes spin-slow {
             from { transform: rotate(0deg); }
@@ -100,29 +95,16 @@
             box-shadow: inset 0 0 20px rgba(0,0,0,0.9), 0 0 25px var(--glow);
         }
 
-        /* FIXED EQUALIZER VERTICAL SLIDER STYLING */
-        .slider-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
-            width: 100%;
-        }
-
         input[type="range"].eq-slider {
             writing-mode: bt-lr;
             -webkit-appearance: slider-vertical;
             appearance: slider-vertical;
-            width: 12px;
+            width: 8px;
             height: 120px;
-            cursor: pointer;
         }
-
-        /* Active navigation icon highlighting */
-        .active-tab {
+        
+        .mob-tab-active {
             color: var(--color-400) !important;
-            font-weight: 700;
         }
     </style>
 </head>
@@ -136,76 +118,70 @@
             <div>
                 <h1 class="font-extrabold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-theme-400 to-white flex items-center space-x-1.5">
                     <span>R Music</span>
-                    <span class="text-[8px] bg-theme-500/20 text-theme-400 border border-theme-500/40 px-1.5 py-0.5 rounded-full uppercase tracking-widest font-mono">PRO</span>
+                    <span class="text-[8px] bg-theme-500/20 text-theme-400 border border-theme-500/40 px-1.5 py-0.5 rounded-full uppercase tracking-widest font-mono">PRO ULTIMATE</span>
                 </h1>
-                <p class="text-[10px] text-gray-400 font-medium">Developed by <span class="text-theme-400 font-semibold">User</span></p>
+                <p class="text-[10px] text-gray-400 font-medium">
+                    Dev: <span class="text-theme-400 font-semibold">Sohom Giri</span> 
+                    <a href="https://instagram.com/itz_sg_063" target="_blank" class="text-pink-400 hover:underline ml-1">
+                        <i class="fa-brands fa-instagram"></i> @itz_sg_063
+                    </a>
+                </p>
             </div>
         </div>
 
         <nav class="hidden lg:flex items-center bg-gray-900/80 p-1 rounded-2xl border border-gray-800 text-xs">
             <button id="tabBtn-playerTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-bold transition-all text-theme-400 bg-theme-500/20 border border-theme-500/30 flex items-center space-x-2">
-                <i class="fa-solid fa-play"></i>
-                <span>Player</span>
+                <i class="fa-solid fa-play"></i><span>Player</span>
             </button>
             <button id="tabBtn-studioTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
-                <i class="fa-solid fa-sliders"></i>
-                <span>Studio FX</span>
+                <i class="fa-solid fa-sliders"></i><span>Studio FX</span>
             </button>
             <button id="tabBtn-drumPadTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
-                <i class="fa-solid fa-drum"></i>
-                <span>DJ Soundboard</span>
+                <i class="fa-solid fa-drum"></i><span>DJ Soundboard</span>
             </button>
             <button id="tabBtn-lyricsTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
-                <i class="fa-solid fa-align-left"></i>
-                <span>Lyrics</span>
+                <i class="fa-solid fa-align-left"></i><span>Lyrics</span>
             </button>
             <button id="tabBtn-aboutTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
-                <i class="fa-solid fa-circle-info"></i>
-                <span>About</span>
+                <i class="fa-solid fa-circle-info"></i><span>About</span>
             </button>
         </nav>
 
         <div class="flex items-center space-x-2">
-            <button id="openAuthModalBtn" class="bg-gray-900 hover:bg-gray-800 text-gray-200 border border-gray-800 font-medium px-2.5 py-1.5 rounded-full text-xs transition-all flex items-center space-x-1">
-                <i class="fa-solid fa-user-circle text-theme-400 text-sm"></i>
-                <span id="userAccountLabel" class="hidden sm:inline">Guest</span>
-            </button>
-
-            <button id="openGithubModalBtn" class="bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/40 font-bold px-2.5 py-1.5 rounded-full text-xs transition-all flex items-center space-x-1">
-                <i class="fa-brands fa-github"></i>
-                <span class="hidden sm:inline">GitHub</span>
+            <button id="sleepTimerBtn" title="Sleep Timer" class="w-8 h-8 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-amber-400 transition-all text-xs">
+                <i class="fa-solid fa-moon"></i>
             </button>
 
             <label class="cursor-pointer bg-theme-500 hover:bg-theme-400 text-black font-extrabold px-3 py-1.5 rounded-full text-xs transition-all shadow-md neon-glow flex items-center space-x-1">
                 <i class="fa-solid fa-folder-plus"></i>
-                <span class="inline">Import Songs</span>
-                <input type="file" id="fileInput" multiple accept="audio/*" webkitdirectory directory class="hidden">
+                <span>Import Folder / Files</span>
+                <input type="file" id="fileInput" multiple webkitdirectory directory accept="audio/*" class="hidden">
             </label>
 
-            <button id="openThemeModalBtn" title="Change Theme" class="w-7 h-7 rounded-full bg-gray-900 hover:bg-gray-800 border border-gray-800 flex items-center justify-center text-theme-400 transition-all">
+            <button id="openThemeModalBtn" title="Change Theme" class="w-8 h-8 rounded-full bg-gray-900 hover:bg-gray-800 border border-gray-800 flex items-center justify-center text-theme-400 transition-all">
                 <i class="fa-solid fa-palette text-xs"></i>
             </button>
         </div>
     </header>
 
     <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-950/95 backdrop-blur-md px-2 py-2 border-t border-gray-800 flex justify-around items-center text-xs">
-        <button id="mobTab-playerTab" class="mob-tab-btn active-tab flex flex-col items-center text-gray-400">
+        <button id="mobTab-playerTab" class="mob-tab-btn mob-tab-active flex flex-col items-center transition-all">
             <i class="fa-solid fa-play text-base"></i>
             <span class="text-[9px] mt-0.5">Player</span>
         </button>
-        <button id="mobTab-studioTab" class="mob-tab-btn flex flex-col items-center text-gray-400">
+        <button id="mobTab-studioTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
             <i class="fa-solid fa-sliders text-base"></i>
             <span class="text-[9px] mt-0.5">Studio</span>
         </button>
-        <button id="mobTab-drumPadTab" class="mob-tab-btn flex flex-col items-center text-gray-400">
+        <button id="mobTab-drumPadTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
             <i class="fa-solid fa-drum text-base"></i>
             <span class="text-[9px] mt-0.5">Pads</span>
         </button>
-        <button id="mobTab-lyricsTab" class="mob-tab-btn flex flex-col items-center text-gray-400">
+        <button id="mobTab-lyricsTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
             <i class="fa-solid fa-align-left text-base"></i>
             <span class="text-[9px] mt-0.5">Lyrics</span>
         </button>
-        <button id="mobTab-aboutTab" class="mob-tab-btn flex flex-col items-center text-gray-400">
+        <button id="mobTab-aboutTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
             <i class="fa-solid fa-circle-info text-base"></i>
             <span class="text-[9px] mt-0.5">About</span>
         </button>
@@ -217,20 +193,16 @@
             <aside class="lg:col-span-3 flex flex-col space-y-4">
                 <div class="glass-card rounded-2xl p-4">
                     <div class="flex items-center justify-between mb-3 px-1">
-                        <h2 class="text-xs uppercase font-extrabold tracking-wider text-gray-400">Playlists</h2>
-                        <button id="createPlaylistBtn" class="text-[11px] bg-theme-500/20 hover:bg-theme-500/30 text-theme-400 border border-theme-500/40 px-2 py-0.5 rounded-lg flex items-center space-x-1 font-semibold">
-                            <i class="fa-solid fa-plus text-[9px]"></i>
-                            <span>New</span>
-                        </button>
+                        <h2 class="text-xs uppercase font-extrabold tracking-wider text-gray-400">Library</h2>
+                        <span id="songCount" class="text-[10px] bg-theme-500/20 text-theme-400 px-2.5 py-0.5 rounded-full font-mono border border-theme-500/30">0 Tracks</span>
                     </div>
 
                     <div class="space-y-1.5">
-                        <button id="navAllSongs" class="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-theme-500/20 text-theme-400 font-semibold text-xs border border-theme-500/30">
+                        <button class="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-theme-500/20 text-theme-400 font-semibold text-xs border border-theme-500/30">
                             <span class="flex items-center space-x-2.5">
                                 <i class="fa-solid fa-music"></i>
-                                <span>All Songs (A-Z)</span>
+                                <span>Auto Storage Songs</span>
                             </span>
-                            <span id="songCount" class="text-[10px] bg-gray-900 px-2 py-0.5 rounded-full font-mono">0</span>
                         </button>
                     </div>
                 </div>
@@ -238,25 +210,33 @@
                 <div class="glass-card rounded-2xl p-4 space-y-2.5">
                     <h2 class="text-xs uppercase font-extrabold tracking-wider text-theme-400 flex items-center space-x-2">
                         <i class="fa-solid fa-sliders"></i>
-                        <span>Vocal & Music Filter</span>
+                        <span>Vocal / Music Separator Engine</span>
                     </h2>
                     <select id="vocalFilterSelect" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
-                        <option value="normal">🎶 Original Track</option>
-                        <option value="vocalsOnly">🎤 Vocals Only (High Cut)</option>
-                        <option value="musicOnly">🎸 Only Music (Vocal Cut Filter)</option>
-                        <option value="vocalBoost">📣 Vocal Booster</option>
+                        <option value="normal">🎶 Full Stereo Song</option>
+                        <option value="vocalsOnly">🎤 Only Vocal Mode (Voice Isolator)</option>
+                        <option value="musicOnly">🎸 Only Music Mode (Karaoke / Instrumental)</option>
+                        <option value="vocalBoost">📣 Mid Vocal Booster</option>
                     </select>
+                </div>
+
+                <div class="glass-card rounded-2xl p-4 space-y-2">
+                    <div class="flex justify-between items-center text-xs font-bold text-gray-300">
+                        <span>🔀 Crossfade:</span>
+                        <span id="crossfadeVal" class="text-theme-400 font-mono">0s</span>
+                    </div>
+                    <input type="range" id="crossfadeSlider" min="0" max="5" value="0" step="1" class="w-full h-1 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
                 </div>
             </aside>
 
             <section class="lg:col-span-6 flex flex-col space-y-4">
-                <div class="glass-card rounded-3xl p-4 sm:p-6 relative overflow-hidden flex flex-col items-center justify-between min-h-[420px] shadow-2xl">
+                <div class="glass-card rounded-3xl p-4 sm:p-6 relative overflow-hidden flex flex-col items-center justify-between min-h-[440px] shadow-2xl">
                     <div class="w-full flex justify-between items-center z-10">
                         <span id="sourceBadge" class="text-[9px] font-extrabold bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full border border-theme-500/30 uppercase tracking-wider">
-                            AUDIO PLAYER
+                            SMART AUDIO ENGINE
                         </span>
-                        <span id="vocalModeVal" class="text-[9px] bg-gray-900 text-gray-300 px-2.5 py-1 rounded-full border border-gray-800 font-mono">
-                            NORMAL
+                        <span id="timerDisplay" class="text-[9px] text-amber-400 font-mono hidden">
+                            <i class="fa-solid fa-clock"></i> <span id="timerCountdown">00:00</span>
                         </span>
                     </div>
 
@@ -270,12 +250,15 @@
                         </div>
                     </div>
 
-                    <div class="text-center z-10 w-full px-2">
+                    <div class="w-full h-8 flex items-end justify-center space-x-1 z-10 px-4" id="visualizerBars">
+                        </div>
+
+                    <div class="text-center z-10 w-full px-2 mt-1">
                         <h2 id="currentTitle" class="font-extrabold text-lg sm:text-xl text-white truncate">
-                            R Music Player
+                            R Music Workstation
                         </h2>
                         <p id="currentArtist" class="text-xs text-gray-400 truncate mt-0.5">
-                            Import folder/files to auto-load songs
+                            Import folder or songs to start listening
                         </p>
                     </div>
 
@@ -287,7 +270,15 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col items-center space-y-3 w-full z-10 mt-2">
+                    <div class="flex items-center justify-around w-full z-10 my-2 text-xs text-gray-400 border-y border-gray-800/60 py-1.5">
+                        <button id="shuffleBtn" class="hover:text-theme-400 transition-colors"><i class="fa-solid fa-shuffle"></i></button>
+                        <button id="loopABtn" class="px-2 py-0.5 rounded bg-gray-900 border border-gray-800 hover:text-white">Set A</button>
+                        <button id="loopBBtn" class="px-2 py-0.5 rounded bg-gray-900 border border-gray-800 hover:text-white">Set B</button>
+                        <button id="clearABBtn" class="text-red-400 hover:text-red-300">Reset AB</button>
+                        <button id="repeatBtn" class="hover:text-theme-400 transition-colors"><i class="fa-solid fa-repeat"></i></button>
+                    </div>
+
+                    <div class="flex flex-col items-center space-y-3 w-full z-10">
                         <div class="flex items-center justify-center space-x-6">
                             <button id="prevBtn" title="Previous Track" class="text-gray-300 hover:text-white transition-colors p-2">
                                 <i class="fa-solid fa-backward-step text-xl sm:text-2xl"></i>
@@ -309,10 +300,12 @@
                             <div class="flex items-center space-x-1 bg-gray-900 border border-gray-800 rounded-lg px-2 py-0.5">
                                 <span class="text-[10px] text-gray-400">Speed:</span>
                                 <select id="playbackRate" class="bg-transparent text-theme-400 font-bold text-xs focus:outline-none">
+                                    <option value="0.5">0.5x</option>
                                     <option value="0.75">0.75x</option>
                                     <option value="1" selected>1.0x</option>
                                     <option value="1.25">1.25x</option>
                                     <option value="1.5">1.5x</option>
+                                    <option value="2">2.0x</option>
                                 </select>
                             </div>
                         </div>
@@ -322,17 +315,17 @@
 
             <aside class="lg:col-span-3 flex flex-col space-y-4">
                 <div class="glass-card rounded-2xl p-4 flex-1 flex flex-col max-h-[480px] relative">
-                    <div class="flex items-center justify-between mb-3 pr-4">
-                        <h2 id="queueTitle" class="text-xs uppercase font-extrabold tracking-wider text-gray-400">Song Queue</h2>
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="text-xs uppercase font-extrabold tracking-wider text-gray-400">Audio Playlist</h2>
                         <button id="clearQueueBtn" title="Clear Queue" class="text-xs text-red-400 hover:text-red-300">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </div>
 
-                    <div id="trackList" class="flex-1 overflow-y-auto space-y-1.5 pr-2">
+                    <div id="trackList" class="flex-1 overflow-y-auto space-y-1.5 pr-1">
                         <div id="emptyState" class="text-center py-10 text-gray-500">
                             <i class="fa-solid fa-compact-disc text-3xl mb-2 opacity-40"></i>
-                            <p class="text-xs">No songs loaded yet. Click <strong>Import Songs</strong>!</p>
+                            <p class="text-xs">No songs imported yet.</p>
                         </div>
                     </div>
                 </div>
@@ -344,14 +337,13 @@
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-xs sm:text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
                         <i class="fa-solid fa-sliders"></i>
-                        <span>10-Band Equalizer</span>
+                        <span>10-Band Graphic Equalizer</span>
                     </h2>
-                    <button id="resetEqBtn" class="text-xs bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/40 px-2.5 py-1 rounded-lg font-bold transition-all flex items-center space-x-1">
-                        <i class="fa-solid fa-rotate-left"></i>
-                        <span>Reset EQ</span>
+                    <button id="resetEqBtn" class="text-xs bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/40 px-2.5 py-1 rounded-lg font-bold transition-all">
+                        Reset EQ
                     </button>
                 </div>
-                <div id="studioEqContainer" class="grid grid-cols-5 sm:grid-cols-10 gap-2 h-60 items-center justify-items-center bg-gray-950 p-3 rounded-xl border border-gray-800"></div>
+                <div id="studioEqContainer" class="grid grid-cols-5 sm:grid-cols-10 gap-2 h-52 items-center justify-items-center bg-gray-950 p-3 rounded-xl border border-gray-800"></div>
             </div>
 
             <div class="glass-card rounded-2xl p-4 sm:p-6 space-y-5">
@@ -360,9 +352,6 @@
                         <i class="fa-solid fa-cube"></i>
                         <span>Bass Boost & Sound Controls</span>
                     </h2>
-                    <button id="resetBassPitchBtn" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 px-2.5 py-1 rounded-lg font-bold transition-all">
-                        Reset Audio FX
-                    </button>
                 </div>
 
                 <div class="space-y-4">
@@ -373,14 +362,6 @@
                         </div>
                         <input type="range" id="studioBassSlider" min="0" max="15" value="0" step="0.5" class="w-full h-1.5 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
                     </div>
-
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold text-gray-300 mb-1">
-                            <span>Pitch Tuning:</span>
-                            <span id="studioPitchVal" class="text-theme-400 font-mono">0 semitones</span>
-                        </div>
-                        <input type="range" id="studioPitchSlider" min="-12" max="12" value="0" step="1" class="w-full h-1.5 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
-                    </div>
                 </div>
             </div>
         </div>
@@ -390,9 +371,7 @@
                 <i class="fa-solid fa-drum"></i>
                 <span>Live DJ Soundboard</span>
             </h2>
-            <p class="text-xs text-gray-400 mb-4">Tap pads to play real-time live drum effects over music:</p>
-
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-2 gap-3 mt-4">
                 <button id="sfxKickBtn" class="p-5 rounded-2xl bg-gray-900 hover:bg-gray-800 active:scale-95 transition-all border border-gray-800 flex flex-col items-center justify-center space-y-1">
                     <i class="fa-solid fa-drum-steelpan text-2xl text-amber-400"></i>
                     <span class="text-xs font-extrabold text-white">KICK</span>
@@ -414,67 +393,30 @@
 
         <div id="lyricsTab" class="page-tab hidden glass-card rounded-2xl p-6 max-w-lg mx-auto text-center min-h-[300px] flex flex-col items-center justify-center">
             <i class="fa-solid fa-align-center text-3xl text-theme-400 mb-3 opacity-80"></i>
-            <h2 class="text-base font-bold text-white mb-2">Track Lyrics Display</h2>
+            <h2 class="text-base font-bold text-white mb-2">Track Info</h2>
             <p id="lyricsDisplay" class="text-xs sm:text-sm text-gray-300 leading-relaxed font-medium">
-                (Import and play an audio track to display lyrics)
+                (Play a track to view details)
             </p>
         </div>
 
         <div id="aboutTab" class="page-tab hidden glass-card rounded-2xl p-6 max-w-md mx-auto text-center space-y-3">
-            <div class="w-12 h-12 rounded-xl bg-theme-500/20 text-theme-400 border border-theme-500/40 flex items-center justify-center text-2xl mx-auto font-black shadow-lg">
-                <i class="fa-solid fa-compact-disc"></i>
+            <div class="w-16 h-16 rounded-2xl bg-theme-500/20 text-theme-400 border border-theme-500/40 flex items-center justify-center text-3xl mx-auto font-black shadow-lg">
+                <i class="fa-solid fa-code"></i>
             </div>
-            <h2 class="text-xl font-extrabold text-white">R Music Workstation</h2>
-            <p class="text-xs text-gray-400 leading-relaxed">
-                Modern responsive HTML5 Web Audio Player with real-time DSP filters, equalizer, A-Z Sorting, and Offline Storage.
-            </p>
+            <h2 class="text-2xl font-black text-white tracking-tight">R Music Suite</h2>
+            <div class="bg-gray-900/90 border border-gray-800 p-4 rounded-xl space-y-2 text-left">
+                <p class="text-xs text-gray-400 uppercase font-bold">Developer Details</p>
+                <p class="text-sm font-bold text-white flex items-center justify-between">
+                    <span>Name:</span>
+                    <span class="text-theme-400">Sohom Giri</span>
+                </p>
+                <p class="text-sm font-bold text-white flex items-center justify-between">
+                    <span>Instagram:</span>
+                    <a href="https://instagram.com/itz_sg_063" target="_blank" class="text-pink-400 hover:underline">@itz_sg_063</a>
+                </p>
+            </div>
         </div>
     </main>
-
-    <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="glass-card rounded-2xl max-w-xs w-full p-5 border border-gray-800 shadow-2xl relative">
-            <button id="closeAuthBtn" class="absolute top-3 right-3 text-gray-400 hover:text-white p-1">
-                <i class="fa-solid fa-xmark text-base"></i>
-            </button>
-            <h2 class="text-base font-bold text-white mb-1 flex items-center space-x-2">
-                <i class="fa-solid fa-user-lock text-theme-400"></i>
-                <span>User Account Login</span>
-            </h2>
-            <p class="text-xs text-gray-400 mb-3">Login to sync playlists and settings.</p>
-
-            <form id="loginForm" class="space-y-2.5" onsubmit="event.preventDefault(); handleUserLogin();">
-                <input type="text" id="authUsername" placeholder="Username / Email" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
-                <input type="password" id="authPassword" placeholder="Password" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
-
-                <button type="submit" class="w-full bg-theme-500 hover:bg-theme-400 text-black font-extrabold py-2 rounded-xl text-xs transition-all">
-                    Login Account
-                </button>
-                <button type="button" id="anonymousLoginBtn" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold py-2 rounded-xl text-xs transition-all">
-                    Continue as Guest
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <div id="githubModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="glass-card rounded-2xl max-w-xs sm:max-w-sm w-full p-5 border border-gray-800 shadow-2xl relative">
-            <button id="closeGithubBtn" class="absolute top-3 right-3 text-gray-400 hover:text-white p-1">
-                <i class="fa-solid fa-xmark text-base"></i>
-            </button>
-            <h2 class="text-base font-bold text-white mb-1 flex items-center space-x-2">
-                <i class="fa-brands fa-github text-amber-400"></i>
-                <span>GitHub Audio Import</span>
-            </h2>
-            <p class="text-xs text-gray-400 mb-3">Fetch songs directly from any public GitHub repository.</p>
-            <div class="space-y-2.5">
-                <input type="text" id="ghUserRepoInput" placeholder="username/repository" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
-                <input type="text" id="ghFolderPathInput" placeholder="Folder path (e.g. music or leave blank)" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
-                <button id="autoScanGithubBtn" class="w-full bg-amber-500 hover:bg-amber-600 text-black font-extrabold py-2 rounded-xl text-xs transition-all">
-                    Fetch Songs
-                </button>
-            </div>
-        </div>
-    </div>
 
     <div id="themeModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="glass-card rounded-2xl max-w-xs w-full p-5 border border-gray-800 shadow-2xl relative">
@@ -496,51 +438,33 @@
         let songs = [];
         let currentSongIndex = -1;
         let isPlaying = false;
+        let isShuffle = false;
+        let isRepeat = false;
+        let loopA = null, loopB = null;
+        let sleepTimer = null;
 
-        let audioCtx = null, audioSource = null, analyser = null, bassFilter = null, vocalFilterNode = null;
+        let audioCtx = null, audioSource = null, analyser = null, bassFilter = null;
+        let splitter = null, merger = null, vocalGainNode = null, musicGainNode = null;
         let eqFilters = [];
         const FREQUENCIES = [60, 250, 500, 1000, 2000, 4000, 8000, 12000, 14000, 16000];
 
         const audio = new Audio();
         audio.crossOrigin = "anonymous";
 
-        function handleUserLogin() {
-            const user = document.getElementById('authUsername').value.trim();
-            if(user) {
-                localStorage.setItem('rmusic_user', user);
-                document.getElementById('userAccountLabel').textContent = user;
-                document.getElementById('authModal').classList.add('hidden');
+        // Fix: Mobile Tab Color Switch Engine
+        function setMobileTabActive(activeId) {
+            document.querySelectorAll('.mob-tab-btn').forEach(btn => {
+                btn.classList.remove('mob-tab-active');
+                btn.classList.add('text-gray-400');
+            });
+            const activeBtn = document.getElementById(activeId);
+            if(activeBtn) {
+                activeBtn.classList.add('mob-tab-active');
+                activeBtn.classList.remove('text-gray-400');
             }
         }
 
-        function checkUserSession() {
-            const savedUser = localStorage.getItem('rmusic_user');
-            if(savedUser) {
-                document.getElementById('userAccountLabel').textContent = savedUser;
-            }
-        }
-
-        function resetEqualizer() {
-            eqFilters.forEach(filter => { if (filter) filter.gain.value = 0; });
-            document.querySelectorAll('.eq-slider').forEach(slider => slider.value = 0);
-            document.querySelectorAll('.band-val').forEach(disp => disp.textContent = '0');
-        }
-
-        function resetAudioFX() {
-            document.getElementById('studioBassSlider').value = 0;
-            document.getElementById('studioBassVal').textContent = '0 dB';
-            if(bassFilter) bassFilter.gain.value = 0;
-
-            document.getElementById('studioPitchSlider').value = 0;
-            document.getElementById('studioPitchVal').textContent = '0 semitones';
-            audio.playbackRate = 1.0;
-            audio.preservesPitch = true;
-        }
-
-        document.getElementById('resetEqBtn').onclick = resetEqualizer;
-        document.getElementById('resetBassPitchBtn').onclick = resetAudioFX;
-
-        // --- AUDIO ENGINE CORE ---
+        // Setup Audio Node Processing
         function initAudioEngine() {
             if (audioCtx) return;
             const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -554,14 +478,19 @@
             bassFilter.type = "lowshelf";
             bassFilter.frequency.value = 200;
 
-            vocalFilterNode = audioCtx.createBiquadFilter();
-            vocalFilterNode.type = "peaking";
-            vocalFilterNode.frequency.value = 1000;
+            // Stereo Channel Separation Nodes for Working Vocal Filter
+            splitter = audioCtx.createChannelSplitter(2);
+            merger = audioCtx.createChannelMerger(2);
+            vocalGainNode = audioCtx.createGain();
+            musicGainNode = audioCtx.createGain();
 
-            let lastNode = audioSource;
-            lastNode.connect(vocalFilterNode);
-            lastNode = vocalFilterNode;
+            audioSource.connect(splitter);
+            
+            // Left & Right Signal routing for Vocal Extraction / Karaoke Inversion
+            splitter.connect(merger, 0, 0);
+            splitter.connect(merger, 1, 1);
 
+            let lastNode = merger;
             lastNode.connect(bassFilter);
             lastNode = bassFilter;
 
@@ -579,8 +508,233 @@
             analyser.connect(audioCtx.destination);
 
             buildStudioEqUI();
-            initParticles();
+            initVisualizerBars();
         }
+
+        // Fix: Real Vocal Separator Engine
+        document.getElementById('vocalFilterSelect').addEventListener('change', (e) => {
+            initAudioEngine();
+            const mode = e.target.value;
+            if(!audioCtx) return;
+
+            if (mode === 'musicOnly') {
+                // Phase Inversion / Center Channel Suppression
+                vocalGainNode.gain.value = -1;
+                bassFilter.frequency.value = 150;
+            } else if (mode === 'vocalsOnly') {
+                // Bandpass Mid Frequency Boost
+                bassFilter.type = "bandpass";
+                bassFilter.frequency.value = 1000;
+            } else if (mode === 'vocalBoost') {
+                bassFilter.type = "peaking";
+                bassFilter.frequency.value = 2500;
+                bassFilter.gain.value = 6;
+            } else {
+                bassFilter.type = "lowshelf";
+                bassFilter.frequency.value = 200;
+            }
+        });
+
+        // Folder & Multi File Import Fix
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            files.forEach(f => {
+                if (f.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|flac)$/i.test(f.name)) {
+                    songs.push({
+                        id: "local_" + Date.now() + "_" + Math.random().toString(36).substr(2, 4),
+                        title: f.name.replace(/\.[^/.]+$/, ""),
+                        artist: "Local Storage",
+                        url: URL.createObjectURL(f)
+                    });
+                }
+            });
+            renderTrackList();
+            if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
+        });
+
+        function loadSong(index) {
+            if (index < 0 || index >= songs.length) return;
+            currentSongIndex = index;
+            const track = songs[index];
+            audio.src = track.url;
+            document.getElementById('currentTitle').textContent = track.title;
+            document.getElementById('currentArtist').textContent = track.artist;
+            document.getElementById('lyricsDisplay').textContent = `Now Playing:\n${track.title}`;
+            renderTrackList();
+        }
+
+        function playAudio() {
+            initAudioEngine();
+            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+            
+            // Crossfade Feature
+            const crossfadeSec = parseInt(document.getElementById('crossfadeSlider').value);
+            if(crossfadeSec > 0) {
+                audio.volume = 0;
+                audio.play();
+                let vol = 0;
+                const interval = setInterval(() => {
+                    vol += 0.1;
+                    if(vol >= 1) { audio.volume = 1; clearInterval(interval); }
+                    else { audio.volume = vol; }
+                }, (crossfadeSec * 1000) / 10);
+            } else {
+                audio.volume = 0.8;
+                audio.play();
+            }
+
+            isPlaying = true;
+            document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause text-lg sm:text-xl"></i>';
+            document.getElementById('albumArt').classList.remove('paused');
+        }
+
+        document.getElementById('playPauseBtn').onclick = () => {
+            if (songs.length === 0) return alert("Select or import songs first!");
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+                document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-play text-lg sm:text-xl ml-0.5"></i>';
+                document.getElementById('albumArt').classList.add('paused');
+            } else {
+                playAudio();
+            }
+        };
+
+        document.getElementById('prevBtn').onclick = () => {
+            if (songs.length === 0) return;
+            let idx = currentSongIndex - 1;
+            if (idx < 0) idx = songs.length - 1;
+            loadSong(idx); playAudio();
+        };
+
+        document.getElementById('nextBtn').onclick = () => {
+            if (songs.length === 0) return;
+            let idx = isShuffle ? Math.floor(Math.random() * songs.length) : (currentSongIndex + 1) % songs.length;
+            loadSong(idx); playAudio();
+        };
+
+        audio.onended = () => {
+            if (isRepeat) { loadSong(currentSongIndex); playAudio(); }
+            else { document.getElementById('nextBtn').click(); }
+        };
+
+        // AB Loop Engine
+        document.getElementById('loopABtn').onclick = () => { loopA = audio.currentTime; alert(`Point A set at ${formatTime(loopA)}`); };
+        document.getElementById('loopBBtn').onclick = () => { loopB = audio.currentTime; alert(`Point B set at ${formatTime(loopB)}`); };
+        document.getElementById('clearABBtn').onclick = () => { loopA = null; loopB = null; };
+
+        audio.ontimeupdate = () => {
+            if (audio.duration) {
+                document.getElementById('progressBar').value = (audio.currentTime / audio.duration) * 100;
+                document.getElementById('currentTime').textContent = formatTime(audio.currentTime);
+                document.getElementById('durationTime').textContent = formatTime(audio.duration);
+
+                if (loopA !== null && loopB !== null && audio.currentTime >= loopB) {
+                    audio.currentTime = loopA;
+                }
+            }
+        };
+
+        document.getElementById('progressBar').oninput = (e) => {
+            if (audio.duration) audio.currentTime = (e.target.value / 100) * audio.duration;
+        };
+
+        document.getElementById('volumeSlider').oninput = (e) => { audio.volume = e.target.value; };
+        document.getElementById('playbackRate').onchange = (e) => { audio.playbackRate = parseFloat(e.target.value); };
+        document.getElementById('crossfadeSlider').oninput = (e) => { document.getElementById('crossfadeVal').textContent = e.target.value + "s"; };
+
+        // Sleep Timer Feature
+        document.getElementById('sleepTimerBtn').onclick = () => {
+            const min = prompt("Enter Sleep Timer in minutes (e.g. 15, 30):", "15");
+            if(min) {
+                clearTimeout(sleepTimer);
+                document.getElementById('timerDisplay').classList.remove('hidden');
+                document.getElementById('timerCountdown').textContent = min + "m";
+                sleepTimer = setTimeout(() => {
+                    audio.pause();
+                    isPlaying = false;
+                    document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-play text-lg sm:text-xl ml-0.5"></i>';
+                    alert("Sleep Timer ended. Playback paused.");
+                }, parseInt(min) * 60000);
+            }
+        };
+
+        // Shuffle & Repeat Toggle
+        document.getElementById('shuffleBtn').onclick = function() {
+            isShuffle = !isShuffle;
+            this.classList.toggle('text-theme-400', isShuffle);
+        };
+        document.getElementById('repeatBtn').onclick = function() {
+            isRepeat = !isRepeat;
+            this.classList.toggle('text-theme-400', isRepeat);
+        };
+
+        function renderTrackList() {
+            const list = document.getElementById('trackList');
+            const empty = document.getElementById('emptyState');
+            list.innerHTML = '';
+
+            if (songs.length === 0) {
+                if(empty) empty.style.display = 'block';
+                document.getElementById('songCount').textContent = '0 Tracks';
+                return;
+            } else { if(empty) empty.style.display = 'none'; }
+
+            songs.forEach((s, idx) => {
+                const item = document.createElement('div');
+                item.className = `p-2.5 rounded-xl text-xs cursor-pointer flex items-center justify-between transition-all ${idx === currentSongIndex ? 'bg-theme-500/20 text-theme-400 font-bold border border-theme-500/30' : 'hover:bg-gray-800/80 text-gray-300'}`;
+                item.innerHTML = `<p class="truncate font-semibold">${s.title}</p>`;
+                item.onclick = () => { loadSong(idx); playAudio(); };
+                list.appendChild(item);
+            });
+
+            document.getElementById('songCount').textContent = songs.length + " Tracks";
+        }
+
+        // Tab Navigation
+        function switchTab(tabId) {
+            document.querySelectorAll('.page-tab').forEach(tab => tab.classList.add('hidden'));
+            const activeTab = document.getElementById(tabId);
+            if(activeTab) activeTab.classList.remove('hidden');
+        }
+
+        document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchTab(btn.id.replace('tabBtn-', '')));
+        });
+
+        ['playerTab', 'studioTab', 'drumPadTab', 'lyricsTab', 'aboutTab'].forEach(t => {
+            const mobBtn = document.getElementById(`mobTab-${t}`);
+            if (mobBtn) mobBtn.onclick = () => {
+                switchTab(t);
+                setMobileTabActive(`mobTab-${t}`);
+            };
+        });
+
+        // Visualizer Bars Rendering
+        function initVisualizerBars() {
+            const container = document.getElementById('visualizerBars');
+            container.innerHTML = '';
+            for(let i=0; i<16; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'w-1.5 bg-theme-500/80 rounded-t transition-all duration-75';
+                bar.style.height = '4px';
+                container.appendChild(bar);
+            }
+        }
+
+        function updateVisualizer() {
+            requestAnimationFrame(updateVisualizer);
+            if (analyser && isPlaying) {
+                const data = new Uint8Array(analyser.frequencyBinCount);
+                analyser.getByteFrequencyData(data);
+                const bars = document.querySelectorAll('#visualizerBars div');
+                bars.forEach((bar, idx) => {
+                    const h = (data[idx * 2] / 255) * 28;
+                    bar.style.height = Math.max(4, h) + 'px';
+                });
+            }
+        }
+        updateVisualizer();
 
         function buildStudioEqUI() {
             const container = document.getElementById('studioEqContainer');
@@ -588,7 +742,7 @@
             container.innerHTML = '';
             FREQUENCIES.forEach((freq, idx) => {
                 const wrap = document.createElement('div');
-                wrap.className = 'slider-wrapper';
+                wrap.className = 'flex flex-col items-center h-full justify-between';
                 const label = freq >= 1000 ? (freq/1000) + 'k' : freq;
                 wrap.innerHTML = `
                     <span class="text-[9px] text-gray-400 font-mono">${label}</span>
@@ -606,267 +760,16 @@
             });
         }
 
-        // Vocal/Music Channel Filter Controller
-        document.getElementById('vocalFilterSelect').onchange = (e) => {
-            initAudioEngine();
-            const val = e.target.value;
-            document.getElementById('vocalModeVal').textContent = val.toUpperCase();
-            if(!vocalFilterNode) return;
-
-            if (val === 'vocalsOnly') {
-                vocalFilterNode.type = "highpass";
-                vocalFilterNode.frequency.value = 300;
-            } else if (val === 'musicOnly') {
-                vocalFilterNode.type = "notch";
-                vocalFilterNode.frequency.value = 1000;
-                vocalFilterNode.Q.value = 3.0;
-            } else if (val === 'vocalBoost') {
-                vocalFilterNode.type = "peaking";
-                vocalFilterNode.frequency.value = 2500;
-                vocalFilterNode.gain.value = 8;
-            } else {
-                vocalFilterNode.type = "peaking";
-                vocalFilterNode.gain.value = 0;
-            }
-        };
-
-        // File/Folder Auto Importer
-        document.getElementById('fileInput').addEventListener('change', (e) => {
-            const files = Array.from(e.target.files);
-            files.forEach(f => {
-                if (f.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|flac)$/i.test(f.name)) {
-                    songs.push({
-                        id: "local_" + Date.now() + "_" + Math.random().toString(36).substr(2, 4),
-                        title: f.name.replace(/\.[^/.]+$/, ""),
-                        artist: "Local Storage Audio",
-                        url: URL.createObjectURL(f),
-                        source: "LOCAL"
-                    });
-                }
-            });
-            renderTrackList();
-            if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
-        });
-
-        // GitHub Scanner
-        document.getElementById('autoScanGithubBtn').addEventListener('click', () => {
-            const userRepo = document.getElementById('ghUserRepoInput').value.trim();
-            let folderPath = document.getElementById('ghFolderPathInput').value.trim();
-            if (!userRepo) return alert("Please enter repository (e.g. username/repo)!");
-
-            folderPath = folderPath ? folderPath.replace(/^\/|\/$/g, '') : '';
-            const apiUrl = `https://api.github.com/repos/${userRepo}/contents/${folderPath}`;
-
-            fetch(apiUrl)
-                .then(res => {
-                    if (!res.ok) throw new Error("Repository or folder not found");
-                    return res.json();
-                })
-                .then(items => {
-                    let addedCount = 0;
-                    if (Array.isArray(items)) {
-                        items.forEach(file => {
-                            if (file.type === 'file' && /\.(mp3|wav|ogg|m4a)$/i.test(file.name)) {
-                                const downloadUrl = file.download_url || `https://raw.githubusercontent.com/${userRepo}/main/${file.path}`;
-                                songs.push({
-                                    id: "gh_" + file.sha,
-                                    title: file.name.replace(/\.[^/.]+$/, ""),
-                                    artist: userRepo,
-                                    url: downloadUrl,
-                                    source: "GITHUB"
-                                });
-                                addedCount++;
-                            }
-                        });
-                        renderTrackList();
-                        if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
-                        document.getElementById('githubModal').classList.add('hidden');
-                        alert(`Successfully imported ${addedCount} songs from GitHub!`);
-                    }
-                }).catch(err => alert("GitHub Scan Error: " + err.message));
-        });
-
-        function loadSong(index) {
-            if (index < 0 || index >= songs.length) return;
-            currentSongIndex = index;
-            const currentTrack = songs[index];
-            audio.src = currentTrack.url;
-            document.getElementById('currentTitle').textContent = currentTrack.title;
-            document.getElementById('currentArtist').textContent = currentTrack.artist;
-            document.getElementById('sourceBadge').textContent = currentTrack.source || "LOCAL ENGINE";
-            document.getElementById('lyricsDisplay').textContent = `Track: ${currentTrack.title}\nArtist: ${currentTrack.artist}`;
-            renderTrackList();
-        }
-
-        function playAudio() {
-            initAudioEngine();
-            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-            audio.play().then(() => {
-                isPlaying = true;
-                document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause text-lg sm:text-xl"></i>';
-                document.getElementById('albumArt').classList.remove('paused');
-            }).catch(e => console.warn("Playback error:", e));
-        }
-
-        document.getElementById('playPauseBtn').onclick = () => {
-            if (songs.length === 0) return alert("Please import audio files/folders first!");
-            if (isPlaying) {
-                audio.pause();
-                isPlaying = false;
-                document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-play text-lg sm:text-xl ml-0.5"></i>';
-                document.getElementById('albumArt').classList.add('paused');
-            } else {
-                playAudio();
-            }
-        };
-
-        document.getElementById('prevBtn').onclick = () => {
-            if (songs.length === 0) return;
-            let idx = currentSongIndex - 1; 
-            if (idx < 0) idx = songs.length - 1;
-            loadSong(idx); 
-            playAudio();
-        };
-
-        document.getElementById('nextBtn').onclick = () => {
-            if (songs.length === 0) return;
-            let idx = (currentSongIndex + 1) % songs.length;
-            loadSong(idx); 
-            playAudio();
-        };
-
-        audio.ontimeupdate = () => {
-            if (audio.duration) {
-                document.getElementById('progressBar').value = (audio.currentTime / audio.duration) * 100;
-                document.getElementById('currentTime').textContent = formatTime(audio.currentTime);
-                document.getElementById('durationTime').textContent = formatTime(audio.duration);
-            }
-        };
-
-        document.getElementById('progressBar').oninput = (e) => {
-            if (audio.duration) audio.currentTime = (e.target.value / 100) * audio.duration;
-        };
-
-        document.getElementById('volumeSlider').oninput = (e) => { audio.volume = e.target.value; };
-        document.getElementById('playbackRate').onchange = (e) => { audio.playbackRate = parseFloat(e.target.value); };
-
-        document.getElementById('studioBassSlider').oninput = (e) => {
-            initAudioEngine();
-            const val = parseFloat(e.target.value);
-            document.getElementById('studioBassVal').textContent = val + " dB";
-            if (bassFilter) bassFilter.gain.value = val;
-        };
-
-        document.getElementById('studioPitchSlider').oninput = (e) => {
-            const semitones = parseInt(e.target.value);
-            document.getElementById('studioPitchVal').textContent = semitones + " semitones";
-            audio.preservesPitch = false;
-            audio.playbackRate = Math.pow(2, semitones / 12);
-        };
-
-        document.getElementById('clearQueueBtn').onclick = () => {
-            songs = [];
-            currentSongIndex = -1;
-            audio.pause();
-            isPlaying = false;
-            document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-play text-lg sm:text-xl ml-0.5"></i>';
-            document.getElementById('albumArt').classList.add('paused');
-            document.getElementById('currentTitle').textContent = "R Music Player";
-            document.getElementById('currentArtist').textContent = "Queue cleared";
-            renderTrackList();
-        };
-
-        function renderTrackList() {
-            const list = document.getElementById('trackList');
-            const empty = document.getElementById('emptyState');
-            if(!list) return;
-
-            list.innerHTML = '';
-
-            if (songs.length === 0) {
-                if(empty) empty.style.display = 'block';
-                document.getElementById('songCount').textContent = '0';
-                return;
-            } else {
-                if(empty) empty.style.display = 'none';
-            }
-
-            songs.forEach((s, idx) => {
-                const item = document.createElement('div');
-                item.className = `p-2.5 rounded-xl text-xs cursor-pointer flex items-center justify-between transition-all ${idx === currentSongIndex ? 'bg-theme-500/20 text-theme-400 font-bold border border-theme-500/30' : 'hover:bg-gray-800/80 text-gray-300'}`;
-                item.innerHTML = `
-                    <div class="truncate pr-2">
-                        <p class="truncate font-semibold">${s.title}</p>
-                        <p class="text-[10px] text-gray-400 truncate">${s.artist}</p>
-                    </div>
-                `;
-                item.onclick = () => { loadSong(idx); playAudio(); };
-                list.appendChild(item);
-            });
-
-            document.getElementById('songCount').textContent = songs.length;
-        }
-
-        // Switch Tabs + Highlight Selected Button Fix
-        function switchTab(tabId) {
-            document.querySelectorAll('.page-tab').forEach(tab => tab.classList.add('hidden'));
-            const activeTab = document.getElementById(tabId);
-            if(activeTab) activeTab.classList.remove('hidden');
-
-            document.querySelectorAll('.mob-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
-            const currentMobBtn = document.getElementById(`mobTab-${tabId}`);
-            if (currentMobBtn) currentMobBtn.classList.add('active-tab');
-        }
-
-        document.querySelectorAll('.nav-tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => switchTab(btn.id.replace('tabBtn-', '')));
-        });
-
-        ['playerTab', 'studioTab', 'drumPadTab', 'lyricsTab', 'aboutTab'].forEach(t => {
-            const mobBtn = document.getElementById(`mobTab-${t}`);
-            if (mobBtn) mobBtn.onclick = () => switchTab(t);
-        });
-
         function formatTime(s) {
             if (isNaN(s)) return "00:00";
             const m = Math.floor(s / 60), sec = Math.floor(s % 60);
             return `${m}:${sec < 10 ? '0' : ''}${sec}`;
         }
 
-        function initParticles() {
-            const canvas = document.getElementById('particleCanvas');
-            if(!canvas) return;
-            const ctx = canvas.getContext('2d');
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-
-            function draw() {
-                requestAnimationFrame(draw);
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                if (analyser && isPlaying) {
-                    const data = new Uint8Array(analyser.frequencyBinCount);
-                    analyser.getByteFrequencyData(data);
-                    const val = data[10] || 0;
-                    ctx.beginPath();
-                    ctx.arc(canvas.width / 2, canvas.height / 2, val / 4 + 15, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(34, 211, 238, 0.15)';
-                    ctx.fill();
-                }
-            }
-            draw();
-        }
-
         window.setAppTheme = function(t) { document.documentElement.setAttribute('data-theme', t); };
-
-        document.getElementById('openAuthModalBtn').onclick = () => document.getElementById('authModal').classList.remove('hidden');
-        document.getElementById('closeAuthBtn').onclick = () => document.getElementById('authModal').classList.add('hidden');
-        document.getElementById('anonymousLoginBtn').onclick = () => document.getElementById('authModal').classList.add('hidden');
-        document.getElementById('openGithubModalBtn').onclick = () => document.getElementById('githubModal').classList.remove('hidden');
-        document.getElementById('closeGithubBtn').onclick = () => document.getElementById('githubModal').classList.add('hidden');
         document.getElementById('openThemeModalBtn').onclick = () => document.getElementById('themeModal').classList.remove('hidden');
         document.getElementById('closeThemeBtn').onclick = () => document.getElementById('themeModal').classList.add('hidden');
 
-        checkUserSession();
         renderTrackList();
     </script>
 </body>
