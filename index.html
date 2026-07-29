@@ -95,7 +95,6 @@
             box-shadow: inset 0 0 20px rgba(0,0,0,0.9), 0 0 25px var(--glow);
         }
 
-        /* Equalizer Fixed Slider Dimensions & Cross-browser Alignment */
         .eq-wrapper {
             display: flex;
             flex-direction: column;
@@ -488,7 +487,6 @@
     </div>
 
     <script>
-        // IndexedDB persistent storage for Offline Automatic Retrieval
         let db = null;
         const request = indexedDB.open("RMusicTrackDB", 1);
         request.onupgradeneeded = (e) => {
@@ -573,7 +571,6 @@
             initVisualizerBars();
         }
 
-        // Bass boost handler
         document.getElementById('studioBassSlider').addEventListener('input', (e) => {
             initAudioEngine();
             const gainVal = parseFloat(e.target.value);
@@ -581,7 +578,6 @@
             if (bassFilter) bassFilter.gain.value = gainVal;
         });
 
-        // Vocal Filter Mode
         document.getElementById('vocalFilterSelect').addEventListener('change', (e) => {
             initAudioEngine();
             const mode = e.target.value;
@@ -604,36 +600,51 @@
             }
         });
 
-        // File Import with Auto-Save into Local DB
-        document.getElementById('fileInput').addEventListener('change', (e) => {
+        // FIXED FILE UPLOAD LOGIC (Async Queue to save all files safely)
+        document.getElementById('fileInput').addEventListener('change', async (e) => {
             const files = Array.from(e.target.files);
-            files.forEach(f => {
+            for (let i = 0; i < files.length; i++) {
+                const f = files[i];
                 if (f.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|flac)$/i.test(f.name)) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        const trackData = {
-                            id: "local_" + Date.now() + "_" + Math.random().toString(36).substr(2, 4),
-                            title: f.name.replace(/\.[^/.]+$/, ""),
-                            artist: "Offline Audio",
-                            blob: event.target.result
+                    await new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            const trackData = {
+                                id: "local_" + Date.now() + "_" + i + "_" + Math.random().toString(36).substr(2, 5),
+                                title: f.name.replace(/\.[^/.]+$/, ""),
+                                artist: "Offline Audio",
+                                blob: event.target.result
+                            };
+
+                            if (db) {
+                                const tx = db.transaction("audioTracks", "readwrite");
+                                const store = tx.objectStore("audioTracks");
+                                store.put(trackData);
+                                
+                                tx.oncomplete = () => {
+                                    trackData.url = URL.createObjectURL(f);
+                                    songs.push(trackData);
+                                    renderTrackList();
+                                    if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
+                                    resolve();
+                                };
+                                tx.onerror = () => {
+                                    resolve();
+                                };
+                            } else {
+                                trackData.url = URL.createObjectURL(f);
+                                songs.push(trackData);
+                                renderTrackList();
+                                if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
+                                resolve();
+                            }
                         };
-
-                        if(db) {
-                            const tx = db.transaction("audioTracks", "readwrite");
-                            tx.objectStore("audioTracks").put(trackData);
-                        }
-
-                        trackData.url = URL.createObjectURL(f);
-                        songs.push(trackData);
-                        renderTrackList();
-                        if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
-                    };
-                    reader.readAsArrayBuffer(f);
+                        reader.readAsArrayBuffer(f);
+                    });
                 }
-            });
+            }
         });
 
-        // Load Stored Offline Songs on startup
         function loadStoredSongs() {
             if(!db) return;
             const tx = db.transaction("audioTracks", "readonly");
