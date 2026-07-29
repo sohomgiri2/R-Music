@@ -133,7 +133,7 @@
             <div>
                 <h1 class="font-extrabold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-theme-400 to-white flex items-center space-x-1.5">
                     <span>R Music</span>
-                    <span class="text-[8px] bg-theme-500/20 text-theme-400 border border-theme-500/40 px-1.5 py-0.5 rounded-full uppercase tracking-widest font-mono">ULTIMATE PRO</span>
+                    <span class="text-[8px] bg-theme-500/20 text-theme-400 border border-theme-500/40 px-1.5 py-0.5 rounded-full uppercase tracking-widest font-mono">ULTIMATE PRO V2.7</span>
                 </h1>
                 <p class="text-[10px] text-gray-400 font-medium">
                     Dev: <span class="text-theme-400 font-semibold">Sohom Giri</span> 
@@ -226,9 +226,6 @@
                             OFFLINE ENGINE READY
                         </span>
                         <div class="flex items-center space-x-2">
-                            <button id="favoriteToggleBtn" title="Toggle Favorite" class="text-gray-400 hover:text-pink-400 text-lg transition-colors">
-                                <i class="fa-regular fa-heart" id="favIcon"></i>
-                            </button>
                             <span id="timerDisplay" class="text-[9px] text-amber-400 font-mono hidden">
                                 <i class="fa-solid fa-clock"></i> <span id="timerCountdown">00:00</span>
                             </span>
@@ -264,7 +261,16 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-around w-full z-10 my-3 text-xs text-gray-400 border-y border-gray-800/60 py-2">
+                    <div class="grid grid-cols-6 gap-1.5 w-full z-10 my-2">
+                        <button onclick="skipTime(-10)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">-10s</button>
+                        <button onclick="skipTime(-5)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">-5s</button>
+                        <button onclick="skipTime(-2)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">-2s</button>
+                        <button onclick="skipTime(2)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">+2s</button>
+                        <button onclick="skipTime(5)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">+5s</button>
+                        <button onclick="skipTime(10)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">+10s</button>
+                    </div>
+
+                    <div class="flex items-center justify-around w-full z-10 my-2 text-xs text-gray-400 border-y border-gray-800/60 py-2">
                         <button id="shuffleBtn" class="hover:text-theme-400 transition-colors" title="Shuffle"><i class="fa-solid fa-shuffle"></i></button>
                         <button id="loopABtn" class="px-2 py-0.5 rounded bg-gray-900 border border-gray-800 hover:text-white" title="Loop Point A">Set A</button>
                         <button id="loopBBtn" class="px-2 py-0.5 rounded bg-gray-900 border border-gray-800 hover:text-white" title="Loop Point B">Set B</button>
@@ -405,8 +411,8 @@
             <div class="glass-card rounded-2xl p-4 sm:p-5 space-y-4">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xs sm:text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
-                        <i class="fa-solid fa-cube"></i>
-                        <span>Vocal & Music Splitter & FX</span>
+                        <i class="fa-solid fa-microphone-lines"></i>
+                        <span>AI Vocal & Instrumental Processor</span>
                     </h2>
                     <button id="resetAudioFxBtn" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-2.5 py-1 rounded-lg font-bold transition-all">
                         Reset Audio FX
@@ -414,28 +420,31 @@
                 </div>
 
                 <div class="space-y-4 pt-2">
-                    <div class="bg-gray-950 p-3 rounded-xl border border-gray-800 space-y-2">
-                        <p class="text-[11px] font-bold text-white flex items-center space-x-2">
-                            <i class="fa-solid fa-microphone-lines text-theme-400"></i>
-                            <span>Vocal / Instrumental Extractor Balance</span>
-                        </p>
-                        <div class="flex items-center space-x-3">
-                            <span class="text-[10px] text-gray-400">Instrumental</span>
-                            <input type="range" id="vocalSplitSlider" min="-1" max="1" value="0" step="0.1" class="w-full h-1.5 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
-                            <span class="text-[10px] text-gray-400">Vocal</span>
+                    <div class="bg-gray-950 p-3.5 rounded-xl border border-gray-800 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <p class="text-[11px] font-bold text-white flex items-center space-x-2">
+                                <i class="fa-solid fa-wand-magic-sparkles text-theme-400"></i>
+                                <span>Processor Mode Selector</span>
+                            </p>
+                            <span id="vocalModeLabel" class="text-[10px] text-theme-400 font-mono font-bold">Standard Mix</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="setVocalProcessorMode('normal')" id="vModeNormal" class="py-1.5 px-2 rounded-lg bg-theme-500 text-black text-[10px] font-bold">Normal</button>
+                            <button onclick="setVocalProcessorMode('karaoke')" id="vModeKaraoke" class="py-1.5 px-2 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 text-[10px] font-bold">Karaoke (Vocal Cut)</button>
+                            <button onclick="setVocalProcessorMode('acapella')" id="vModeAcapella" class="py-1.5 px-2 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 text-[10px] font-bold">Vocal Boost</button>
                         </div>
                     </div>
 
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold text-gray-300 mb-1.5">
+                    <div class="bg-gray-950 p-3 rounded-xl border border-gray-800 space-y-2">
+                        <div class="flex justify-between text-xs font-semibold text-gray-300">
                             <span>Bass Boost Gain:</span>
                             <span id="studioBassVal" class="text-theme-400 font-mono">0 dB</span>
                         </div>
                         <input type="range" id="studioBassSlider" min="0" max="15" value="0" step="0.5" class="w-full h-1.5 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
                     </div>
 
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold text-gray-300 mb-1.5">
+                    <div class="bg-gray-950 p-3 rounded-xl border border-gray-800 space-y-2">
+                        <div class="flex justify-between text-xs font-semibold text-gray-300">
                             <span>Pitch Shift Tuning:</span>
                             <span id="pitchVal" class="text-theme-400 font-mono">1.0x</span>
                         </div>
@@ -490,17 +499,6 @@
                         Apply Volume Normalization
                     </button>
                 </div>
-
-                <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-2">
-                    <p class="font-bold text-white flex items-center space-x-2">
-                        <i class="fa-solid fa-circle-info text-cyan-400"></i>
-                        <span>Active Track Metadata Inspector</span>
-                    </p>
-                    <div id="metaInspectorBox" class="text-gray-400 space-y-1 font-mono text-[11px]">
-                        <p>File Name: <span class="text-white">None</span></p>
-                        <p>Format: <span class="text-white">Unknown</span></p>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -519,7 +517,7 @@
             </div>
             <div>
                 <h2 class="text-xl font-black text-white tracking-tight">R Music Suite Ultimate Pro</h2>
-                <span class="text-[10px] bg-theme-500/20 text-theme-400 border border-theme-500/40 px-2 py-0.5 rounded-full uppercase tracking-widest font-mono mt-1 inline-block">v2.6 Stable Build</span>
+                <span class="text-[10px] bg-theme-500/20 text-theme-400 border border-theme-500/40 px-2 py-0.5 rounded-full uppercase tracking-widest font-mono mt-1 inline-block">v2.7 Stable Build</span>
             </div>
             
             <div class="bg-gray-900/90 border border-gray-800 p-4 rounded-xl space-y-2.5 text-left">
@@ -541,10 +539,6 @@
                         <span>System Diagnostics</span>
                     </button>
                 </div>
-            </div>
-
-            <div class="text-[11px] text-gray-400 pt-2 border-t border-gray-800">
-                <p>✨ Built for high performance, local web audio management, and custom studio workflows.</p>
             </div>
         </div>
     </main>
@@ -575,8 +569,6 @@
                     <i class="fa-solid fa-folder-open"></i>
                 </div>
                 <h3 class="text-lg font-bold text-white">Select Vault Category</h3>
-                <p class="text-xs text-gray-400">Choose which encrypted offline media repository to access.</p>
-                
                 <div class="max-w-xs mx-auto space-y-3 pt-2">
                     <button id="vaultOptionPhotoBtn" class="w-full py-3 rounded-xl bg-theme-500/20 hover:bg-theme-500/30 border border-theme-500/40 text-theme-400 font-extrabold text-xs transition-all flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-images"></i>
@@ -596,15 +588,10 @@
                         <span>Encrypted Offline Photos (20 Slots)</span>
                     </h3>
                     <div class="flex items-center space-x-2">
-                        <button id="backToVaultMenuBtn1" class="text-xs text-gray-400 hover:text-white bg-gray-900 border border-gray-800 px-3 py-1 rounded-lg">
-                            <i class="fa-solid fa-arrow-left"></i> Menu
-                        </button>
-                        <button id="vaultLockBtn1" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-lg">
-                            <i class="fa-solid fa-lock"></i> Lock
-                        </button>
+                        <button id="backToVaultMenuBtn1" class="text-xs text-gray-400 hover:text-white bg-gray-900 border border-gray-800 px-3 py-1 rounded-lg">Menu</button>
+                        <button id="vaultLockBtn1" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-lg">Lock</button>
                     </div>
                 </div>
-
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-[60vh] overflow-y-auto p-1" id="vaultPhotoGrid"></div>
             </div>
 
@@ -615,15 +602,10 @@
                         <span>Encrypted Offline Videos (10 Slots)</span>
                     </h3>
                     <div class="flex items-center space-x-2">
-                        <button id="backToVaultMenuBtn2" class="text-xs text-gray-400 hover:text-white bg-gray-900 border border-gray-800 px-3 py-1 rounded-lg">
-                            <i class="fa-solid fa-arrow-left"></i> Menu
-                        </button>
-                        <button id="vaultLockBtn2" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-lg">
-                            <i class="fa-solid fa-lock"></i> Lock
-                        </button>
+                        <button id="backToVaultMenuBtn2" class="text-xs text-gray-400 hover:text-white bg-gray-900 border border-gray-800 px-3 py-1 rounded-lg">Menu</button>
+                        <button id="vaultLockBtn2" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-lg">Lock</button>
                     </div>
                 </div>
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[60vh] overflow-y-auto p-1" id="vaultVideoGrid"></div>
             </div>
         </div>
@@ -635,21 +617,15 @@
                 <i class="fa-solid fa-compact-disc animate-spin-slow"></i>
                 <span>IMMERSIVE FULLSCREEN MODE</span>
             </span>
-            <button id="closeFullScreenBtn" class="text-gray-400 hover:text-white p-2 text-2xl transition-all">
-                <i class="fa-solid fa-compress"></i>
-            </button>
+            <button id="closeFullScreenBtn" class="text-gray-400 hover:text-white p-2 text-2xl transition-all"><i class="fa-solid fa-compress"></i></button>
         </div>
-
         <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full dj-turntable flex items-center justify-center border-8 border-gray-800 neon-glow my-auto">
             <img id="fsAlbumArt" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='1'><circle cx='12' cy='12' r='10'/></svg>" class="w-full h-full object-cover rounded-full opacity-70 animate-spin-slow paused">
-            <div class="absolute inset-0 border-4 border-dashed border-theme-500/30 rounded-full animate-spin-slow"></div>
         </div>
-
         <div class="text-center space-y-2 max-w-lg w-full">
             <h2 id="fsTitle" class="text-2xl sm:text-3xl font-black text-white tracking-wide truncate">Track Title</h2>
             <p id="fsArtist" class="text-sm text-theme-400 font-semibold truncate">Artist Name</p>
         </div>
-
         <div class="w-full max-w-xl space-y-4 pt-4 border-t border-gray-800/80">
             <div class="flex items-center justify-center space-x-8">
                 <button id="fsPrevBtn" class="text-gray-300 hover:text-white text-2xl"><i class="fa-solid fa-backward-step"></i></button>
@@ -661,9 +637,7 @@
 
     <div id="themeModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="glass-card rounded-2xl max-w-md w-full p-5 border border-gray-800 shadow-2xl relative max-h-[85vh] overflow-y-auto">
-            <button id="closeThemeBtn" class="absolute top-3 right-3 text-gray-400 hover:text-white p-1">
-                <i class="fa-solid fa-xmark text-base"></i>
-            </button>
+            <button id="closeThemeBtn" class="absolute top-3 right-3 text-gray-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-base"></i></button>
             <h2 class="text-base font-bold text-white mb-3">Choose Theme Palette (20 Options)</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
                 <button onclick="setAppTheme('cyan')" class="p-2.5 rounded-xl bg-gray-950 border border-cyan-500 text-cyan-400 font-bold">Cyan</button>
@@ -691,16 +665,13 @@
     </div>
 
     <script>
-        // Separate Default Library vs 2 Custom Playlists vs Favorites
-        let defaultLibrarySongs = []; // Default songs (not automatically forced into custom playlists)
+        let defaultLibrarySongs = [];
         let playlistNames = JSON.parse(localStorage.getItem('r_music_playlist_names') || '["Playlist 1", "Playlist 2"]');
         let customPlaylists = JSON.parse(localStorage.getItem('r_music_custom_playlists') || '{"pl1": [], "pl2": []}');
-        
-        // Favorite songs saved permanently in localStorage across browser refreshes
         let favoriteSongs = JSON.parse(localStorage.getItem('r_music_favorites') || '[]');
 
-        let activeSection = 'default'; // 'default', 'pl1', or 'pl2'
-        let songs = []; // Currently active list being displayed
+        let activeSection = 'default';
+        let songs = [];
         let currentSongIndex = -1;
         let isPlaying = false;
         let isShuffle = false;
@@ -709,12 +680,17 @@
         let sleepTimerRef = null;
 
         let audioCtx = null, audioSource = null, analyser = null, bassFilter = null;
-        let splitter = null, merger = null, vocalGainNode = null;
+        let splitter = null, merger = null, vocalGainNode = null, processorNode = null;
         let eqFilters = [];
         const FREQUENCIES = [60, 250, 500, 1000, 2000, 4000, 8000, 12000, 14000, 16000];
 
         const audio = new Audio();
         audio.crossOrigin = "anonymous";
+
+        function skipTime(sec) {
+            if(!audio.duration) return;
+            audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + sec));
+        }
 
         function setMobileTabActive(activeId) {
             document.querySelectorAll('.mob-tab-btn').forEach(btn => {
@@ -774,19 +750,46 @@
             initVisualizerBars();
         }
 
+        function setVocalProcessorMode(mode) {
+            initAudioEngine();
+            ['vModeNormal', 'vModeKaraoke', 'vModeAcapella'].forEach(id => {
+                const btn = document.getElementById(id);
+                btn.className = "py-1.5 px-2 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 text-[10px] font-bold";
+            });
+
+            if(mode === 'normal') {
+                document.getElementById('vModeNormal').className = "py-1.5 px-2 rounded-lg bg-theme-500 text-black text-[10px] font-bold";
+                document.getElementById('vocalModeLabel').textContent = "Standard Mix";
+                if(vocalGainNode) vocalGainNode.gain.value = 1.0;
+                if(splitter && merger) {
+                    try { splitter.disconnect(); splitter.connect(merger, 0, 0); splitter.connect(merger, 1, 1); } catch(e){}
+                }
+            } else if(mode === 'karaoke') {
+                document.getElementById('vModeKaraoke').className = "py-1.5 px-2 rounded-lg bg-theme-500 text-black text-[10px] font-bold";
+                document.getElementById('vocalModeLabel').textContent = "Karaoke (Center Cancel)";
+                // Center-channel subtraction to reduce center vocals
+                if(splitter && merger && audioCtx) {
+                    try {
+                        splitter.disconnect();
+                        const invertGain = audioCtx.createGain();
+                        invertGain.gain.value = -1.0;
+                        splitter.connect(merger, 0, 0);
+                        splitter.connect(invertGain, 1, 0);
+                        invertGain.connect(merger, 0, 1);
+                    } catch(e){}
+                }
+            } else if(mode === 'acapella') {
+                document.getElementById('vModeAcapella').className = "py-1.5 px-2 rounded-lg bg-theme-500 text-black text-[10px] font-bold";
+                document.getElementById('vocalModeLabel').textContent = "Vocal Isolation Boost";
+                if(vocalGainNode) vocalGainNode.gain.value = 1.5;
+            }
+        }
+
         document.getElementById('studioBassSlider').addEventListener('input', (e) => {
             initAudioEngine();
             const gainVal = parseFloat(e.target.value);
             document.getElementById('studioBassVal').textContent = gainVal + " dB";
             if (bassFilter) bassFilter.gain.value = gainVal;
-        });
-
-        document.getElementById('vocalSplitSlider').addEventListener('input', (e) => {
-            initAudioEngine();
-            const val = parseFloat(e.target.value);
-            if(vocalGainNode) {
-                vocalGainNode.gain.value = 1.0 + val;
-            }
         });
 
         document.getElementById('pitchSlider').addEventListener('input', (e) => {
@@ -804,7 +807,6 @@
             }
         };
 
-        // Folder import goes into Default Library
         document.getElementById('fileInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
             if(files.length === 0) return;
@@ -830,7 +832,6 @@
             }
         });
 
-        // Section & Playlist Selector UI Logic
         const defaultBtn = document.getElementById('selectDefaultBtn');
         const btn1 = document.getElementById('selectPlaylist1Btn');
         const btn2 = document.getElementById('selectPlaylist2Btn');
@@ -843,7 +844,6 @@
             pl1NameSpan.textContent = playlistNames[0];
             pl2NameSpan.textContent = playlistNames[1];
 
-            // Reset button styles
             defaultBtn.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate";
             btn1.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate";
             btn2.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate";
@@ -883,7 +883,6 @@
             updatePlaylistUI();
         };
 
-        // Add custom individual song files into active section
         document.getElementById('playlistSongInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
             if (files.length === 0) return;
@@ -949,7 +948,6 @@
             const customNote = document.getElementById('customLyricsInput').value;
             document.getElementById('lyricsDisplay').textContent = customNote ? customNote : `Now Playing:\n${track.title}`;
             
-            updateFavoriteButtonState();
             renderTrackList();
             renderFavoritesList();
         }
@@ -1005,43 +1003,24 @@
             else { document.getElementById('nextBtn').click(); }
         };
 
-        // Favorite Toggle & Persistence Logic
-        const favoriteToggleBtn = document.getElementById('favoriteToggleBtn');
-        const favIcon = document.getElementById('favIcon');
-
-        function isCurrentSongFavorite() {
-            if (currentSongIndex === -1 || !songs[currentSongIndex]) return false;
-            const track = songs[currentSongIndex];
+        function isTrackFavorite(track) {
             return favoriteSongs.some(f => f.title === track.title);
         }
 
-        function updateFavoriteButtonState() {
-            if (isCurrentSongFavorite()) {
-                favIcon.className = "fa-solid fa-heart text-pink-400";
-            } else {
-                favIcon.className = "fa-regular fa-heart text-gray-400";
-            }
-        }
-
-        favoriteToggleBtn.onclick = () => {
-            if (currentSongIndex === -1 || !songs[currentSongIndex]) {
-                return alert("No active song playing to favorite!");
-            }
-            const track = songs[currentSongIndex];
+        function toggleFavoriteSong(track, event) {
+            if(event) event.stopPropagation();
             const existingIdx = favoriteSongs.findIndex(f => f.title === track.title);
 
             if (existingIdx !== -1) {
                 favoriteSongs.splice(existingIdx, 1);
-                alert(`Removed "${track.title}" from Favorites.`);
             } else {
                 favoriteSongs.push({ ...track });
-                alert(`Added "${track.title}" to Favorites! Saved securely.`);
             }
 
             localStorage.setItem('r_music_favorites', JSON.stringify(favoriteSongs));
-            updateFavoriteButtonState();
+            renderTrackList();
             renderFavoritesList();
-        };
+        }
 
         function renderFavoritesList() {
             const list = document.getElementById('favTrackList');
@@ -1065,14 +1044,16 @@
                         <p class="truncate font-semibold">${s.title}</p>
                     </div>
                     <div class="flex items-center space-x-2 ml-2">
-                        <button title="Remove from Favorites" class="remove-fav-btn px-2 py-1 rounded-lg text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20">
+                        <button title="Remove from Favorites" class="fav-btn px-2.5 py-1 rounded-lg text-xs text-pink-400 bg-pink-500/10 border border-pink-500/20 hover:bg-pink-500/20">
+                            <i class="fa-solid fa-heart"></i>
+                        </button>
+                        <button title="Remove Song" class="remove-fav-btn px-2.5 py-1 rounded-lg text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </div>
                 `;
 
                 item.querySelector('.flex-1').onclick = () => {
-                    // Switch to default or playlist section to play, or load directly
                     songs = favoriteSongs;
                     let realIndex = favoriteSongs.findIndex(orig => orig.title === s.title);
                     if(realIndex !== -1) {
@@ -1081,12 +1062,16 @@
                     }
                 };
 
+                item.querySelector('.fav-btn').onclick = (e) => {
+                    toggleFavoriteSong(s, e);
+                };
+
                 item.querySelector('.remove-fav-btn').onclick = (e) => {
                     e.stopPropagation();
                     favoriteSongs = favoriteSongs.filter(orig => orig.title !== s.title);
                     localStorage.setItem('r_music_favorites', JSON.stringify(favoriteSongs));
-                    updateFavoriteButtonState();
                     renderFavoritesList();
+                    renderTrackList();
                 };
 
                 list.appendChild(item);
@@ -1160,9 +1145,7 @@
             const startSec = parseFloat(document.getElementById('trimStartInput').value) || 0;
             const endSec = parseFloat(document.getElementById('trimEndInput').value) || 10;
 
-            if(endSec <= startSec) {
-                return alert("End time must be greater than start time!");
-            }
+            if(endSec <= startSec) return alert("End time must be greater than start time!");
 
             fetch(songs[currentSongIndex].url)
                 .then(res => res.arrayBuffer())
@@ -1193,10 +1176,8 @@
                         a.click();
                         setTimeout(() => { document.body.removeChild(a); window.URL.revokeObjectURL(url); }, 100);
                         alert("Trimmed audio clip downloaded successfully!");
-                    }, function(err) {
-                        alert("Error processing audio file buffer!");
-                    });
-                }).catch(err => alert("Could not fetch file stream for trimming!"));
+                    }, () => alert("Error processing audio file buffer!"));
+                }).catch(() => alert("Could not fetch file stream for trimming!"));
         };
 
         function bufferToWave(abBuffer, len) {
@@ -1210,18 +1191,10 @@
             function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
             function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
 
-            setUint32(0x46464952); // "RIFF"
-            setUint32(length - 8);
-            setUint32(0x45564157); // "WAVE"
-            setUint32(0x20746d66); // "fmt " chunk
-            setUint32(16);
-            setUint16(1);
-            setUint16(numOfChan);
-            setUint32(sampleRate);
-            setUint32(sampleRate * 2 * numOfChan);
-            setUint16(numOfChan * 2);
-            setUint16(16);
-            setUint32(0x61746164); // "data"
+            setUint32(0x46464952); setUint32(length - 8); setUint32(0x45564157);
+            setUint32(0x20746d66); setUint32(16); setUint16(1); setUint16(numOfChan);
+            setUint32(sampleRate); setUint32(sampleRate * 2 * numOfChan);
+            setUint16(numOfChan * 2); setUint16(16); setUint32(0x61746164);
             setUint32(length - pos - 4);
 
             for (let i = 0; i < abBuffer.numberOfChannels; i++) channels.push(abBuffer.getChannelData(i));
@@ -1229,7 +1202,7 @@
             while (pos < length) {
                 for (let i = 0; i < numOfChan; i++) {
                     let sample = Math.max(-1, Math.min(1, channels[i][offset]));
-                    sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767);
+                    sample = (sample < 0 ? sample * 32768 : sample * 32767);
                     view.setInt16(pos, sample, true);
                     pos += 2;
                 }
@@ -1241,7 +1214,6 @@
         document.getElementById('fullScreenPlayerBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.remove('hidden');
         document.getElementById('closeFullScreenBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.add('hidden');
 
-        // Secret Vault Logic
         const secretVaultTrigger = document.getElementById('secretVaultTrigger');
         const secretVaultModal = document.getElementById('secretVaultModal');
         const closeVaultBtn = document.getElementById('closeVaultBtn');
@@ -1251,13 +1223,6 @@
         const vaultVideoGallerySection = document.getElementById('vaultVideoGallerySection');
         const vaultPasswordInput = document.getElementById('vaultPasswordInput');
         const vaultUnlockBtn = document.getElementById('vaultUnlockBtn');
-        
-        const vaultOptionPhotoBtn = document.getElementById('vaultOptionPhotoBtn');
-        const vaultOptionVideoBtn = document.getElementById('vaultOptionVideoBtn');
-        const backToVaultMenuBtn1 = document.getElementById('backToVaultMenuBtn1');
-        const backToVaultMenuBtn2 = document.getElementById('backToVaultMenuBtn2');
-        const vaultLockBtn1 = document.getElementById('vaultLockBtn1');
-        const vaultLockBtn2 = document.getElementById('vaultLockBtn2');
 
         secretVaultTrigger.onclick = () => {
             secretVaultModal.classList.remove('hidden');
@@ -1268,9 +1233,7 @@
             vaultPasswordInput.value = '';
         };
 
-        closeVaultBtn.onclick = () => {
-            secretVaultModal.classList.add('hidden');
-        };
+        closeVaultBtn.onclick = () => secretVaultModal.classList.add('hidden');
 
         vaultUnlockBtn.onclick = () => {
             if (vaultPasswordInput.value === 'Rihana') {
@@ -1282,28 +1245,26 @@
             }
         };
 
-        vaultPasswordInput.onkeydown = (e) => {
-            if(e.key === 'Enter') vaultUnlockBtn.click();
-        };
+        vaultPasswordInput.onkeydown = (e) => { if(e.key === 'Enter') vaultUnlockBtn.click(); };
 
-        vaultOptionPhotoBtn.onclick = () => {
+        document.getElementById('vaultOptionPhotoBtn').onclick = () => {
             vaultMenuSection.classList.add('hidden');
             vaultPhotoGallerySection.classList.remove('hidden');
             populatePhotoSlots();
         };
 
-        vaultOptionVideoBtn.onclick = () => {
+        document.getElementById('vaultOptionVideoBtn').onclick = () => {
             vaultMenuSection.classList.add('hidden');
             vaultVideoGallerySection.classList.remove('hidden');
             populateVideoSlots();
         };
 
-        backToVaultMenuBtn1.onclick = () => {
+        document.getElementById('backToVaultMenuBtn1').onclick = () => {
             vaultPhotoGallerySection.classList.add('hidden');
             vaultMenuSection.classList.remove('hidden');
         };
 
-        backToVaultMenuBtn2.onclick = () => {
+        document.getElementById('backToVaultMenuBtn2').onclick = () => {
             vaultVideoGallerySection.classList.add('hidden');
             vaultMenuSection.classList.remove('hidden');
         };
@@ -1316,8 +1277,8 @@
             vaultPasswordInput.value = '';
         };
 
-        vaultLockBtn1.onclick = lockVaultAction;
-        vaultLockBtn2.onclick = lockVaultAction;
+        document.getElementById('vaultLockBtn1').onclick = lockVaultAction;
+        document.getElementById('vaultLockBtn2').onclick = lockVaultAction;
 
         function populatePhotoSlots() {
             const grid = document.getElementById('vaultPhotoGrid');
@@ -1327,7 +1288,7 @@
                 item.className = 'bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group';
                 item.innerHTML = `
                     <div class="w-full h-24 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                        <img src="./p${i}.jpg" alt="Vault Photo p${i}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
+                        <img src="./p${i}.jpg" alt="Photo p${i}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
                     </div>
                     <span class="text-[10px] text-gray-400 mt-2 font-mono">p${i}.jpg</span>
                 `;
@@ -1369,6 +1330,7 @@
 
             filteredSongs.forEach((s) => {
                 const isCurrent = (songs[currentSongIndex] && songs[currentSongIndex].title === s.title);
+                const isFav = isTrackFavorite(s);
                 
                 const item = document.createElement('div');
                 item.className = `p-3 rounded-xl text-xs flex items-center justify-between transition-all ${isCurrent ? 'bg-theme-500/20 text-theme-400 font-bold border border-theme-500/30' : 'bg-gray-950/80 hover:bg-gray-900 text-gray-300 border border-gray-800/60'}`;
@@ -1379,7 +1341,10 @@
                         <p class="truncate font-semibold">${s.title}</p>
                     </div>
                     <div class="flex items-center space-x-2 ml-2">
-                        <button title="Remove Song" class="remove-btn px-2 py-1 rounded-lg text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20">
+                        <button title="Toggle Favorite" class="fav-btn px-2.5 py-1 rounded-lg text-xs ${isFav ? 'text-pink-400 bg-pink-500/10 border border-pink-500/20 hover:bg-pink-500/20' : 'text-gray-400 hover:text-pink-400 bg-gray-900 border border-gray-800'}">
+                            <i class="${isFav ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                        </button>
+                        <button title="Remove Song" class="remove-btn px-2.5 py-1 rounded-lg text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </div>
@@ -1391,6 +1356,10 @@
                         loadSong(realIndex);
                         playAudio();
                     }
+                };
+
+                item.querySelector('.fav-btn').onclick = (e) => {
+                    toggleFavoriteSong(s, e);
                 };
 
                 item.querySelector('.remove-btn').onclick = (e) => {
@@ -1489,12 +1458,11 @@
         document.getElementById('resetAudioFxBtn').onclick = () => {
             document.getElementById('studioBassSlider').value = 0;
             document.getElementById('studioBassVal').textContent = "0 dB";
-            document.getElementById('vocalSplitSlider').value = 0;
             document.getElementById('pitchSlider').value = 1;
             document.getElementById('pitchVal').textContent = "1.0x";
             audio.playbackRate = 1;
             if(bassFilter) bassFilter.gain.value = 0;
-            if(vocalGainNode) vocalGainNode.gain.value = 1.0;
+            setVocalProcessorMode('normal');
         };
 
         function formatTime(s) {
@@ -1507,7 +1475,6 @@
         document.getElementById('openThemeModalBtn').onclick = () => document.getElementById('themeModal').classList.remove('hidden');
         document.getElementById('closeThemeBtn').onclick = () => document.getElementById('themeModal').classList.add('hidden');
 
-        // Initialize UI on load
         updatePlaylistUI();
         renderFavoritesList();
     </script>
