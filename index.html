@@ -149,7 +149,10 @@
                 <i class="fa-solid fa-play"></i><span>Player</span>
             </button>
             <button id="tabBtn-playlistTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
-                <i class="fa-solid fa-list-ul"></i><span>Playlist Manager</span>
+                <i class="fa-solid fa-list-ul"></i><span>Playlists</span>
+            </button>
+            <button id="tabBtn-favoritesTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
+                <i class="fa-solid fa-heart text-pink-400"></i><span>Favorites</span>
             </button>
             <button id="tabBtn-studioTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
                 <i class="fa-solid fa-sliders"></i><span>Studio FX</span>
@@ -193,7 +196,11 @@
         </button>
         <button id="mobTab-playlistTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
             <i class="fa-solid fa-list-ul text-base"></i>
-            <span class="text-[9px] mt-0.5">Playlist</span>
+            <span class="text-[9px] mt-0.5">Playlists</span>
+        </button>
+        <button id="mobTab-favoritesTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
+            <i class="fa-solid fa-heart text-base text-pink-400"></i>
+            <span class="text-[9px] mt-0.5">Favorites</span>
         </button>
         <button id="mobTab-studioTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
             <i class="fa-solid fa-sliders text-base"></i>
@@ -202,10 +209,6 @@
         <button id="mobTab-toolsTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
             <i class="fa-solid fa-toolbox text-base"></i>
             <span class="text-[9px] mt-0.5">Tools</span>
-        </button>
-        <button id="mobTab-lyricsTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
-            <i class="fa-solid fa-align-left text-base"></i>
-            <span class="text-[9px] mt-0.5">Lyrics</span>
         </button>
         <button id="mobTab-aboutTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
             <i class="fa-solid fa-circle-info text-base"></i>
@@ -222,9 +225,14 @@
                         <span id="sourceBadge" class="text-[9px] font-extrabold bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full border border-theme-500/30 uppercase tracking-wider">
                             OFFLINE ENGINE READY
                         </span>
-                        <span id="timerDisplay" class="text-[9px] text-amber-400 font-mono hidden">
-                            <i class="fa-solid fa-clock"></i> <span id="timerCountdown">00:00</span>
-                        </span>
+                        <div class="flex items-center space-x-2">
+                            <button id="favoriteToggleBtn" title="Toggle Favorite" class="text-gray-400 hover:text-pink-400 text-lg transition-colors">
+                                <i class="fa-regular fa-heart" id="favIcon"></i>
+                            </button>
+                            <span id="timerDisplay" class="text-[9px] text-amber-400 font-mono hidden">
+                                <i class="fa-solid fa-clock"></i> <span id="timerCountdown">00:00</span>
+                            </span>
+                        </div>
                     </div>
 
                     <div class="relative my-2 flex items-center justify-center w-full h-48 sm:h-56 z-10">
@@ -305,32 +313,36 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
                         <i class="fa-solid fa-list-ul"></i>
-                        <span>Custom Playlist Manager (2 Playlists Only)</span>
+                        <span>Default Library & 2 Custom Playlists</span>
                     </h2>
                     <span id="songCount" class="text-[10px] bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full font-mono border border-theme-500/30">0 Tracks</span>
                 </div>
 
-                <div class="grid grid-cols-2 gap-3">
-                    <button id="selectPlaylist1Btn" class="py-2.5 px-4 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-compact-disc"></i>
-                        <span id="playlist1Name">Playlist 1</span>
+                <div class="grid grid-cols-3 gap-2">
+                    <button id="selectDefaultBtn" class="py-2.5 px-2 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-1.5 truncate">
+                        <i class="fa-solid fa-folder-open"></i>
+                        <span class="truncate">Default Library</span>
                     </button>
-                    <button id="selectPlaylist2Btn" class="py-2.5 px-4 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-2">
+                    <button id="selectPlaylist1Btn" class="py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate">
                         <i class="fa-solid fa-compact-disc"></i>
-                        <span id="playlist2Name">Playlist 2</span>
+                        <span id="playlist1Name" class="truncate">Playlist 1</span>
+                    </button>
+                    <button id="selectPlaylist2Btn" class="py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate">
+                        <i class="fa-solid fa-compact-disc"></i>
+                        <span id="playlist2Name" class="truncate">Playlist 2</span>
                     </button>
                 </div>
 
                 <div class="flex items-center justify-between bg-gray-950 p-3 rounded-xl border border-gray-800">
                     <div class="flex items-center space-x-2">
-                        <span id="activePlaylistTitle" class="font-extrabold text-xs text-white uppercase tracking-wider">Viewing: Playlist 1</span>
+                        <span id="activePlaylistTitle" class="font-extrabold text-xs text-white uppercase tracking-wider">Viewing: Default Library</span>
                     </div>
-                    <div class="flex items-center space-x-2">
-                        <button id="renamePlaylistBtn" class="text-[11px] text-theme-400 bg-theme-500/10 border border-theme-500/30 px-2.5 py-1 rounded-lg hover:bg-theme-500/20">
+                    <div id="playlistActionControls" class="flex items-center space-x-2">
+                        <button id="renamePlaylistBtn" class="text-[11px] text-theme-400 bg-theme-500/10 border border-theme-500/30 px-2.5 py-1 rounded-lg hover:bg-theme-500/20 hidden">
                             <i class="fa-solid fa-pen"></i> Rename
                         </button>
                         <button id="clearCurrentPlaylistBtn" class="text-[11px] text-red-400 bg-red-500/10 border border-red-500/20 px-2.5 py-1 rounded-lg hover:bg-red-500/20">
-                            <i class="fa-solid fa-trash"></i> Clear Playlist
+                            <i class="fa-solid fa-trash"></i> Clear Section
                         </button>
                     </div>
                 </div>
@@ -350,7 +362,27 @@
                 <div id="trackList" class="max-h-[340px] overflow-y-auto space-y-2 pr-1">
                     <div id="emptyState" class="text-center py-10 text-gray-500">
                         <i class="fa-solid fa-list-ul text-3xl mb-2 opacity-40"></i>
-                        <p class="text-xs">No songs in this playlist yet.<br>Click "Add Songs" to add custom music!</p>
+                        <p class="text-xs">No songs here yet.<br>Import folder or add individual tracks!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="favoritesTab" class="page-tab hidden max-w-2xl mx-auto space-y-4">
+            <div class="glass-card rounded-2xl p-5 flex flex-col space-y-4 border border-pink-500/30">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-sm uppercase font-extrabold text-pink-400 flex items-center space-x-2">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Favorites Collection (Persisted)</span>
+                    </h2>
+                    <span id="favSongCount" class="text-[10px] bg-pink-500/20 text-pink-300 px-2.5 py-1 rounded-full font-mono border border-pink-500/30">0 Tracks</span>
+                </div>
+                <p class="text-[11px] text-gray-400">All songs you favorite will remain securely stored here even after refreshing the page.</p>
+
+                <div id="favTrackList" class="max-h-[380px] overflow-y-auto space-y-2 pr-1">
+                    <div id="favEmptyState" class="text-center py-10 text-gray-500">
+                        <i class="fa-regular fa-heart text-3xl mb-2 opacity-40 text-pink-400"></i>
+                        <p class="text-xs">No favorite songs added yet.<br>Click the heart icon on any player track to save it here!</p>
                     </div>
                 </div>
             </div>
@@ -487,7 +519,7 @@
             </div>
             <div>
                 <h2 class="text-xl font-black text-white tracking-tight">R Music Suite Ultimate Pro</h2>
-                <span class="text-[10px] bg-theme-500/20 text-theme-400 border border-theme-500/40 px-2 py-0.5 rounded-full uppercase tracking-widest font-mono mt-1 inline-block">v2.5 Stable Build</span>
+                <span class="text-[10px] bg-theme-500/20 text-theme-400 border border-theme-500/40 px-2 py-0.5 rounded-full uppercase tracking-widest font-mono mt-1 inline-block">v2.6 Stable Build</span>
             </div>
             
             <div class="bg-gray-900/90 border border-gray-800 p-4 rounded-xl space-y-2.5 text-left">
@@ -659,12 +691,16 @@
     </div>
 
     <script>
-        // 2 Dedicated Custom Playlists stored in localStorage
+        // Separate Default Library vs 2 Custom Playlists vs Favorites
+        let defaultLibrarySongs = []; // Default songs (not automatically forced into custom playlists)
         let playlistNames = JSON.parse(localStorage.getItem('r_music_playlist_names') || '["Playlist 1", "Playlist 2"]');
         let customPlaylists = JSON.parse(localStorage.getItem('r_music_custom_playlists') || '{"pl1": [], "pl2": []}');
         
-        let activePlaylistKey = 'pl1'; // 'pl1' or 'pl2'
-        let songs = [];
+        // Favorite songs saved permanently in localStorage across browser refreshes
+        let favoriteSongs = JSON.parse(localStorage.getItem('r_music_favorites') || '[]');
+
+        let activeSection = 'default'; // 'default', 'pl1', or 'pl2'
+        let songs = []; // Currently active list being displayed
         let currentSongIndex = -1;
         let isPlaying = false;
         let isShuffle = false;
@@ -768,7 +804,7 @@
             }
         };
 
-        // Folder import works as before for bulk adding
+        // Folder import goes into Default Library
         document.getElementById('fileInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
             if(files.length === 0) return;
@@ -777,63 +813,77 @@
                 if (f.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|flac)$/i.test(f.name)) {
                     const cleanTitle = f.name.replace(/\.[^/.]+$/, "");
                     const trackData = {
-                        id: "local_" + cleanTitle + "_" + i,
+                        id: "default_" + cleanTitle + "_" + i,
                         title: cleanTitle,
-                        artist: "Local Storage",
+                        artist: "Default Library",
                         url: URL.createObjectURL(f)
                     };
-                    if (!songs.some(s => s.title === trackData.title)) {
-                        songs.push(trackData);
+                    if (!defaultLibrarySongs.some(s => s.title === trackData.title)) {
+                        defaultLibrarySongs.push(trackData);
                     }
                 }
             });
 
-            renderTrackList();
+            updatePlaylistUI();
             if (currentSongIndex === -1 && songs.length > 0) {
                 loadSong(0);
             }
         });
 
-        // Playlist Selector UI Logic
+        // Section & Playlist Selector UI Logic
+        const defaultBtn = document.getElementById('selectDefaultBtn');
         const btn1 = document.getElementById('selectPlaylist1Btn');
         const btn2 = document.getElementById('selectPlaylist2Btn');
         const pl1NameSpan = document.getElementById('playlist1Name');
         const pl2NameSpan = document.getElementById('playlist2Name');
         const activePlaylistTitle = document.getElementById('activePlaylistTitle');
+        const renameBtn = document.getElementById('renamePlaylistBtn');
 
         function updatePlaylistUI() {
             pl1NameSpan.textContent = playlistNames[0];
             pl2NameSpan.textContent = playlistNames[1];
 
-            if (activePlaylistKey === 'pl1') {
-                btn1.className = "py-2.5 px-4 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-2";
-                btn2.className = "py-2.5 px-4 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-2";
+            // Reset button styles
+            defaultBtn.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate";
+            btn1.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate";
+            btn2.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate";
+
+            if (activeSection === 'default') {
+                defaultBtn.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-1.5 truncate";
+                activePlaylistTitle.textContent = "Viewing: Default Library";
+                renameBtn.classList.add('hidden');
+                songs = defaultLibrarySongs;
+            } else if (activeSection === 'pl1') {
+                btn1.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-1.5 truncate";
                 activePlaylistTitle.textContent = `Viewing: ${playlistNames[0]}`;
+                renameBtn.classList.remove('hidden');
                 songs = customPlaylists.pl1;
             } else {
-                btn2.className = "py-2.5 px-4 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-2";
-                btn1.className = "py-2.5 px-4 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-2";
+                btn2.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-1.5 truncate";
                 activePlaylistTitle.textContent = `Viewing: ${playlistNames[1]}`;
+                renameBtn.classList.remove('hidden');
                 songs = customPlaylists.pl2;
             }
             renderTrackList();
+            renderFavoritesList();
         }
 
-        btn1.onclick = () => { activePlaylistKey = 'pl1'; updatePlaylistUI(); };
-        btn2.onclick = () => { activePlaylistKey = 'pl2'; updatePlaylistUI(); };
+        defaultBtn.onclick = () => { activeSection = 'default'; updatePlaylistUI(); };
+        btn1.onclick = () => { activeSection = 'pl1'; updatePlaylistUI(); };
+        btn2.onclick = () => { activeSection = 'pl2'; updatePlaylistUI(); };
 
-        document.getElementById('renamePlaylistBtn').onclick = () => {
-            let currentName = activePlaylistKey === 'pl1' ? playlistNames[0] : playlistNames[1];
+        renameBtn.onclick = () => {
+            let currentName = activeSection === 'pl1' ? playlistNames[0] : playlistNames[1];
             let newName = prompt("Enter new name for this playlist:", currentName);
             if (!newName || !newName.trim()) return;
-            if (activePlaylistKey === 'pl1') playlistNames[0] = newName.trim();
+            if (activeSection === 'pl1') playlistNames[0] = newName.trim();
             else playlistNames[1] = newName.trim();
 
             localStorage.setItem('r_music_playlist_names', JSON.stringify(playlistNames));
             updatePlaylistUI();
         };
 
-        // Add custom individual song files into active playlist
+        // Add custom individual song files into active section
         document.getElementById('playlistSongInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
             if (files.length === 0) return;
@@ -842,12 +892,14 @@
                 if (f.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|flac)$/i.test(f.name)) {
                     const cleanTitle = f.name.replace(/\.[^/.]+$/, "");
                     const trackData = {
-                        id: "custom_" + Date.now() + "_" + i,
+                        id: "track_" + Date.now() + "_" + i,
                         title: cleanTitle,
-                        artist: "Custom Playlist Track",
+                        artist: activeSection === 'default' ? "Default Library" : "Playlist Track",
                         url: URL.createObjectURL(f)
                     };
-                    if (activePlaylistKey === 'pl1') {
+                    if (activeSection === 'default') {
+                        if (!defaultLibrarySongs.some(s => s.title === trackData.title)) defaultLibrarySongs.push(trackData);
+                    } else if (activeSection === 'pl1') {
                         if (!customPlaylists.pl1.some(s => s.title === trackData.title)) customPlaylists.pl1.push(trackData);
                     } else {
                         if (!customPlaylists.pl2.some(s => s.title === trackData.title)) customPlaylists.pl2.push(trackData);
@@ -855,22 +907,27 @@
                 }
             });
 
-            localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
+            if (activeSection !== 'default') {
+                localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
+            }
             updatePlaylistUI();
             if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
         });
 
         document.getElementById('clearCurrentPlaylistBtn').onclick = () => {
-            if (confirm("Are you sure you want to clear all tracks from this playlist?")) {
-                if (activePlaylistKey === 'pl1') customPlaylists.pl1 = [];
+            if (confirm("Are you sure you want to clear all tracks from this section?")) {
+                if (activeSection === 'default') defaultLibrarySongs = [];
+                else if (activeSection === 'pl1') customPlaylists.pl1 = [];
                 else customPlaylists.pl2 = [];
 
-                localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
+                if (activeSection !== 'default') {
+                    localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
+                }
                 audio.pause();
                 isPlaying = false;
                 currentSongIndex = -1;
                 document.getElementById('currentTitle').textContent = "R Music Workstation Pro";
-                document.getElementById('currentArtist').textContent = "Import folder or add to playlist";
+                document.getElementById('currentArtist').textContent = "Import folder or add songs";
                 updatePlaylistUI();
             }
         };
@@ -891,7 +948,10 @@
             
             const customNote = document.getElementById('customLyricsInput').value;
             document.getElementById('lyricsDisplay').textContent = customNote ? customNote : `Now Playing:\n${track.title}`;
+            
+            updateFavoriteButtonState();
             renderTrackList();
+            renderFavoritesList();
         }
 
         function playAudio() {
@@ -909,7 +969,7 @@
         }
 
         function togglePlayPause() {
-            if (songs.length === 0) return alert("Add songs to this playlist first!");
+            if (songs.length === 0) return alert("Add songs to this section first!");
             if (isPlaying) {
                 audio.pause();
                 isPlaying = false;
@@ -944,6 +1004,96 @@
             if (isRepeat) { loadSong(currentSongIndex); playAudio(); }
             else { document.getElementById('nextBtn').click(); }
         };
+
+        // Favorite Toggle & Persistence Logic
+        const favoriteToggleBtn = document.getElementById('favoriteToggleBtn');
+        const favIcon = document.getElementById('favIcon');
+
+        function isCurrentSongFavorite() {
+            if (currentSongIndex === -1 || !songs[currentSongIndex]) return false;
+            const track = songs[currentSongIndex];
+            return favoriteSongs.some(f => f.title === track.title);
+        }
+
+        function updateFavoriteButtonState() {
+            if (isCurrentSongFavorite()) {
+                favIcon.className = "fa-solid fa-heart text-pink-400";
+            } else {
+                favIcon.className = "fa-regular fa-heart text-gray-400";
+            }
+        }
+
+        favoriteToggleBtn.onclick = () => {
+            if (currentSongIndex === -1 || !songs[currentSongIndex]) {
+                return alert("No active song playing to favorite!");
+            }
+            const track = songs[currentSongIndex];
+            const existingIdx = favoriteSongs.findIndex(f => f.title === track.title);
+
+            if (existingIdx !== -1) {
+                favoriteSongs.splice(existingIdx, 1);
+                alert(`Removed "${track.title}" from Favorites.`);
+            } else {
+                favoriteSongs.push({ ...track });
+                alert(`Added "${track.title}" to Favorites! Saved securely.`);
+            }
+
+            localStorage.setItem('r_music_favorites', JSON.stringify(favoriteSongs));
+            updateFavoriteButtonState();
+            renderFavoritesList();
+        };
+
+        function renderFavoritesList() {
+            const list = document.getElementById('favTrackList');
+            const empty = document.getElementById('favEmptyState');
+            list.innerHTML = '';
+
+            if (favoriteSongs.length === 0) {
+                if (empty) empty.style.display = 'block';
+                document.getElementById('favSongCount').textContent = '0 Tracks';
+                return;
+            } else {
+                if (empty) empty.style.display = 'none';
+            }
+
+            favoriteSongs.forEach((s) => {
+                const item = document.createElement('div');
+                item.className = 'p-3 rounded-xl text-xs flex items-center justify-between bg-gray-950/80 hover:bg-gray-900 text-gray-300 border border-gray-800/60 transition-all';
+                item.innerHTML = `
+                    <div class="flex items-center space-x-3 overflow-hidden cursor-pointer flex-1" title="Play Favorite">
+                        <i class="fa-solid fa-heart text-pink-400"></i>
+                        <p class="truncate font-semibold">${s.title}</p>
+                    </div>
+                    <div class="flex items-center space-x-2 ml-2">
+                        <button title="Remove from Favorites" class="remove-fav-btn px-2 py-1 rounded-lg text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+
+                item.querySelector('.flex-1').onclick = () => {
+                    // Switch to default or playlist section to play, or load directly
+                    songs = favoriteSongs;
+                    let realIndex = favoriteSongs.findIndex(orig => orig.title === s.title);
+                    if(realIndex !== -1) {
+                        loadSong(realIndex);
+                        playAudio();
+                    }
+                };
+
+                item.querySelector('.remove-fav-btn').onclick = (e) => {
+                    e.stopPropagation();
+                    favoriteSongs = favoriteSongs.filter(orig => orig.title !== s.title);
+                    localStorage.setItem('r_music_favorites', JSON.stringify(favoriteSongs));
+                    updateFavoriteButtonState();
+                    renderFavoritesList();
+                };
+
+                list.appendChild(item);
+            });
+
+            document.getElementById('favSongCount').textContent = favoriteSongs.length + " Tracks";
+        }
 
         document.getElementById('loopABtn').onclick = () => { loopA = audio.currentTime; alert(`Loop Point A set at ${formatTime(loopA)}`); };
         document.getElementById('loopBBtn').onclick = () => { loopB = audio.currentTime; alert(`Loop Point B set at ${formatTime(loopB)}`); };
@@ -1014,7 +1164,6 @@
                 return alert("End time must be greater than start time!");
             }
 
-            // Fetch active audio source data for export
             fetch(songs[currentSongIndex].url)
                 .then(res => res.arrayBuffer())
                 .then(arrayBuffer => {
@@ -1246,12 +1395,15 @@
 
                 item.querySelector('.remove-btn').onclick = (e) => {
                     e.stopPropagation();
-                    if (activePlaylistKey === 'pl1') {
+                    if (activeSection === 'default') {
+                        defaultLibrarySongs = defaultLibrarySongs.filter(orig => orig.title !== s.title);
+                    } else if (activeSection === 'pl1') {
                         customPlaylists.pl1 = customPlaylists.pl1.filter(orig => orig.title !== s.title);
+                        localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
                     } else {
                         customPlaylists.pl2 = customPlaylists.pl2.filter(orig => orig.title !== s.title);
+                        localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
                     }
-                    localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
                     updatePlaylistUI();
                     if(currentSongIndex >= songs.length) currentSongIndex = songs.length - 1;
                 };
@@ -1272,7 +1424,7 @@
             btn.addEventListener('click', () => switchTab(btn.id.replace('tabBtn-', '')));
         });
 
-        ['playerTab', 'playlistTab', 'studioTab', 'toolsTab', 'lyricsTab', 'aboutTab'].forEach(t => {
+        ['playerTab', 'playlistTab', 'favoritesTab', 'studioTab', 'toolsTab', 'lyricsTab', 'aboutTab'].forEach(t => {
             const mobBtn = document.getElementById(`mobTab-${t}`);
             if (mobBtn) mobBtn.onclick = () => {
                 switchTab(t);
@@ -1355,8 +1507,9 @@
         document.getElementById('openThemeModalBtn').onclick = () => document.getElementById('themeModal').classList.remove('hidden');
         document.getElementById('closeThemeBtn').onclick = () => document.getElementById('themeModal').classList.add('hidden');
 
-        // Initialize Playlists on load
+        // Initialize UI on load
         updatePlaylistUI();
+        renderFavoritesList();
     </script>
 </body>
 </html>
