@@ -116,6 +116,7 @@
             height: 120px;
             background: transparent;
             cursor: pointer;
+            touch-action: none;
         }
         
         .mob-tab-active {
@@ -278,15 +279,6 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-6 gap-1.5 w-full z-10 my-2">
-                        <button onclick="skipTime(-2)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">-2s</button>
-                        <button onclick="skipTime(-5)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">-5s</button>
-                        <button onclick="skipTime(-10)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">-<span id="skipMinusDisplay">10</span>s</button>
-                        <button onclick="skipTime(10)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">+<span id="skipPlusDisplay">10</span>s</button>
-                        <button onclick="skipTime(5)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">+5s</button>
-                        <button onclick="skipTime(2)" class="py-1 rounded bg-gray-900 border border-gray-800 text-[10px] text-gray-300 hover:text-white font-mono">+2s</button>
-                    </div>
-
                     <div class="flex items-center justify-around w-full z-10 my-2 text-xs text-gray-400 border-y border-gray-800/60 py-2">
                         <button id="shuffleBtn" class="hover:text-theme-400 transition-colors" title="Shuffle"><i class="fa-solid fa-shuffle"></i></button>
                         <button id="loopABtn" class="px-2 py-0.5 rounded bg-gray-900 border border-gray-800 hover:text-white" title="Loop Point A">Set A</button>
@@ -306,7 +298,7 @@
                             <button id="nextBtn" title="Next Track" class="text-gray-300 hover:text-white transition-colors p-2">
                                 <i class="fa-solid fa-forward-step text-xl sm:text-2xl"></i>
                             </button>
-                            <div class="flex items-center space-x-1.5 ml-2 bg-gray-900/90 border border-gray-800 px-2 py-1.5 rounded-xl">
+                            <div class="flex items-center space-x-1.5 ml-2 bg-gray-900/90 border border-gray-800 px-2 py-1.5 rounded-xl hidden">
                                 <span class="text-[10px] text-gray-400 font-bold">Editable Skip:</span>
                                 <input type="number" id="customSkipInput" value="10" min="1" max="60" class="w-10 bg-gray-950 text-center text-theme-400 font-mono text-xs rounded border border-gray-800 focus:outline-none">
                                 <span class="text-[10px] text-gray-400">s</span>
@@ -811,15 +803,11 @@
 
         // Custom Editable Skip Handlers & Dynamic Label Updates
         const customSkipInput = document.getElementById('customSkipInput');
-        const skipMinusDisplay = document.getElementById('skipMinusDisplay');
-        const skipPlusDisplay = document.getElementById('skipPlusDisplay');
 
         function updateSkipLabels() {
             let val = parseInt(customSkipInput.value) || 10;
             if(val < 1) val = 1;
             if(val > 60) val = 60;
-            skipMinusDisplay.textContent = val;
-            skipPlusDisplay.textContent = val;
         }
 
         customSkipInput.addEventListener('input', updateSkipLabels);
@@ -833,7 +821,6 @@
             updateSkipLabels();
         };
 
-        // Redefined standard skip buttons to handle dynamic editable value vs fixed 2s and 5s
         window.skipTime = function(multiplier) {
             if(!audio.duration) return;
             let dynamicSec = multiplier;
@@ -913,7 +900,9 @@
             initVisualizerBars();
         }
 
-        // Working 8D Surround Audio Engine Toggle & LFO
+        buildStudioEqUI();
+        initVisualizerBars();
+
         document.getElementById('toggle8dBtn').onclick = () => {
             initAudioEngine();
             if(!stereoPannerNode) {
@@ -1723,6 +1712,7 @@
 
         function initVisualizerBars() {
             const container = document.getElementById('visualizerBars');
+            if(!container) return;
             container.innerHTML = '';
             for(let i=0; i<16; i++) {
                 const bar = document.createElement('div');
@@ -1754,10 +1744,11 @@
                 const wrap = document.createElement('div');
                 wrap.className = 'eq-wrapper';
                 const label = freq >= 1000 ? (freq/1000) + 'k' : freq;
+                const currentGain = (eqFilters[idx] && eqFilters[idx].gain) ? eqFilters[idx].gain.value : 0;
                 wrap.innerHTML = `
                     <span class="text-[9px] text-gray-400 font-mono">${label}</span>
-                    <input type="range" min="-12" max="12" value="${eqFilters[idx] ? eqFilters[idx].gain.value : 0}" step="0.5" class="eq-slider accent-theme-500">
-                    <span class="text-[9px] text-theme-400 font-bold font-mono band-val">${eqFilters[idx] ? eqFilters[idx].gain.value : 0}</span>
+                    <input type="range" min="-12" max="12" value="${currentGain}" step="0.5" class="eq-slider accent-theme-500">
+                    <span class="text-[9px] text-theme-400 font-bold font-mono band-val">${currentGain}</span>
                 `;
                 const slider = wrap.querySelector('input');
                 const valDisp = wrap.querySelector('.band-val');
@@ -1771,7 +1762,7 @@
         }
 
         document.getElementById('resetEqBtn').onclick = () => {
-            eqFilters.forEach(f => f.gain.value = 0);
+            eqFilters.forEach(f => { if(f && f.gain) f.gain.value = 0; });
             buildStudioEqUI();
         };
 
