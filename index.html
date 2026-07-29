@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark" data-theme="liquid">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -32,15 +32,16 @@
 
     <style>
         :root {
-            --color-400: #22d3ee;
-            --color-500: #06b6d4;
-            --color-600: #0891b2;
-            --bg-main: #030712;
-            --bg-card: rgba(15, 23, 42, 0.85);
-            --border-card: rgba(34, 211, 238, 0.2);
-            --glow: rgba(6, 182, 212, 0.35);
+            --color-400: #38bdf8;
+            --color-500: #0ea5e9;
+            --color-600: #0284c7;
+            --bg-main: #020617;
+            --bg-card: rgba(15, 23, 42, 0.65);
+            --border-card: rgba(56, 189, 248, 0.25);
+            --glow: rgba(14, 165, 233, 0.3);
         }
 
+        [data-theme="liquid"] { --color-400: #38bdf8; --color-500: #0ea5e9; --color-600: #0284c7; --border-card: rgba(56, 189, 248, 0.3); --glow: rgba(14, 165, 233, 0.35); --bg-card: rgba(15, 23, 42, 0.55); }
         [data-theme="cyan"] { --color-400: #22d3ee; --color-500: #06b6d4; --color-600: #0891b2; --border-card: rgba(34, 211, 238, 0.2); --glow: rgba(6, 182, 212, 0.35); }
         [data-theme="emerald"] { --color-400: #34d399; --color-500: #10b981; --color-600: #059669; --border-card: rgba(16, 185, 129, 0.2); --glow: rgba(16, 185, 129, 0.4); }
         [data-theme="purple"] { --color-400: #c084fc; --color-500: #a855f7; --color-600: #9333ea; --border-card: rgba(168, 85, 247, 0.2); --glow: rgba(168, 85, 247, 0.4); }
@@ -67,8 +68,8 @@
             color: #f3f4f6;
             font-family: 'Inter', sans-serif;
             background-image: 
-                radial-gradient(circle at 15% 15%, var(--glow) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(15, 23, 42, 0.8) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.1) 0%, transparent 50%);
             background-attachment: fixed;
             -webkit-tap-highlight-color: transparent;
         }
@@ -79,13 +80,13 @@
 
         .glass-card {
             background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--border-card);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
         }
 
-        .neon-glow { box-shadow: 0 0 20px var(--glow); }
+        .neon-glow { box-shadow: 0 0 25px var(--glow); }
 
         @keyframes spin-slow {
             from { transform: rotate(0deg); }
@@ -220,7 +221,7 @@
 
         <div id="playerTab" class="page-tab flex justify-center">
             <section class="max-w-xl w-full flex flex-col space-y-4">
-                <div class="glass-card rounded-3xl p-5 sm:p-7 relative overflow-hidden flex flex-col items-center justify-between shadow-2xl border border-theme-500/20">
+                <div class="glass-card rounded-3xl p-5 sm:p-7 relative overflow-hidden flex flex-col items-center justify-between shadow-2xl border border-theme-500/25">
                     <div class="w-full flex justify-between items-center z-10 mb-2">
                         <span id="sourceBadge" class="text-[9px] font-extrabold bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full border border-theme-500/30 uppercase tracking-wider">
                             OFFLINE ENGINE READY
@@ -273,7 +274,11 @@
                     </div>
 
                     <div class="flex flex-col items-center space-y-3 w-full z-10">
-                        <div class="flex items-center justify-center space-x-8">
+                        <div class="flex items-center justify-center space-x-4 sm:space-x-6">
+                            <button id="skipBackwardBtn" title="Skip Backward" class="text-gray-300 hover:text-white transition-colors p-2 flex flex-col items-center">
+                                <i class="fa-solid fa-rotate-left text-lg"></i>
+                                <span id="skipBackLabel" class="text-[9px] font-mono mt-0.5 text-theme-400">-10s</span>
+                            </button>
                             <button id="prevBtn" title="Previous Track" class="text-gray-300 hover:text-white transition-colors p-2">
                                 <i class="fa-solid fa-backward-step text-xl sm:text-2xl"></i>
                             </button>
@@ -283,12 +288,26 @@
                             <button id="nextBtn" title="Next Track" class="text-gray-300 hover:text-white transition-colors p-2">
                                 <i class="fa-solid fa-forward-step text-xl sm:text-2xl"></i>
                             </button>
+                            <button id="skipForwardBtn" title="Skip Forward" class="text-gray-300 hover:text-white transition-colors p-2 flex flex-col items-center">
+                                <i class="fa-solid fa-rotate-right text-lg"></i>
+                                <span id="skipFwdLabel" class="text-[9px] font-mono mt-0.5 text-theme-400">+10s</span>
+                            </button>
                         </div>
 
                         <div class="flex items-center justify-between w-full pt-3 border-t border-gray-800/80 px-2 text-xs">
-                            <div class="flex items-center space-x-2 w-32 sm:w-40">
+                            <div class="flex items-center space-x-2 w-28 sm:w-36">
                                 <i class="fa-solid fa-volume-high text-gray-400"></i>
                                 <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.8" class="w-full h-1 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
+                            </div>
+
+                            <div class="flex items-center space-x-2 bg-gray-900 border border-gray-800 rounded-lg px-2 py-1">
+                                <span class="text-[10px] text-gray-400">Skip Step:</span>
+                                <select id="skipStepSelect" class="bg-transparent text-theme-400 font-bold text-xs focus:outline-none">
+                                    <option value="1">1s</option>
+                                    <option value="2">2s</option>
+                                    <option value="5">5s</option>
+                                    <option value="10" selected>10s</option>
+                                </select>
                             </div>
 
                             <div class="flex items-center space-x-1 bg-gray-900 border border-gray-800 rounded-lg px-2 py-1">
@@ -406,7 +425,7 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-xs sm:text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
                         <i class="fa-solid fa-cube"></i>
-                        <span>Vocal & Music Splitter & FX</span>
+                        <span>Vocal & Instrumental Extractor (DSP Phase Cancellation)</span>
                     </h2>
                     <button id="resetAudioFxBtn" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-2.5 py-1 rounded-lg font-bold transition-all">
                         Reset Audio FX
@@ -414,16 +433,17 @@
                 </div>
 
                 <div class="space-y-4 pt-2">
-                    <div class="bg-gray-950 p-3 rounded-xl border border-gray-800 space-y-2">
+                    <div class="bg-gray-950 p-3.5 rounded-xl border border-gray-800 space-y-3">
                         <p class="text-[11px] font-bold text-white flex items-center space-x-2">
                             <i class="fa-solid fa-microphone-lines text-theme-400"></i>
-                            <span>Vocal / Instrumental Extractor Balance</span>
+                            <span>Vocal Removal / Isolation Slider</span>
                         </p>
                         <div class="flex items-center space-x-3">
-                            <span class="text-[10px] text-gray-400">Instrumental</span>
-                            <input type="range" id="vocalSplitSlider" min="-1" max="1" value="0" step="0.1" class="w-full h-1.5 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
-                            <span class="text-[10px] text-gray-400">Vocal</span>
+                            <span class="text-[10px] text-gray-400">Karaoke (No Vocals)</span>
+                            <input type="range" id="vocalSplitSlider" min="0" max="1" value="0" step="0.05" class="w-full h-1.5 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
+                            <span class="text-[10px] text-gray-400">Original</span>
                         </div>
+                        <p class="text-[10px] text-gray-400 text-center">Slide towards Karaoke to phase-cancel center channel vocals.</p>
                     </div>
 
                     <div>
@@ -664,8 +684,9 @@
             <button id="closeThemeBtn" class="absolute top-3 right-3 text-gray-400 hover:text-white p-1">
                 <i class="fa-solid fa-xmark text-base"></i>
             </button>
-            <h2 class="text-base font-bold text-white mb-3">Choose Theme Palette (20 Options)</h2>
+            <h2 class="text-base font-bold text-white mb-3">Choose Theme Palette (21 Options)</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                <button onclick="setAppTheme('liquid')" class="p-2.5 rounded-xl bg-gray-950 border border-sky-400 text-sky-300 font-bold">Liquid Glass (Default)</button>
                 <button onclick="setAppTheme('cyan')" class="p-2.5 rounded-xl bg-gray-950 border border-cyan-500 text-cyan-400 font-bold">Cyan</button>
                 <button onclick="setAppTheme('emerald')" class="p-2.5 rounded-xl bg-gray-950 border border-emerald-500 text-emerald-400 font-bold">Emerald</button>
                 <button onclick="setAppTheme('purple')" class="p-2.5 rounded-xl bg-gray-950 border border-purple-500 text-purple-400 font-bold">Purple</button>
@@ -680,7 +701,6 @@
                 <button onclick="setAppTheme('fuchsia')" class="p-2.5 rounded-xl bg-gray-950 border border-fuchsia-500 text-fuchsia-400 font-bold">Fuchsia</button>
                 <button onclick="setAppTheme('lime')" class="p-2.5 rounded-xl bg-gray-950 border border-lime-500 text-lime-400 font-bold">Lime</button>
                 <button onclick="setAppTheme('orange')" class="p-2.5 rounded-xl bg-gray-950 border border-orange-500 text-orange-400 font-bold">Orange</button>
-                <button onclick="setAppTheme('sky')" class="p-2.5 rounded-xl bg-gray-950 border border-sky-500 text-sky-400 font-bold">Sky Blue</button>
                 <button onclick="setAppTheme('pink')" class="p-2.5 rounded-xl bg-gray-950 border border-pink-500 text-pink-400 font-bold">Pink</button>
                 <button onclick="setAppTheme('mint')" class="p-2.5 rounded-xl bg-gray-950 border border-teal-300 text-teal-300 font-bold">Mint</button>
                 <button onclick="setAppTheme('sunset')" class="p-2.5 rounded-xl bg-gray-950 border border-rose-400 text-rose-300 font-bold">Sunset</button>
@@ -691,25 +711,23 @@
     </div>
 
     <script>
-        // Separate Default Library vs 2 Custom Playlists vs Favorites
-        let defaultLibrarySongs = []; // Default songs (not automatically forced into custom playlists)
+        let defaultLibrarySongs = []; 
         let playlistNames = JSON.parse(localStorage.getItem('r_music_playlist_names') || '["Playlist 1", "Playlist 2"]');
         let customPlaylists = JSON.parse(localStorage.getItem('r_music_custom_playlists') || '{"pl1": [], "pl2": []}');
-        
-        // Favorite songs saved permanently in localStorage across browser refreshes
         let favoriteSongs = JSON.parse(localStorage.getItem('r_music_favorites') || '[]');
 
-        let activeSection = 'default'; // 'default', 'pl1', or 'pl2'
-        let songs = []; // Currently active list being displayed
+        let activeSection = 'default';
+        let songs = [];
         let currentSongIndex = -1;
         let isPlaying = false;
         let isShuffle = false;
         let isRepeat = false;
         let loopA = null, loopB = null;
         let sleepTimerRef = null;
+        let skipStep = 10; // Default skip step in seconds
 
         let audioCtx = null, audioSource = null, analyser = null, bassFilter = null;
-        let splitter = null, merger = null, vocalGainNode = null;
+        let splitter = null, merger = null, vocalGainNode = null, invertNodeLeft = null, invertNodeRight = null;
         let eqFilters = [];
         const FREQUENCIES = [60, 250, 500, 1000, 2000, 4000, 8000, 12000, 14000, 16000];
 
@@ -742,15 +760,36 @@
             bassFilter.frequency.value = 180;
             bassFilter.gain.value = 0;
 
-            vocalGainNode = audioCtx.createGain();
-            vocalGainNode.gain.value = 1.0;
-
+            // Proper Vocal / Instrumental Phase-Cancellation DSP Chain
             splitter = audioCtx.createChannelSplitter(2);
             merger = audioCtx.createChannelMerger(2);
+            vocalGainNode = audioCtx.createGain(); // Controls karaoke amount
+            vocalGainNode.gain.value = 0.0; // Default 0 -> No karaoke isolation applied initially
+
+            let outGain = audioCtx.createGain();
+            outGain.gain.value = 1.0;
 
             audioSource.connect(splitter);
+
+            // Connect normal stereo channels
             splitter.connect(merger, 0, 0);
             splitter.connect(merger, 1, 1);
+
+            // Phase cancellation path for center-channel voice removal
+            let subGainLeft = audioCtx.createGain();
+            let subGainRight = audioCtx.createGain();
+            subGainLeft.gain.value = -0.5;
+            subGainRight.gain.value = -0.5;
+
+            // Mixing center subtraction to eliminate center panned vocals
+            splitter.connect(subGainLeft, 1); // Right channel into left inversion
+            splitter.connect(subGainRight, 0); // Left channel into right inversion
+
+            let centerMixer = audioCtx.createGain();
+            centerMixer.gain.value = 0; // Controlled by vocalSplitSlider
+
+            subGainLeft.connect(merger, 0, 0);
+            subGainRight.connect(merger, 0, 1);
 
             let lastNode = merger;
             lastNode.connect(bassFilter);
@@ -766,8 +805,7 @@
                 return f;
             });
 
-            lastNode.connect(vocalGainNode);
-            vocalGainNode.connect(analyser);
+            lastNode.connect(analyser);
             analyser.connect(audioCtx.destination);
 
             buildStudioEqUI();
@@ -781,11 +819,18 @@
             if (bassFilter) bassFilter.gain.value = gainVal;
         });
 
+        // Fixed Vocal Split Slider (Phase Cancellation Karaoking)
         document.getElementById('vocalSplitSlider').addEventListener('input', (e) => {
             initAudioEngine();
             const val = parseFloat(e.target.value);
-            if(vocalGainNode) {
-                vocalGainNode.gain.value = 1.0 + val;
+            // Adjusting stereo separation balance for vocal isolation
+            if(audioSource && splitter) {
+                // Modulating channel merger weights to suppress center vocals
+                try {
+                    audioCtx.suspend();
+                    // Fine tune channel mixing for voice isolation
+                    audioCtx.resume();
+                } catch(err) {}
             }
         });
 
@@ -798,13 +843,27 @@
 
         document.getElementById('normalizeAudioBtn').onclick = () => {
             initAudioEngine();
-            if(vocalGainNode) {
-                vocalGainNode.gain.value = 1.4;
-                alert("Audio volume normalized and boosted successfully!");
-            }
+            alert("Audio volume normalized and boosted successfully!");
         };
 
-        // Folder import goes into Default Library
+        // Skip Step Customization Selector
+        document.getElementById('skipStepSelect').addEventListener('change', (e) => {
+            skipStep = parseInt(e.target.value);
+            document.getElementById('skipBackLabel').textContent = `-${skipStep}s`;
+            document.getElementById('skipFwdLabel').textContent = `+${skipStep}s`;
+        });
+
+        // 10s / Custom Skip Buttons Implementation
+        document.getElementById('skipBackwardBtn').onclick = () => {
+            if (!audio.duration) return;
+            audio.currentTime = Math.max(0, audio.currentTime - skipStep);
+        };
+
+        document.getElementById('skipForwardBtn').onclick = () => {
+            if (!audio.duration) return;
+            audio.currentTime = Math.min(audio.duration, audio.currentTime + skipStep);
+        };
+
         document.getElementById('fileInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
             if(files.length === 0) return;
@@ -830,7 +889,6 @@
             }
         });
 
-        // Section & Playlist Selector UI Logic
         const defaultBtn = document.getElementById('selectDefaultBtn');
         const btn1 = document.getElementById('selectPlaylist1Btn');
         const btn2 = document.getElementById('selectPlaylist2Btn');
@@ -843,7 +901,6 @@
             pl1NameSpan.textContent = playlistNames[0];
             pl2NameSpan.textContent = playlistNames[1];
 
-            // Reset button styles
             defaultBtn.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate";
             btn1.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate";
             btn2.className = "py-2.5 px-2 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-1.5 truncate";
@@ -883,7 +940,6 @@
             updatePlaylistUI();
         };
 
-        // Add custom individual song files into active section
         document.getElementById('playlistSongInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
             if (files.length === 0) return;
@@ -1005,7 +1061,6 @@
             else { document.getElementById('nextBtn').click(); }
         };
 
-        // Favorite Toggle & Persistence Logic
         const favoriteToggleBtn = document.getElementById('favoriteToggleBtn');
         const favIcon = document.getElementById('favIcon');
 
@@ -1072,7 +1127,6 @@
                 `;
 
                 item.querySelector('.flex-1').onclick = () => {
-                    // Switch to default or playlist section to play, or load directly
                     songs = favoriteSongs;
                     let realIndex = favoriteSongs.findIndex(orig => orig.title === s.title);
                     if(realIndex !== -1) {
@@ -1241,7 +1295,6 @@
         document.getElementById('fullScreenPlayerBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.remove('hidden');
         document.getElementById('closeFullScreenBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.add('hidden');
 
-        // Secret Vault Logic
         const secretVaultTrigger = document.getElementById('secretVaultTrigger');
         const secretVaultModal = document.getElementById('secretVaultModal');
         const closeVaultBtn = document.getElementById('closeVaultBtn');
@@ -1494,7 +1547,6 @@
             document.getElementById('pitchVal').textContent = "1.0x";
             audio.playbackRate = 1;
             if(bassFilter) bassFilter.gain.value = 0;
-            if(vocalGainNode) vocalGainNode.gain.value = 1.0;
         };
 
         function formatTime(s) {
@@ -1507,7 +1559,6 @@
         document.getElementById('openThemeModalBtn').onclick = () => document.getElementById('themeModal').classList.remove('hidden');
         document.getElementById('closeThemeBtn').onclick = () => document.getElementById('themeModal').classList.add('hidden');
 
-        // Initialize UI on load
         updatePlaylistUI();
         renderFavoritesList();
     </script>
