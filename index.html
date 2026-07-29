@@ -261,15 +261,6 @@
 
                     <div class="w-full h-8 flex items-end justify-center space-x-1 z-10 px-4 my-2" id="visualizerBars"></div>
 
-                    <div class="flex items-center justify-center space-x-2 z-10 my-1 bg-gray-950/60 px-3 py-1 rounded-full border border-gray-800/80 text-xs">
-                        <button onclick="triggerEmojiReaction('🔥')" class="hover:scale-125 transition-transform">🔥</button>
-                        <button onclick="triggerEmojiReaction('🎸')" class="hover:scale-125 transition-transform">🎸</button>
-                        <button onclick="triggerEmojiReaction('⚡')" class="hover:scale-125 transition-transform">⚡</button>
-                        <button onclick="triggerEmojiReaction('💖')" class="hover:scale-125 transition-transform">💖</button>
-                        <button onclick="triggerEmojiReaction('🚀')" class="hover:scale-125 transition-transform">🚀</button>
-                        <span id="reactionPopup" class="text-[10px] text-theme-400 font-mono ml-2">Vibe Check</span>
-                    </div>
-
                     <div class="text-center z-10 w-full px-2 mt-1">
                         <h2 id="currentTitle" class="font-extrabold text-lg sm:text-xl text-white truncate">
                             R Music Workstation Pro
@@ -305,7 +296,7 @@
                     </div>
 
                     <div class="flex flex-col items-center space-y-3 w-full z-10">
-                        <div class="flex items-center justify-center space-x-8">
+                        <div class="flex items-center justify-center space-x-4">
                             <button id="prevBtn" title="Previous Track" class="text-gray-300 hover:text-white transition-colors p-2">
                                 <i class="fa-solid fa-backward-step text-xl sm:text-2xl"></i>
                             </button>
@@ -315,6 +306,13 @@
                             <button id="nextBtn" title="Next Track" class="text-gray-300 hover:text-white transition-colors p-2">
                                 <i class="fa-solid fa-forward-step text-xl sm:text-2xl"></i>
                             </button>
+                            <div class="flex items-center space-x-1.5 ml-2 bg-gray-900/90 border border-gray-800 px-2 py-1.5 rounded-xl">
+                                <span class="text-[10px] text-gray-400 font-bold">Custom Skip:</span>
+                                <input type="number" id="customSkipInput" value="5" min="1" max="60" class="w-10 bg-gray-950 text-center text-theme-400 font-mono text-xs rounded border border-gray-800 focus:outline-none">
+                                <span class="text-[10px] text-gray-400">s</span>
+                                <button id="customSkipMinus" class="px-1.5 py-0.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded text-[10px] font-mono">-</button>
+                                <button id="customSkipPlus" class="px-1.5 py-0.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded text-[10px] font-mono">+</button>
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-between w-full pt-3 border-t border-gray-800/80 px-2 text-xs">
@@ -457,7 +455,7 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-xs sm:text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
                         <i class="fa-solid fa-microphone-lines"></i>
-                        <span>AI Vocal & Instrumental Processor</span>
+                        <span>AI Vocal & 8D Spatial Audio Processor</span>
                     </h2>
                     <button id="resetAudioFxBtn" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-2.5 py-1 rounded-lg font-bold transition-all">
                         Reset Audio FX
@@ -477,6 +475,25 @@
                             <button onclick="setVocalProcessorMode('normal')" id="vModeNormal" class="py-1.5 px-2 rounded-lg bg-theme-500 text-black text-[10px] font-bold">Normal</button>
                             <button onclick="setVocalProcessorMode('karaoke')" id="vModeKaraoke" class="py-1.5 px-2 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 text-[10px] font-bold">Karaoke (Vocal Cut)</button>
                             <button onclick="setVocalProcessorMode('acapella')" id="vModeAcapella" class="py-1.5 px-2 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 text-[10px] font-bold">Vocal Boost</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-950 p-3.5 rounded-xl border border-theme-500/30 space-y-3 shadow-lg">
+                        <div class="flex items-center justify-between">
+                            <p class="text-[11px] font-bold text-white flex items-center space-x-2">
+                                <i class="fa-solid fa-globe text-cyan-400 animate-spin-slow"></i>
+                                <span>8D Spatial Audio Surround Engine</span>
+                            </p>
+                            <button id="toggle8dBtn" class="text-[10px] px-3 py-1 rounded-lg font-extrabold bg-gray-900 text-gray-300 border border-gray-800 hover:text-white transition-all">
+                                Enable 8D Surround
+                            </button>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-[10px] text-gray-400 font-semibold">
+                                <span>Orbit Rotation Speed:</span>
+                                <span id="speed8dVal" class="text-cyan-400 font-mono">0.20 Hz</span>
+                            </div>
+                            <input type="range" id="speed8dSlider" min="0.05" max="1.0" value="0.2" step="0.05" class="w-full h-1 bg-gray-900 rounded-lg accent-cyan-400">
                         </div>
                     </div>
 
@@ -779,6 +796,11 @@
         let eqFilters = [];
         const FREQUENCIES = [60, 250, 500, 1000, 2000, 4000, 8000, 12000, 14000, 16000];
 
+        // 8D Audio Variables
+        let is8dActive = false;
+        let lfoInterval = null;
+        let pannerAngle = 0;
+
         const audio = new Audio();
         audio.crossOrigin = "anonymous";
 
@@ -786,6 +808,16 @@
             if(!audio.duration) return;
             audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + sec));
         }
+
+        // Custom Skip increment/decrement handlers
+        document.getElementById('customSkipPlus').onclick = () => {
+            const input = document.getElementById('customSkipInput');
+            input.value = Math.min(60, parseInt(input.value || 5) + 1);
+        };
+        document.getElementById('customSkipMinus').onclick = () => {
+            const input = document.getElementById('customSkipInput');
+            input.value = Math.max(1, parseInt(input.value || 5) - 1);
+        };
 
         function setMobileTabActive(activeId) {
             document.querySelectorAll('.mob-tab-btn').forEach(btn => {
@@ -816,7 +848,6 @@
             vocalGainNode = audioCtx.createGain();
             vocalGainNode.gain.value = 1.0;
 
-            // NEW ADDITION 14: Stereo Panner Node if supported
             if (audioCtx.createStereoPanner) {
                 stereoPannerNode = audioCtx.createStereoPanner();
             }
@@ -857,7 +888,49 @@
             initVisualizerBars();
         }
 
-        // NEW ADDITION 15: Quick Mute Button Logic
+        // Working 8D Surround Audio Engine Toggle & LFO
+        document.getElementById('toggle8dBtn').onclick = () => {
+            initAudioEngine();
+            if(!stereoPannerNode) {
+                return alert("Stereo Panner is not supported in this browser environment.");
+            }
+            is8dActive = !is8dActive;
+            const btn = document.getElementById('toggle8dBtn');
+            if(is8dActive) {
+                btn.className = "text-[10px] px-3 py-1 rounded-lg font-extrabold bg-cyan-500 text-black border border-cyan-400 shadow-lg animate-pulse";
+                btn.textContent = "8D Surround Active";
+                start8dOrbit();
+            } else {
+                btn.className = "text-[10px] px-3 py-1 rounded-lg font-extrabold bg-gray-900 text-gray-300 border border-gray-800 hover:text-white transition-all";
+                btn.textContent = "Enable 8D Surround";
+                stop8dOrbit();
+                stereoPannerNode.pan.value = 0;
+            }
+        };
+
+        function start8dOrbit() {
+            if(lfoInterval) clearInterval(lfoInterval);
+            pannerAngle = 0;
+            const speedSlider = document.getElementById('speed8dSlider');
+            lfoInterval = setInterval(() => {
+                if(!isPlaying || !is8dActive || !stereoPannerNode) return;
+                const freqRate = parseFloat(speedSlider.value) || 0.2;
+                pannerAngle += (freqRate * 0.1);
+                // Sine wave panning calculation between -1 (left) and +1 (right)
+                stereoPannerNode.pan.value = Math.sin(pannerAngle * Math.PI * 2);
+            }, 50);
+        }
+
+        function stop8dOrbit() {
+            if(lfoInterval) clearInterval(lfoInterval);
+            lfoInterval = null;
+        }
+
+        document.getElementById('speed8dSlider').addEventListener('input', (e) => {
+            document.getElementById('speed8dVal').textContent = parseFloat(e.target.value).toFixed(2) + " Hz";
+        });
+
+        // Quick Mute Button Logic
         let previousVolume = 0.8;
         document.getElementById('quickMuteBtn').onclick = () => {
             if (audio.volume > 0) {
@@ -872,7 +945,7 @@
             }
         };
 
-        // NEW ADDITION 16: Party Strobe Light FX Toggle Logic
+        // Party Strobe Light FX Toggle Logic
         let strobeActive = false;
         let strobeInterval = null;
         document.getElementById('partyStrobeBtn').onclick = () => {
@@ -891,14 +964,7 @@
             }
         };
 
-        // NEW ADDITION 17: Emoji Reaction Popup Handler
-        window.triggerEmojiReaction = function(emoji) {
-            const popup = document.getElementById('reactionPopup');
-            popup.textContent = `${emoji} Vibe Registered!`;
-            setTimeout(() => { popup.textContent = "Vibe Check"; }, 2000);
-        };
-
-        // NEW ADDITION 18: Sort Playlist Alphabetically Handler
+        // Sort Playlist Alphabetically Handler
         document.getElementById('sortPlaylistBtn').onclick = () => {
             if(songs.length === 0) return;
             songs.sort((a, b) => a.title.localeCompare(b.title));
@@ -906,7 +972,7 @@
             alert("Playlist sorted alphabetically A-Z!");
         };
 
-        // NEW ADDITION 19: Export Favorites JSON Handler
+        // Export Favorites JSON Handler
         document.getElementById('exportFavoritesJsonBtn').onclick = () => {
             if(favoriteSongs.length === 0) return alert("No favorites to export!");
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(favoriteSongs, null, 2));
@@ -918,7 +984,7 @@
             dlAnchorElem.remove();
         };
 
-        // NEW ADDITION 20: EQ Preset Selector Handler
+        // EQ Preset Selector Handler
         document.getElementById('eqPresetSelect').onchange = (e) => {
             const preset = e.target.value;
             initAudioEngine();
@@ -938,8 +1004,9 @@
             }
         };
 
-        // NEW ADDITION 21: Stereo Panner Slider Handler
+        // Stereo Panner Slider Handler
         document.getElementById('stereoPanSlider').addEventListener('input', (e) => {
+            if(is8dActive) return; // Disable manual pan override when 8D is running
             initAudioEngine();
             const val = parseFloat(e.target.value);
             document.getElementById('stereoPanVal').textContent = val === 0 ? "Center (0.0)" : (val < 0 ? `Left (${val})` : `Right (+${val})`);
@@ -948,7 +1015,7 @@
             }
         });
 
-        // NEW ADDITION 22: Sine Wave Tone Generator Handler
+        // Sine Wave Tone Generator Handler
         document.getElementById('toneFreqSlider').addEventListener('input', (e) => {
             document.getElementById('toneFreqVal').textContent = e.target.value + " Hz";
         });
@@ -1185,6 +1252,8 @@
             document.getElementById('floatingMiniPlayBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
             document.getElementById('albumArt').classList.remove('paused');
             document.getElementById('fsAlbumArt').classList.remove('paused');
+
+            if (is8dActive) start8dOrbit();
         }
 
         function togglePlayPause() {
@@ -1209,16 +1278,26 @@
 
         document.getElementById('prevBtn').onclick = () => {
             if (songs.length === 0) return;
-            let idx = currentSongIndex - 1;
-            if (idx < 0) idx = songs.length - 1;
-            loadSong(idx); playAudio();
+            const skipSec = parseFloat(document.getElementById('customSkipInput').value) || 5;
+            if(audio.duration && audio.currentTime > 3) {
+                audio.currentTime = Math.max(0, audio.currentTime - skipSec);
+            } else {
+                let idx = currentSongIndex - 1;
+                if (idx < 0) idx = songs.length - 1;
+                loadSong(idx); playAudio();
+            }
         };
         document.getElementById('fsPrevBtn').onclick = () => document.getElementById('prevBtn').click();
 
         document.getElementById('nextBtn').onclick = () => {
             if (songs.length === 0) return;
-            let idx = isShuffle ? Math.floor(Math.random() * songs.length) : (currentSongIndex + 1) % songs.length;
-            loadSong(idx); playAudio();
+            const skipSec = parseFloat(document.getElementById('customSkipInput').value) || 5;
+            if(audio.duration && audio.currentTime < audio.duration - 3) {
+                audio.currentTime = Math.min(audio.duration, audio.currentTime + skipSec);
+            } else {
+                let idx = isShuffle ? Math.floor(Math.random() * songs.length) : (currentSongIndex + 1) % songs.length;
+                loadSong(idx); playAudio();
+            }
         };
         document.getElementById('fsNextBtn').onclick = () => document.getElementById('nextBtn').click();
 
@@ -1689,6 +1768,13 @@
             audio.playbackRate = 1;
             if(bassFilter) bassFilter.gain.value = 0;
             if(stereoPannerNode) stereoPannerNode.pan.value = 0;
+            is8dActive = false;
+            stop8dOrbit();
+            const btn8d = document.getElementById('toggle8dBtn');
+            if(btn8d) {
+                btn8d.className = "text-[10px] px-3 py-1 rounded-lg font-extrabold bg-gray-900 text-gray-300 border border-gray-800 hover:text-white transition-all";
+                btn8d.textContent = "Enable 8D Surround";
+            }
             setVocalProcessorMode('normal');
         };
 
