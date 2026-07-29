@@ -41,7 +41,6 @@
             --glow: rgba(6, 182, 212, 0.35);
         }
 
-        /* 20 Expanded Theme Palettes */
         [data-theme="cyan"] { --color-400: #22d3ee; --color-500: #06b6d4; --color-600: #0891b2; --border-card: rgba(34, 211, 238, 0.2); --glow: rgba(6, 182, 212, 0.35); }
         [data-theme="emerald"] { --color-400: #34d399; --color-500: #10b981; --color-600: #059669; --border-card: rgba(16, 185, 129, 0.2); --glow: rgba(16, 185, 129, 0.4); }
         [data-theme="purple"] { --color-400: #c084fc; --color-500: #a855f7; --color-600: #9333ea; --border-card: rgba(168, 85, 247, 0.2); --glow: rgba(168, 85, 247, 0.4); }
@@ -306,31 +305,52 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
                         <i class="fa-solid fa-list-ul"></i>
-                        <span>Playlist Manager & Storage</span>
+                        <span>Custom Playlist Manager (2 Playlists Only)</span>
                     </h2>
+                    <span id="songCount" class="text-[10px] bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full font-mono border border-theme-500/30">0 Tracks</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <button id="selectPlaylist1Btn" class="py-2.5 px-4 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-compact-disc"></i>
+                        <span id="playlist1Name">Playlist 1</span>
+                    </button>
+                    <button id="selectPlaylist2Btn" class="py-2.5 px-4 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-compact-disc"></i>
+                        <span id="playlist2Name">Playlist 2</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center justify-between bg-gray-950 p-3 rounded-xl border border-gray-800">
                     <div class="flex items-center space-x-2">
-                        <span id="songCount" class="text-[10px] bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full font-mono border border-theme-500/30">0 Tracks</span>
-                        <button id="clearQueueBtn" title="Clear Playlist" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-2.5 py-1 rounded-lg">
-                            <i class="fa-solid fa-trash"></i> Clear
+                        <span id="activePlaylistTitle" class="font-extrabold text-xs text-white uppercase tracking-wider">Viewing: Playlist 1</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button id="renamePlaylistBtn" class="text-[11px] text-theme-400 bg-theme-500/10 border border-theme-500/30 px-2.5 py-1 rounded-lg hover:bg-theme-500/20">
+                            <i class="fa-solid fa-pen"></i> Rename
+                        </button>
+                        <button id="clearCurrentPlaylistBtn" class="text-[11px] text-red-400 bg-red-500/10 border border-red-500/20 px-2.5 py-1 rounded-lg hover:bg-red-500/20">
+                            <i class="fa-solid fa-trash"></i> Clear Playlist
                         </button>
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-2">
+                <div class="flex gap-2">
                     <div class="relative flex-1">
                         <input type="text" id="songSearchInput" placeholder="🔍 Search track name..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500 pl-8">
                         <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-3 text-gray-500 text-xs"></i>
                     </div>
-                    <button id="sortAZBtn" class="px-4 py-2 rounded-xl bg-theme-500/20 text-theme-400 hover:bg-theme-500/30 font-semibold text-xs border border-theme-500/30 transition-all flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-arrow-down-a-z"></i>
-                        <span>Sort A-Z</span>
-                    </button>
+                    <label class="cursor-pointer bg-theme-500/20 text-theme-400 hover:bg-theme-500/30 border border-theme-500/30 font-semibold px-4 py-2 rounded-xl text-xs flex items-center space-x-1.5 transition-all">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Add Songs</span>
+                        <input type="file" id="playlistSongInput" multiple accept="audio/*" class="hidden">
+                    </label>
                 </div>
 
-                <div id="trackList" class="max-h-[380px] overflow-y-auto space-y-2 pr-1">
-                    <div id="emptyState" class="text-center py-12 text-gray-500">
-                        <i class="fa-solid fa-list-ul text-4xl mb-3 opacity-40"></i>
-                        <p class="text-xs">No tracks found.<br>Click "Import Folder" from the top navigation to load music!</p>
+                <div id="trackList" class="max-h-[340px] overflow-y-auto space-y-2 pr-1">
+                    <div id="emptyState" class="text-center py-10 text-gray-500">
+                        <i class="fa-solid fa-list-ul text-3xl mb-2 opacity-40"></i>
+                        <p class="text-xs">No songs in this playlist yet.<br>Click "Add Songs" to add custom music!</p>
                     </div>
                 </div>
             </div>
@@ -553,8 +573,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-[60vh] overflow-y-auto p-1" id="vaultPhotoGrid">
-                    </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-[60vh] overflow-y-auto p-1" id="vaultPhotoGrid"></div>
             </div>
 
             <div id="vaultVideoGallerySection" class="hidden space-y-4">
@@ -573,8 +592,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[60vh] overflow-y-auto p-1" id="vaultVideoGrid">
-                    </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[60vh] overflow-y-auto p-1" id="vaultVideoGrid"></div>
             </div>
         </div>
     </div>
@@ -641,8 +659,12 @@
     </div>
 
     <script>
+        // 2 Dedicated Custom Playlists stored in localStorage
+        let playlistNames = JSON.parse(localStorage.getItem('r_music_playlist_names') || '["Playlist 1", "Playlist 2"]');
+        let customPlaylists = JSON.parse(localStorage.getItem('r_music_custom_playlists') || '{"pl1": [], "pl2": []}');
+        
+        let activePlaylistKey = 'pl1'; // 'pl1' or 'pl2'
         let songs = [];
-        let favorites = JSON.parse(localStorage.getItem('r_music_favorites') || '[]');
         let currentSongIndex = -1;
         let isPlaying = false;
         let isShuffle = false;
@@ -746,6 +768,7 @@
             }
         };
 
+        // Folder import works as before for bulk adding
         document.getElementById('fileInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
             if(files.length === 0) return;
@@ -756,9 +779,8 @@
                     const trackData = {
                         id: "local_" + cleanTitle + "_" + i,
                         title: cleanTitle,
-                        artist: "Local Storage Folder",
-                        url: URL.createObjectURL(f),
-                        fileObj: f
+                        artist: "Local Storage",
+                        url: URL.createObjectURL(f)
                     };
                     if (!songs.some(s => s.title === trackData.title)) {
                         songs.push(trackData);
@@ -772,15 +794,90 @@
             }
         });
 
+        // Playlist Selector UI Logic
+        const btn1 = document.getElementById('selectPlaylist1Btn');
+        const btn2 = document.getElementById('selectPlaylist2Btn');
+        const pl1NameSpan = document.getElementById('playlist1Name');
+        const pl2NameSpan = document.getElementById('playlist2Name');
+        const activePlaylistTitle = document.getElementById('activePlaylistTitle');
+
+        function updatePlaylistUI() {
+            pl1NameSpan.textContent = playlistNames[0];
+            pl2NameSpan.textContent = playlistNames[1];
+
+            if (activePlaylistKey === 'pl1') {
+                btn1.className = "py-2.5 px-4 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-2";
+                btn2.className = "py-2.5 px-4 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-2";
+                activePlaylistTitle.textContent = `Viewing: ${playlistNames[0]}`;
+                songs = customPlaylists.pl1;
+            } else {
+                btn2.className = "py-2.5 px-4 rounded-xl font-bold text-xs bg-theme-500 text-black shadow-md transition-all flex items-center justify-center space-x-2";
+                btn1.className = "py-2.5 px-4 rounded-xl font-bold text-xs bg-gray-900 text-gray-400 border border-gray-800 hover:text-white transition-all flex items-center justify-center space-x-2";
+                activePlaylistTitle.textContent = `Viewing: ${playlistNames[1]}`;
+                songs = customPlaylists.pl2;
+            }
+            renderTrackList();
+        }
+
+        btn1.onclick = () => { activePlaylistKey = 'pl1'; updatePlaylistUI(); };
+        btn2.onclick = () => { activePlaylistKey = 'pl2'; updatePlaylistUI(); };
+
+        document.getElementById('renamePlaylistBtn').onclick = () => {
+            let currentName = activePlaylistKey === 'pl1' ? playlistNames[0] : playlistNames[1];
+            let newName = prompt("Enter new name for this playlist:", currentName);
+            if (!newName || !newName.trim()) return;
+            if (activePlaylistKey === 'pl1') playlistNames[0] = newName.trim();
+            else playlistNames[1] = newName.trim();
+
+            localStorage.setItem('r_music_playlist_names', JSON.stringify(playlistNames));
+            updatePlaylistUI();
+        };
+
+        // Add custom individual song files into active playlist
+        document.getElementById('playlistSongInput').addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            if (files.length === 0) return;
+
+            files.forEach((f, i) => {
+                if (f.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|flac)$/i.test(f.name)) {
+                    const cleanTitle = f.name.replace(/\.[^/.]+$/, "");
+                    const trackData = {
+                        id: "custom_" + Date.now() + "_" + i,
+                        title: cleanTitle,
+                        artist: "Custom Playlist Track",
+                        url: URL.createObjectURL(f)
+                    };
+                    if (activePlaylistKey === 'pl1') {
+                        if (!customPlaylists.pl1.some(s => s.title === trackData.title)) customPlaylists.pl1.push(trackData);
+                    } else {
+                        if (!customPlaylists.pl2.some(s => s.title === trackData.title)) customPlaylists.pl2.push(trackData);
+                    }
+                }
+            });
+
+            localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
+            updatePlaylistUI();
+            if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
+        });
+
+        document.getElementById('clearCurrentPlaylistBtn').onclick = () => {
+            if (confirm("Are you sure you want to clear all tracks from this playlist?")) {
+                if (activePlaylistKey === 'pl1') customPlaylists.pl1 = [];
+                else customPlaylists.pl2 = [];
+
+                localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
+                audio.pause();
+                isPlaying = false;
+                currentSongIndex = -1;
+                document.getElementById('currentTitle').textContent = "R Music Workstation Pro";
+                document.getElementById('currentArtist').textContent = "Import folder or add to playlist";
+                updatePlaylistUI();
+            }
+        };
+
         document.getElementById('songSearchInput').addEventListener('input', (e) => {
             renderTrackList(e.target.value.trim().toLowerCase());
         });
-
-        document.getElementById('sortAZBtn').onclick = () => {
-            if (songs.length === 0) return;
-            songs.sort((a, b) => a.title.localeCompare(b.title));
-            renderTrackList();
-        };
 
         function loadSong(index) {
             if (index < 0 || index >= songs.length) return;
@@ -794,15 +891,6 @@
             
             const customNote = document.getElementById('customLyricsInput').value;
             document.getElementById('lyricsDisplay').textContent = customNote ? customNote : `Now Playing:\n${track.title}`;
-            
-            if(track.fileObj) {
-                document.getElementById('metaInspectorBox').innerHTML = `
-                    <p>File Name: <span class="text-white">${track.fileObj.name}</span></p>
-                    <p>Size: <span class="text-white">${(track.fileObj.size / (1024*1024)).toFixed(2)} MB</span></p>
-                    <p>Type: <span class="text-white">${track.fileObj.type || 'Audio Stream'}</span></p>
-                `;
-            }
-
             renderTrackList();
         }
 
@@ -821,7 +909,7 @@
         }
 
         function togglePlayPause() {
-            if (songs.length === 0) return alert("Select or import a folder first!");
+            if (songs.length === 0) return alert("Add songs to this playlist first!");
             if (isPlaying) {
                 audio.pause();
                 isPlaying = false;
@@ -855,16 +943,6 @@
         audio.onended = () => {
             if (isRepeat) { loadSong(currentSongIndex); playAudio(); }
             else { document.getElementById('nextBtn').click(); }
-        };
-
-        document.getElementById('clearQueueBtn').onclick = () => {
-            songs = [];
-            audio.pause();
-            isPlaying = false;
-            currentSongIndex = -1;
-            document.getElementById('currentTitle').textContent = "R Music Workstation Pro";
-            document.getElementById('currentArtist').textContent = "Import folder to start listening";
-            renderTrackList();
         };
 
         document.getElementById('loopABtn').onclick = () => { loopA = audio.currentTime; alert(`Loop Point A set at ${formatTime(loopA)}`); };
@@ -926,8 +1004,8 @@
         };
 
         document.getElementById('exportTrimBtn').onclick = () => {
-            if(currentSongIndex === -1 || !songs[currentSongIndex].fileObj) {
-                return alert("Please select or play a local folder track first!");
+            if(currentSongIndex === -1 || !songs[currentSongIndex]) {
+                return alert("Please select or play a track first!");
             }
             const startSec = parseFloat(document.getElementById('trimStartInput').value) || 0;
             const endSec = parseFloat(document.getElementById('trimEndInput').value) || 10;
@@ -936,41 +1014,40 @@
                 return alert("End time must be greater than start time!");
             }
 
-            const currentFile = songs[currentSongIndex].fileObj;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const arrayBuffer = e.target.result;
-                const tempAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                tempAudioCtx.decodeAudioData(arrayBuffer, function(audioBuffer) {
-                    const sampleRate = audioBuffer.sampleRate;
-                    const startFrame = Math.floor(startSec * sampleRate);
-                    const endFrame = Math.min(Math.floor(endSec * sampleRate), audioBuffer.length);
-                    const frameCount = endFrame - startFrame;
+            // Fetch active audio source data for export
+            fetch(songs[currentSongIndex].url)
+                .then(res => res.arrayBuffer())
+                .then(arrayBuffer => {
+                    const tempAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    tempAudioCtx.decodeAudioData(arrayBuffer, function(audioBuffer) {
+                        const sampleRate = audioBuffer.sampleRate;
+                        const startFrame = Math.floor(startSec * sampleRate);
+                        const endFrame = Math.min(Math.floor(endSec * sampleRate), audioBuffer.length);
+                        const frameCount = endFrame - startFrame;
 
-                    const trimmedBuffer = tempAudioCtx.createBuffer(audioBuffer.numberOfChannels, frameCount, sampleRate);
-                    for (let ch = 0; ch < audioBuffer.numberOfChannels; ch++) {
-                        const channelData = audioBuffer.getChannelData(ch);
-                        const trimmedData = trimmedBuffer.getChannelData(ch);
-                        for (let i = 0; i < frameCount; i++) {
-                            trimmedData[i] = channelData[startFrame + i];
+                        const trimmedBuffer = tempAudioCtx.createBuffer(audioBuffer.numberOfChannels, frameCount, sampleRate);
+                        for (let ch = 0; ch < audioBuffer.numberOfChannels; ch++) {
+                            const channelData = audioBuffer.getChannelData(ch);
+                            const trimmedData = trimmedBuffer.getChannelData(ch);
+                            for (let i = 0; i < frameCount; i++) {
+                                trimmedData[i] = channelData[startFrame + i];
+                            }
                         }
-                    }
 
-                    const wavBlob = bufferToWave(trimmedBuffer, frameCount);
-                    const url = URL.createObjectURL(wavBlob);
-                    const a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = url;
-                    a.download = `${songs[currentSongIndex].title}_trimmed_${startSec}s-${endSec}s.wav`;
-                    document.body.appendChild(a);
-                    a.click();
-                    setTimeout(() => { document.body.removeChild(a); window.URL.revokeObjectURL(url); }, 100);
-                    alert("Trimmed audio clip downloaded successfully!");
-                }, function(err) {
-                    alert("Error processing audio file buffer!");
-                });
-            };
-            reader.readAsArrayBuffer(currentFile);
+                        const wavBlob = bufferToWave(trimmedBuffer, frameCount);
+                        const url = URL.createObjectURL(wavBlob);
+                        const a = document.createElement('a');
+                        a.style.display = 'none';
+                        a.href = url;
+                        a.download = `${songs[currentSongIndex].title}_trimmed_${startSec}s-${endSec}s.wav`;
+                        document.body.appendChild(a);
+                        a.click();
+                        setTimeout(() => { document.body.removeChild(a); window.URL.revokeObjectURL(url); }, 100);
+                        alert("Trimmed audio clip downloaded successfully!");
+                    }, function(err) {
+                        alert("Error processing audio file buffer!");
+                    });
+                }).catch(err => alert("Could not fetch file stream for trimming!"));
         };
 
         function bufferToWave(abBuffer, len) {
@@ -1015,7 +1092,7 @@
         document.getElementById('fullScreenPlayerBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.remove('hidden');
         document.getElementById('closeFullScreenBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.add('hidden');
 
-        // Secret Vault Logic updated for p1, p2... (20 photos) and v1, v2... (10 videos)
+        // Secret Vault Logic
         const secretVaultTrigger = document.getElementById('secretVaultTrigger');
         const secretVaultModal = document.getElementById('secretVaultModal');
         const closeVaultBtn = document.getElementById('closeVaultBtn');
@@ -1133,34 +1210,15 @@
             const empty = document.getElementById('emptyState');
             list.innerHTML = '';
 
-            let combinedMap = new Map();
-            
-            favorites.forEach(fav => {
-                combinedMap.set(fav.title, {
-                    ...fav,
-                    url: fav.url || "",
-                    fileObj: null
-                });
-            });
-
-            songs.forEach(s => {
-                combinedMap.set(s.title, {
-                    ...s,
-                    isFavorite: favorites.some(f => f.title === s.title)
-                });
-            });
-
-            let displayTracks = Array.from(combinedMap.values());
-            let filteredSongs = displayTracks.filter(s => s.title.toLowerCase().includes(searchTerm));
+            let filteredSongs = songs.filter(s => s.title.toLowerCase().includes(searchTerm));
 
             if (filteredSongs.length === 0) {
                 if(empty) empty.style.display = 'block';
-                document.getElementById('songCount').textContent = displayTracks.length + ' Tracks';
+                document.getElementById('songCount').textContent = songs.length + ' Tracks';
                 return;
             } else { if(empty) empty.style.display = 'none'; }
 
             filteredSongs.forEach((s) => {
-                const isFav = favorites.some(f => f.title === s.title);
                 const isCurrent = (songs[currentSongIndex] && songs[currentSongIndex].title === s.title);
                 
                 const item = document.createElement('div');
@@ -1169,12 +1227,9 @@
                 item.innerHTML = `
                     <div class="flex items-center space-x-3 overflow-hidden cursor-pointer flex-1" title="Play Track">
                         <i class="fa-solid fa-music text-theme-400"></i>
-                        <p class="truncate font-semibold">${s.title} ${!s.fileObj && s.url === "" ? '<span class="text-[9px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded ml-1">Favorite Saved (Re-import to Play)</span>' : ''}</p>
+                        <p class="truncate font-semibold">${s.title}</p>
                     </div>
                     <div class="flex items-center space-x-2 ml-2">
-                        <button title="Favorite Song" class="fav-btn px-2 py-1 rounded-lg text-xs transition-all ${isFav ? 'text-amber-400 bg-amber-500/20 border border-amber-500/30' : 'text-gray-400 hover:text-amber-400 bg-gray-900 border border-gray-800'}">
-                            <i class="fa-solid fa-star"></i>
-                        </button>
                         <button title="Remove Song" class="remove-btn px-2 py-1 rounded-lg text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20">
                             <i class="fa-solid fa-trash"></i>
                         </button>
@@ -1186,45 +1241,25 @@
                     if(realIndex !== -1) {
                         loadSong(realIndex);
                         playAudio();
-                    } else if(s.url !== "") {
-                        songs.push(s);
-                        loadSong(songs.length - 1);
-                        playAudio();
-                    } else {
-                        alert(`"${s.title}" is saved in favorites! Please import your folder/file once to link its audio stream.`);
                     }
-                };
-
-                item.querySelector('.fav-btn').onclick = (e) => {
-                    e.stopPropagation();
-                    const indexInFav = favorites.findIndex(fav => fav.title === s.title);
-                    if(indexInFav !== -1) {
-                        favorites.splice(indexInFav, 1);
-                    } else {
-                        favorites.push({
-                            id: s.id,
-                            title: s.title,
-                            artist: s.artist,
-                            url: s.fileObj ? "" : s.url
-                        });
-                    }
-                    localStorage.setItem('r_music_favorites', JSON.stringify(favorites));
-                    renderTrackList(searchTerm);
                 };
 
                 item.querySelector('.remove-btn').onclick = (e) => {
                     e.stopPropagation();
-                    songs = songs.filter(orig => orig.title !== s.title);
-                    favorites = favorites.filter(fav => fav.title !== s.title);
-                    localStorage.setItem('r_music_favorites', JSON.stringify(favorites));
+                    if (activePlaylistKey === 'pl1') {
+                        customPlaylists.pl1 = customPlaylists.pl1.filter(orig => orig.title !== s.title);
+                    } else {
+                        customPlaylists.pl2 = customPlaylists.pl2.filter(orig => orig.title !== s.title);
+                    }
+                    localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
+                    updatePlaylistUI();
                     if(currentSongIndex >= songs.length) currentSongIndex = songs.length - 1;
-                    renderTrackList(searchTerm);
                 };
 
                 list.appendChild(item);
             });
 
-            document.getElementById('songCount').textContent = displayTracks.length + " Tracks";
+            document.getElementById('songCount').textContent = songs.length + " Tracks";
         }
 
         function switchTab(tabId) {
@@ -1320,7 +1355,8 @@
         document.getElementById('openThemeModalBtn').onclick = () => document.getElementById('themeModal').classList.remove('hidden');
         document.getElementById('closeThemeBtn').onclick = () => document.getElementById('themeModal').classList.add('hidden');
 
-        renderTrackList();
+        // Initialize Playlists on load
+        updatePlaylistUI();
     </script>
 </body>
 </html>
