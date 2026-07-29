@@ -137,6 +137,9 @@
             <button id="tabBtn-favoritesTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
                 <i class="fa-solid fa-heart text-pink-400"></i><span>Favorites</span>
             </button>
+            <button id="tabBtn-vaultTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
+                <i class="fa-solid fa-vault text-amber-400"></i><span>Vault</span>
+            </button>
             <button id="tabBtn-studioTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
                 <i class="fa-solid fa-sliders"></i><span>Studio FX</span>
             </button>
@@ -165,10 +168,10 @@
     <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-950/90 backdrop-blur-xl px-2 py-2 border-t border-white/10 flex justify-around items-center text-xs">
         <button id="mobTab-playerTab" class="mob-tab-btn mob-tab-active flex flex-col items-center"><i class="fa-solid fa-play text-base"></i><span class="text-[9px] mt-0.5">Player</span></button>
         <button id="mobTab-playlistTab" class="mob-tab-btn text-gray-400 flex flex-col items-center"><i class="fa-solid fa-list-ul text-base"></i><span class="text-[9px] mt-0.5">Playlists</span></button>
-        <button id="mobTab-favoritesTab" class="mob-tab-btn text-gray-400 flex flex-col items-center"><i class="fa-solid fa-heart text-base text-pink-400"></i><span class="text-[9px] mt-0.5">Favorites</span></button>
+        <button id="mobTab-favoritesTab" class="mob-tab-btn text-gray-400 flex flex-col items-center"><i class="fa-solid fa-heart text-base text-pink-400"></i><span class="text-[9px] mt-0.5">Favs</span></button>
+        <button id="mobTab-vaultTab" class="mob-tab-btn text-gray-400 flex flex-col items-center"><i class="fa-solid fa-vault text-base text-amber-400"></i><span class="text-[9px] mt-0.5">Vault</span></button>
         <button id="mobTab-studioTab" class="mob-tab-btn text-gray-400 flex flex-col items-center"><i class="fa-solid fa-sliders text-base"></i><span class="text-[9px] mt-0.5">Studio</span></button>
         <button id="mobTab-toolsTab" class="mob-tab-btn text-gray-400 flex flex-col items-center"><i class="fa-solid fa-toolbox text-base"></i><span class="text-[9px] mt-0.5">Tools</span></button>
-        <button id="mobTab-aboutTab" class="mob-tab-btn text-gray-400 flex flex-col items-center"><i class="fa-solid fa-circle-info text-base"></i><span class="text-[9px] mt-0.5">About</span></button>
     </div>
 
     <main class="flex-1 max-w-[1400px] w-full mx-auto p-3 sm:p-5">
@@ -178,7 +181,7 @@
                     <div class="w-full flex justify-between items-center z-10 mb-2">
                         <span id="sourceBadge" class="text-[9px] font-extrabold bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full border border-theme-500/30 uppercase tracking-wider">OFFLINE ENGINE READY</span>
                         <div class="flex items-center space-x-2">
-                            <button id="favoriteToggleBtn" class="text-gray-400 hover:text-pink-400 text-lg transition-colors"><i class="fa-regular fa-heart" id="favIcon"></i></button>
+                            <button id="favoriteToggleBtn" title="Add/Remove Favorite" class="text-gray-400 hover:text-pink-400 text-lg transition-colors"><i class="fa-regular fa-heart" id="favIcon"></i></button>
                             <span id="timerDisplay" class="text-[9px] text-amber-400 font-mono hidden"><i class="fa-solid fa-clock"></i> <span id="timerCountdown">00:00</span></span>
                         </div>
                     </div>
@@ -302,8 +305,32 @@
                 </div>
                 <div id="favTrackList" class="max-h-[380px] overflow-y-auto space-y-2 pr-1">
                     <div id="favEmptyState" class="text-center py-10 text-gray-500">
-                        <i class="regular fa-heart text-3xl mb-2 opacity-40 text-pink-400"></i>
+                        <i class="fa-regular fa-heart text-3xl mb-2 opacity-40 text-pink-400"></i>
                         <p class="text-xs">No favorite songs added yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="vaultTab" class="page-tab hidden max-w-2xl mx-auto space-y-4">
+            <div class="glass-card rounded-2xl p-5 flex flex-col space-y-4 border border-amber-500/30">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-sm uppercase font-extrabold text-amber-400 flex items-center space-x-2">
+                        <i class="fa-solid fa-vault"></i><span>Secure Secret Vault</span>
+                    </h2>
+                    <span id="vaultSongCount" class="text-[10px] bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-full font-mono border border-amber-500/30">0 Locked</span>
+                </div>
+                <div class="bg-gray-950/60 p-3 rounded-xl border border-white/10 flex items-center justify-between">
+                    <span class="text-xs text-gray-300">Lock sensitive tracks securely offline</span>
+                    <label class="cursor-pointer bg-amber-500 text-black font-extrabold px-3 py-1.5 rounded-lg text-xs flex items-center space-x-1">
+                        <i class="fa-solid fa-lock"></i><span>Lock New Track</span>
+                        <input type="file" id="vaultFileInput" multiple accept="audio/*" class="hidden">
+                    </label>
+                </div>
+                <div id="vaultTrackList" class="max-h-[340px] overflow-y-auto space-y-2 pr-1">
+                    <div id="vaultEmptyState" class="text-center py-10 text-gray-500">
+                        <i class="fa-solid fa-vault text-3xl mb-2 opacity-40 text-amber-400"></i>
+                        <p class="text-xs">Vault is empty.</p>
                     </div>
                 </div>
             </div>
@@ -332,7 +359,7 @@
                     <div class="bg-gray-950/60 p-3.5 rounded-xl border border-white/10 space-y-2.5">
                         <p class="text-[11px] font-bold text-white flex items-center space-x-2">
                             <i class="fa-solid fa-microphone-lines text-theme-400"></i>
-                            <span>Vocal / Instrument Mode (Default Mode Active)</span>
+                            <span>Vocal / Instrument Mode</span>
                         </p>
                         
                         <div class="grid grid-cols-2 gap-2 pt-1 text-xs">
@@ -462,6 +489,7 @@
         let playlistNames = JSON.parse(localStorage.getItem('r_music_playlist_names') || '["Playlist 1", "Playlist 2"]');
         let customPlaylists = JSON.parse(localStorage.getItem('r_music_custom_playlists') || '{"pl1": [], "pl2": []}');
         let favoriteSongs = JSON.parse(localStorage.getItem('r_music_favorites') || '[]');
+        let vaultSongs = JSON.parse(localStorage.getItem('r_music_vault') || '[]');
 
         let activeSection = 'default';
         let songs = [];
@@ -474,7 +502,7 @@
         let skipStep = 10;
 
         let audioCtx = null, audioSource = null, analyser = null, bassFilter = null;
-        let splitterNode = null, mergerNode = null, karaokeGainNode = null, vocalBoostNode = null;
+        let splitterNode = null, mergerNode = null, karaokeGainNode = null;
         let eqFilters = [];
         const FREQUENCIES = [60, 250, 500, 1000, 2000, 4000, 8000, 12000, 14000, 16000];
 
@@ -507,7 +535,6 @@
             bassFilter.frequency.value = 180;
             bassFilter.gain.value = 0;
 
-            // Advanced DSP Chain for Vocal Modes
             splitterNode = audioCtx.createChannelSplitter(2);
             mergerNode = audioCtx.createChannelMerger(2);
             karaokeGainNode = audioCtx.createGain();
@@ -554,13 +581,10 @@
             initVisualizerBars();
         }
 
-        // Handle Vocal Mode Selection Radio Buttons
         document.querySelectorAll('input[name="vocalMode"]').forEach(radio => {
             radio.addEventListener('change', (e) => {
                 initAudioEngine();
                 const mode = e.target.value;
-                
-                // Highlight UI label styling
                 document.querySelectorAll('input[name="vocalMode"]').forEach(r => {
                     r.closest('label').className = "cursor-pointer bg-gray-900/80 border border-white/10 hover:bg-gray-900 p-2.5 rounded-xl flex items-center space-x-2 transition-all";
                     r.nextElementSibling.className = "font-semibold text-gray-300";
@@ -568,15 +592,10 @@
                 e.target.closest('label').className = "cursor-pointer bg-theme-500/20 border border-theme-500/40 hover:bg-theme-500/30 p-2.5 rounded-xl flex items-center space-x-2 transition-all";
                 e.target.nextElementSibling.className = "font-bold text-white";
 
-                if (mode === 'default') {
-                    karaokeGainNode.gain.value = 0.0;
-                } else if (mode === 'remove_vocal') {
-                    karaokeGainNode.gain.value = 1.0; // Karaoke mode
-                } else if (mode === 'remove_instrument') {
-                    karaokeGainNode.gain.value = 0.5; // Isolate center channel vocals
-                } else if (mode === 'increase_vocal') {
-                    karaokeGainNode.gain.value = 0.85; // Boost vocals relative to mix
-                }
+                if (mode === 'default') karaokeGainNode.gain.value = 0.0;
+                else if (mode === 'remove_vocal') karaokeGainNode.gain.value = 1.0;
+                else if (mode === 'remove_instrument') karaokeGainNode.gain.value = 0.5;
+                else if (mode === 'increase_vocal') karaokeGainNode.gain.value = 0.85;
             });
         });
 
@@ -593,6 +612,132 @@
             audio.preservesPitch = true;
             audio.playbackRate = val;
         });
+
+        // Skip forward/backward timer setup
+        document.getElementById('skipBackwardBtn').onclick = () => {
+            audio.currentTime = Math.max(0, audio.currentTime - skipStep);
+        };
+        document.getElementById('skipForwardBtn').onclick = () => {
+            audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + skipStep);
+        };
+
+        // Sleep Timer setup
+        document.getElementById('sleepTimerBtn').onclick = () => {
+            const mins = prompt("Enter sleep timer in minutes (0 to cancel):", "15");
+            if (mins === null) return;
+            const m = parseInt(mins);
+            if (isNaN(m) || m <= 0) {
+                if (sleepTimerRef) clearTimeout(sleepTimerRef);
+                document.getElementById('timerDisplay').classList.add('hidden');
+                alert("Sleep timer cancelled.");
+                return;
+            }
+            if (sleepTimerRef) clearTimeout(sleepTimerRef);
+            let secondsLeft = m * 60;
+            document.getElementById('timerDisplay').classList.remove('hidden');
+            
+            const timerInt = setInterval(() => {
+                secondsLeft--;
+                const minRem = Math.floor(secondsLeft / 60);
+                const secRem = secondsLeft % 60;
+                document.getElementById('timerCountdown').textContent = `${minRem}:${secRem < 10 ? '0' : ''}${secRem}`;
+                if (secondsLeft <= 0) {
+                    clearInterval(timerInt);
+                    audio.pause();
+                    isPlaying = false;
+                    document.getElementById('timerDisplay').classList.add('hidden');
+                }
+            }, 1000);
+            sleepTimerRef = timerInt;
+            alert(`Sleep timer set for ${m} minutes.`);
+        };
+
+        // AB Loop setup
+        document.getElementById('loopABtn').onclick = () => { loopA = audio.currentTime; alert(`Loop Point A set at ${formatTime(loopA)}`); };
+        document.getElementById('loopBBtn').onclick = () => { 
+            loopB = audio.currentTime; 
+            alert(`Loop Point B set at ${formatTime(loopB)}`); 
+        };
+        document.getElementById('clearABBtn').onclick = () => { loopA = null; loopB = null; alert("AB Loop cleared."); };
+
+        audio.addEventListener('timeupdate', () => {
+            if (loopA !== null && loopB !== null && audio.currentTime >= loopB) {
+                audio.currentTime = loopA;
+            }
+        });
+
+        // Audio Trimmer Export setup
+        document.getElementById('exportTrimBtn').onclick = async () => {
+            if (!audio.src) return alert("Please load an audio track first!");
+            const start = parseFloat(document.getElementById('trimStartInput').value) || 0;
+            const end = parseFloat(document.getElementById('trimEndInput').value) || 10;
+            if (start >= end) return alert("Start time must be less than End time!");
+
+            alert("Processing trimmed audio clip for download...");
+            try {
+                const response = await fetch(audio.src);
+                const arrayBuffer = await response.arrayBuffer();
+                const offlineCtx = new OfflineAudioContext(2, 44100 * (end - start), 44100);
+                const decodedBuffer = await offlineCtx.decodeAudioData(arrayBuffer);
+
+                const source = offlineCtx.createBufferSource();
+                source.buffer = decodedBuffer;
+                source.connect(offlineCtx.destination);
+                source.start(0, start, end - start);
+
+                const renderedBuffer = await offlineCtx.startRendering();
+                const wavBlob = bufferToWave(renderedBuffer, renderedBuffer.length);
+                const url = URL.createObjectURL(wavBlob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `trimmed_clip_${Math.floor(start)}s_${Math.floor(end)}s.wav`;
+                a.click();
+            } catch (err) {
+                console.error(err);
+                alert("Error exporting clip. Make sure it's a valid local audio file.");
+            }
+        };
+
+        function bufferToWave(abuffer, len) {
+            let numOfChan = abuffer.numberOfChannels,
+                length = len * numOfChan * 2 + 44,
+                buffer = new ArrayBuffer(length),
+                view = new DataView(buffer),
+                channels = [], sampleRate = abuffer.sampleRate, offset = 0, pos = 0;
+
+            function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
+            function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
+
+            setUint32(0x46464952); // "RIFF"
+            setUint32(length - 8); // file length - 8
+            setUint32(0x45564157); // "WAVE"
+
+            setUint32(0x20746d66); // "fmt " chunk
+            setUint32(16); // length = 16
+            setUint32(1); // PCM (uncompressed)
+            setUint32(numOfChan);
+            setUint32(sampleRate);
+            setUint32(sampleRate * 2 * numOfChan); // avg. bytes/sec
+            setUint32(2 * numOfChan); // block-align
+            setUint32(16); // 16-bit
+
+            setUint32(0x61746164); // "data" - chunk
+            setUint32(length - pos - 4); // data length
+
+            for (let i = 0; i < abuffer.numberOfChannels; i++) channels.push(abuffer.getChannelData(i));
+
+            while (offset < len) {
+                for (let i = 0; i < numOfChan; i++) {
+                    let sample = Math.max(-1, Math.min(1, channels[i][offset]));
+                    sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767);
+                    view.setInt16(pos, sample, true);
+                    pos += 2;
+                }
+                offset++;
+            }
+            return new Blob([buffer], { type: "audio/wav" });
+        }
 
         document.getElementById('fileInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
@@ -616,6 +761,57 @@
             updatePlaylistUI();
             if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
         });
+
+        // Vault Import File Setup
+        document.getElementById('vaultFileInput').addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            if(files.length === 0) return;
+            files.forEach((f, i) => {
+                if (f.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|flac)$/i.test(f.name)) {
+                    const cleanTitle = f.name.replace(/\.[^/.]+$/, "");
+                    vaultSongs.push({
+                        id: "vault_" + Date.now() + "_" + i,
+                        title: cleanTitle,
+                        artist: "Secure Vault",
+                        url: URL.createObjectURL(f)
+                    });
+                }
+            });
+            localStorage.setItem('r_music_vault', JSON.stringify(vaultSongs));
+            renderVaultList();
+        });
+
+        function renderVaultList() {
+            const list = document.getElementById('vaultTrackList');
+            const empty = document.getElementById('vaultEmptyState');
+            list.innerHTML = '';
+            if (vaultSongs.length === 0) {
+                if (empty) empty.style.display = 'block';
+                document.getElementById('vaultSongCount').textContent = '0 Locked';
+                return;
+            } else { if (empty) empty.style.display = 'none'; }
+
+            vaultSongs.forEach((s, idx) => {
+                const item = document.createElement('div');
+                item.className = 'p-3 rounded-xl text-xs flex items-center justify-between bg-gray-950/80 text-gray-300 border border-white/10';
+                item.innerHTML = `
+                    <div class="flex items-center space-x-3 truncate cursor-pointer flex-1">
+                        <i class="fa-solid fa-lock text-amber-400"></i>
+                        <span class="truncate font-semibold">${s.title}</span>
+                    </div>
+                    <button class="text-red-400 hover:text-red-300 text-xs px-2 py-1"><i class="fa-solid fa-trash"></i></button>
+                `;
+                item.querySelector('.flex-1').onclick = () => { songs = vaultSongs; loadSong(idx); playAudio(); };
+                item.querySelector('button').onclick = (ev) => {
+                    ev.stopPropagation();
+                    vaultSongs.splice(idx, 1);
+                    localStorage.setItem('r_music_vault', JSON.stringify(vaultSongs));
+                    renderVaultList();
+                };
+                list.appendChild(item);
+            });
+            document.getElementById('vaultSongCount').textContent = vaultSongs.length + " Locked";
+        }
 
         const defaultBtn = document.getElementById('selectDefaultBtn');
         const btn1 = document.getElementById('selectPlaylist1Btn');
@@ -651,11 +847,35 @@
             }
             renderTrackList();
             renderFavoritesList();
+            renderVaultList();
         }
 
         defaultBtn.onclick = () => { activeSection = 'default'; updatePlaylistUI(); };
         btn1.onclick = () => { activeSection = 'pl1'; updatePlaylistUI(); };
         btn2.onclick = () => { activeSection = 'pl2'; updatePlaylistUI(); };
+
+        renameBtn.onclick = () => {
+            const newName = prompt("Enter new name for playlist:", activeSection === 'pl1' ? playlistNames[0] : playlistNames[1]);
+            if (!newName) return;
+            if (activeSection === 'pl1') playlistNames[0] = newName;
+            else if (activeSection === 'pl2') playlistNames[1] = newName;
+            localStorage.setItem('r_music_playlist_names', JSON.stringify(playlistNames));
+            updatePlaylistUI();
+        };
+
+        document.getElementById('clearCurrentPlaylistBtn').onclick = () => {
+            if (confirm("Are you sure you want to clear this playlist?")) {
+                if (activeSection === 'default') defaultLibrarySongs = [];
+                else if (activeSection === 'pl1') customPlaylists.pl1 = [];
+                else customPlaylists.pl2 = [];
+                localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
+                updatePlaylistUI();
+            }
+        };
+
+        document.getElementById('songSearchInput').addEventListener('input', (e) => {
+            renderTrackList(e.target.value.toLowerCase());
+        });
 
         document.getElementById('playlistSongInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
@@ -769,11 +989,21 @@
                 return;
             } else { if (empty) empty.style.display = 'none'; }
 
-            favoriteSongs.forEach((s) => {
+            favoriteSongs.forEach((s, idx) => {
                 const item = document.createElement('div');
                 item.className = 'p-3 rounded-xl text-xs flex items-center justify-between bg-gray-950/80 text-gray-300 border border-white/10';
-                item.innerHTML = `<span class="truncate font-semibold cursor-pointer flex-1">${s.title}</span>`;
-                item.querySelector('span').onclick = () => { songs = favoriteSongs; loadSong(favoriteSongs.findIndex(x => x.title === s.title)); playAudio(); };
+                item.innerHTML = `
+                    <span class="truncate font-semibold cursor-pointer flex-1">${s.title}</span>
+                    <button class="text-red-400 hover:text-red-300 text-xs px-2 py-1"><i class="fa-solid fa-trash"></i></button>
+                `;
+                item.querySelector('.flex-1').onclick = () => { songs = favoriteSongs; loadSong(idx); playAudio(); };
+                item.querySelector('button').onclick = (ev) => {
+                    ev.stopPropagation();
+                    favoriteSongs.splice(idx, 1);
+                    localStorage.setItem('r_music_favorites', JSON.stringify(favoriteSongs));
+                    renderFavoritesList();
+                    updateFavoriteButtonState();
+                };
                 list.appendChild(item);
             });
             document.getElementById('favSongCount').textContent = favoriteSongs.length + " Tracks";
@@ -787,10 +1017,24 @@
             }
         };
 
+        audio.onended = () => {
+            if (isRepeat) { playAudio(); }
+            else { document.getElementById('nextBtn').click(); }
+        };
+
         document.getElementById('progressBar').oninput = (e) => {
             if (audio.duration) audio.currentTime = (e.target.value / 100) * audio.duration;
         };
         document.getElementById('volumeSlider').oninput = (e) => { audio.volume = e.target.value; };
+
+        document.getElementById('shuffleBtn').onclick = () => {
+            isShuffle = !isShuffle;
+            document.getElementById('shuffleBtn').classList.toggle('text-theme-400', isShuffle);
+        };
+        document.getElementById('repeatBtn').onclick = () => {
+            isRepeat = !isRepeat;
+            document.getElementById('repeatBtn').classList.toggle('text-theme-400', isRepeat);
+        };
 
         function renderTrackList(searchTerm = '') {
             const list = document.getElementById('trackList');
@@ -801,6 +1045,7 @@
             else { if(empty) empty.style.display = 'none'; }
 
             filteredSongs.forEach((s) => {
+                const origIndex = songs.findIndex(orig => orig.title === s.title);
                 const isCurrent = (songs[currentSongIndex] && songs[currentSongIndex].title === s.title);
                 const item = document.createElement('div');
                 item.className = `p-3 rounded-xl text-xs flex items-center justify-between transition-all ${isCurrent ? 'bg-theme-500/20 text-theme-400 font-bold border border-theme-500/30' : 'bg-gray-950/80 hover:bg-gray-900 text-gray-300 border border-white/10'}`;
@@ -809,8 +1054,18 @@
                         <i class="fa-solid fa-music text-theme-400"></i>
                         <p class="truncate font-semibold">${s.title}</p>
                     </div>
+                    <button class="text-red-400 hover:text-red-300 text-xs px-2 py-1"><i class="fa-solid fa-trash"></i></button>
                 `;
-                item.querySelector('.flex-1').onclick = () => { loadSong(songs.findIndex(orig => orig.title === s.title)); playAudio(); };
+                item.querySelector('.flex-1').onclick = () => { loadSong(origIndex); playAudio(); };
+                item.querySelector('button').onclick = (ev) => {
+                    ev.stopPropagation();
+                    songs.splice(origIndex, 1);
+                    if (activeSection === 'default') defaultLibrarySongs = songs;
+                    else if (activeSection === 'pl1') customPlaylists.pl1 = songs;
+                    else customPlaylists.pl2 = songs;
+                    localStorage.setItem('r_music_custom_playlists', JSON.stringify(customPlaylists));
+                    renderTrackList(searchTerm);
+                };
                 list.appendChild(item);
             });
             document.getElementById('songCount').textContent = songs.length + " Tracks";
@@ -825,7 +1080,7 @@
             btn.addEventListener('click', () => switchTab(btn.id.replace('tabBtn-', '')));
         });
 
-        ['playerTab', 'playlistTab', 'favoritesTab', 'studioTab', 'toolsTab', 'lyricsTab', 'aboutTab'].forEach(t => {
+        ['playerTab', 'playlistTab', 'favoritesTab', 'vaultTab', 'studioTab', 'toolsTab', 'lyricsTab', 'aboutTab'].forEach(t => {
             document.getElementById(`mobTab-${t}`)?.addEventListener('click', () => { switchTab(t); setMobileTabActive(`mobTab-${t}`); });
         });
 
@@ -898,6 +1153,7 @@
 
         updatePlaylistUI();
         renderFavoritesList();
+        renderVaultList();
     </script>
 </body>
 </html>
