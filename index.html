@@ -746,7 +746,6 @@
             }
         };
 
-        // Folder Directory Import
         document.getElementById('fileInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
             if(files.length === 0) return;
@@ -761,7 +760,6 @@
                         url: URL.createObjectURL(f),
                         fileObj: f
                     };
-                    // Prevent duplicates based on title and filename
                     if (!songs.some(s => s.title === trackData.title)) {
                         songs.push(trackData);
                     }
@@ -1017,7 +1015,7 @@
         document.getElementById('fullScreenPlayerBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.remove('hidden');
         document.getElementById('closeFullScreenBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.add('hidden');
 
-        // Secret Vault Logic with 20 Photo Slots and 10 Video Slots + Menu Entry Options
+        // Secret Vault Logic updated for p1, p2... (20 photos) and v1, v2... (10 videos)
         const secretVaultTrigger = document.getElementById('secretVaultTrigger');
         const secretVaultModal = document.getElementById('secretVaultModal');
         const closeVaultBtn = document.getElementById('closeVaultBtn');
@@ -1103,9 +1101,9 @@
                 item.className = 'bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-2 group';
                 item.innerHTML = `
                     <div class="w-full h-24 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center">
-                        <img src="./photo${i}.png" alt="Vault Photo ${i}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
+                        <img src="./p${i}.jpg" alt="Vault Photo p${i}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%234b5563\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg>'">
                     </div>
-                    <span class="text-[10px] text-gray-400 mt-2 font-mono">photo${i}.png</span>
+                    <span class="text-[10px] text-gray-400 mt-2 font-mono">p${i}.jpg</span>
                 `;
                 grid.appendChild(item);
             }
@@ -1119,37 +1117,37 @@
                 item.className = 'bg-gray-950 border border-gray-800 rounded-xl overflow-hidden flex flex-col items-center p-3 group';
                 item.innerHTML = `
                     <div class="w-full h-32 bg-gray-900 rounded-lg overflow-hidden relative flex items-center justify-center border border-gray-800">
-                        <video src="./video${i}.mp4" class="w-full h-full object-cover" muted preload="metadata" onerror="this.style.display='none'"></video>
+                        <video src="./v${i}.mp4" class="w-full h-full object-cover" muted preload="metadata" onerror="this.style.display='none'"></video>
                         <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-all pointer-events-none">
                             <i class="fa-solid fa-play text-theme-400 text-lg"></i>
                         </div>
                     </div>
-                    <span class="text-[10px] text-gray-400 mt-2 font-mono">video${i}.mp4</span>
+                    <span class="text-[10px] text-gray-400 mt-2 font-mono">v${i}.mp4</span>
                 `;
                 grid.appendChild(item);
             }
         }
 
-        // Playlist Permanent Favorite & Remove System
         function renderTrackList(searchTerm = '') {
             const list = document.getElementById('trackList');
             const empty = document.getElementById('emptyState');
             list.innerHTML = '';
 
-            // Merge active imported songs with permanent favorite objects if stored in external persistent storage (localStorage)
             let combinedMap = new Map();
-            songs.forEach(s => combinedMap.set(s.title, s));
-            favorites.forEach(favTitle => {
-                if(!combinedMap.has(favTitle)) {
-                    combinedMap.set(favTitle, {
-                        id: "fav_" + favTitle,
-                        title: favTitle,
-                        artist: "Permanent Favorite Storage",
-                        url: "", // Permanent reference placeholder until re-imported or played from device
-                        fileObj: null,
-                        isFavoriteOnly: true
-                    });
-                }
+            
+            favorites.forEach(fav => {
+                combinedMap.set(fav.title, {
+                    ...fav,
+                    url: fav.url || "",
+                    fileObj: null
+                });
+            });
+
+            songs.forEach(s => {
+                combinedMap.set(s.title, {
+                    ...s,
+                    isFavorite: favorites.some(f => f.title === s.title)
+                });
             });
 
             let displayTracks = Array.from(combinedMap.values());
@@ -1162,7 +1160,7 @@
             } else { if(empty) empty.style.display = 'none'; }
 
             filteredSongs.forEach((s) => {
-                const isFav = favorites.includes(s.title);
+                const isFav = favorites.some(f => f.title === s.title);
                 const isCurrent = (songs[currentSongIndex] && songs[currentSongIndex].title === s.title);
                 
                 const item = document.createElement('div');
@@ -1171,7 +1169,7 @@
                 item.innerHTML = `
                     <div class="flex items-center space-x-3 overflow-hidden cursor-pointer flex-1" title="Play Track">
                         <i class="fa-solid fa-music text-theme-400"></i>
-                        <p class="truncate font-semibold">${s.title} ${s.isFavoriteOnly ? '<span class="text-[9px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded ml-1">Favorite Saved</span>' : ''}</p>
+                        <p class="truncate font-semibold">${s.title} ${!s.fileObj && s.url === "" ? '<span class="text-[9px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded ml-1">Favorite Saved (Re-import to Play)</span>' : ''}</p>
                     </div>
                     <div class="flex items-center space-x-2 ml-2">
                         <button title="Favorite Song" class="fav-btn px-2 py-1 rounded-lg text-xs transition-all ${isFav ? 'text-amber-400 bg-amber-500/20 border border-amber-500/30' : 'text-gray-400 hover:text-amber-400 bg-gray-900 border border-gray-800'}">
@@ -1183,34 +1181,41 @@
                     </div>
                 `;
 
-                // Song click to play if url exists, otherwise prompt to re-import
                 item.querySelector('.flex-1').onclick = () => {
-                    const realIndex = songs.findIndex(orig => orig.title === s.title);
+                    let realIndex = songs.findIndex(orig => orig.title === s.title);
                     if(realIndex !== -1) {
                         loadSong(realIndex);
                         playAudio();
+                    } else if(s.url !== "") {
+                        songs.push(s);
+                        loadSong(songs.length - 1);
+                        playAudio();
                     } else {
-                        alert(`"${s.title}" is saved in permanent favorites storage! Please import your folder/file to play its audio stream.`);
+                        alert(`"${s.title}" is saved in favorites! Please import your folder/file once to link its audio stream.`);
                     }
                 };
 
-                // Favorite option button
                 item.querySelector('.fav-btn').onclick = (e) => {
                     e.stopPropagation();
-                    if(favorites.includes(s.title)) {
-                        favorites = favorites.filter(fav => fav !== s.title);
+                    const indexInFav = favorites.findIndex(fav => fav.title === s.title);
+                    if(indexInFav !== -1) {
+                        favorites.splice(indexInFav, 1);
                     } else {
-                        favorites.push(s.title);
+                        favorites.push({
+                            id: s.id,
+                            title: s.title,
+                            artist: s.artist,
+                            url: s.fileObj ? "" : s.url
+                        });
                     }
                     localStorage.setItem('r_music_favorites', JSON.stringify(favorites));
                     renderTrackList(searchTerm);
                 };
 
-                // Remove option button
                 item.querySelector('.remove-btn').onclick = (e) => {
                     e.stopPropagation();
                     songs = songs.filter(orig => orig.title !== s.title);
-                    favorites = favorites.filter(fav => fav !== s.title);
+                    favorites = favorites.filter(fav => fav.title !== s.title);
                     localStorage.setItem('r_music_favorites', JSON.stringify(favorites));
                     if(currentSongIndex >= songs.length) currentSongIndex = songs.length - 1;
                     renderTrackList(searchTerm);
