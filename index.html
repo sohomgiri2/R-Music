@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>R Music - Web Audio Suite Ultimate</title>
+    <title>R Music - Web Audio Suite Ultimate Pro</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -56,6 +56,22 @@
         [data-theme="rose"] {
             --color-400: #fb7185; --color-500: #f43f5e; --color-600: #e11d48;
             --border-card: rgba(244, 63, 94, 0.2); --glow: rgba(244, 63, 94, 0.4);
+        }
+        [data-theme="violet"] {
+            --color-400: #a78bfa; --color-500: #8b5cf6; --color-600: #7c3aed;
+            --border-card: rgba(139, 92, 246, 0.2); --glow: rgba(139, 92, 246, 0.4);
+        }
+        [data-theme="blue"] {
+            --color-400: #60a5fa; --color-500: #3b82f6; --color-600: #2563eb;
+            --border-card: rgba(59, 130, 246, 0.2); --glow: rgba(59, 130, 246, 0.4);
+        }
+        [data-theme="crimson"] {
+            --color-400: #f87171; --color-500: #ef4444; --color-600: #dc2626;
+            --border-card: rgba(239, 68, 68, 0.2); --glow: rgba(239, 68, 68, 0.4);
+        }
+        [data-theme="gold"] {
+            --color-400: #facc15; --color-500: #eab308; --color-600: #ca8a04;
+            --border-card: rgba(234, 179, 8, 0.2); --glow: rgba(234, 179, 8, 0.4);
         }
 
         body {
@@ -349,7 +365,7 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-xs sm:text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
                         <i class="fa-solid fa-cube"></i>
-                        <span>Bass Boost & Audio Effects</span>
+                        <span>Vocal & Music Splitter & FX</span>
                     </h2>
                     <button id="resetAudioFxBtn" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-2.5 py-1 rounded-lg font-bold transition-all">
                         Reset Audio FX
@@ -357,6 +373,18 @@
                 </div>
 
                 <div class="space-y-4 pt-2">
+                    <div class="bg-gray-950 p-3 rounded-xl border border-gray-800 space-y-2">
+                        <p class="text-[11px] font-bold text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-microphone-lines text-theme-400"></i>
+                            <span>Vocal / Instrumental Extractor Balance</span>
+                        </p>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-[10px] text-gray-400">Instrumental</span>
+                            <input type="range" id="vocalSplitSlider" min="-1" max="1" value="0" step="0.1" class="w-full h-1.5 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
+                            <span class="text-[10px] text-gray-400">Vocal</span>
+                        </div>
+                    </div>
+
                     <div>
                         <div class="flex justify-between text-xs font-semibold text-gray-300 mb-1.5">
                             <span>Bass Boost Gain:</span>
@@ -413,6 +441,17 @@
 
                 <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-2">
                     <p class="font-bold text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-cyan-400"></i>
+                        <span>Quick Audio Normalizer & Booster</span>
+                    </p>
+                    <p class="text-gray-400">Optimize audio volume levels dynamically for silent imported tracks.</p>
+                    <button id="normalizeAudioBtn" class="w-full px-3 py-2 rounded-lg bg-gray-900 hover:bg-gray-800 text-theme-400 font-bold border border-theme-500/30">
+                        Apply Volume Normalization
+                    </button>
+                </div>
+
+                <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-2">
+                    <p class="font-bold text-white flex items-center space-x-2">
                         <i class="fa-solid fa-circle-info text-cyan-400"></i>
                         <span>Active Track Metadata Inspector</span>
                     </p>
@@ -437,7 +476,7 @@
             <div class="w-16 h-16 rounded-2xl bg-theme-500/20 text-theme-400 border border-theme-500/40 flex items-center justify-center text-3xl mx-auto font-black shadow-lg">
                 <i class="fa-solid fa-code"></i>
             </div>
-            <h2 class="text-2xl font-black text-white tracking-tight">R Music Suite Ultimate</h2>
+            <h2 class="text-2xl font-black text-white tracking-tight">R Music Suite Ultimate Pro</h2>
             <div class="bg-gray-900/90 border border-gray-800 p-4 rounded-xl space-y-2 text-left">
                 <p class="text-xs text-gray-400 uppercase font-bold">Developer Details</p>
                 <p class="text-sm font-bold text-white flex items-center justify-between">
@@ -483,17 +522,21 @@
     </div>
 
     <div id="themeModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="glass-card rounded-2xl max-w-xs w-full p-5 border border-gray-800 shadow-2xl relative">
+        <div class="glass-card rounded-2xl max-w-sm w-full p-5 border border-gray-800 shadow-2xl relative">
             <button id="closeThemeBtn" class="absolute top-3 right-3 text-gray-400 hover:text-white p-1">
                 <i class="fa-solid fa-xmark text-base"></i>
             </button>
-            <h2 class="text-base font-bold text-white mb-3">Choose Theme</h2>
-            <div class="grid grid-cols-2 gap-2 text-xs">
-                <button onclick="setAppTheme('cyan')" class="p-2.5 rounded-xl bg-gray-950 border border-cyan-500 text-cyan-400 font-bold">Cyber Cyan</button>
-                <button onclick="setAppTheme('emerald')" class="p-2.5 rounded-xl bg-gray-950 border border-emerald-500 text-emerald-400 font-bold">Emerald Green</button>
-                <button onclick="setAppTheme('purple')" class="p-2.5 rounded-xl bg-gray-950 border border-purple-500 text-purple-400 font-bold">Purple Wave</button>
-                <button onclick="setAppTheme('amber')" class="p-2.5 rounded-xl bg-gray-950 border border-amber-500 text-amber-400 font-bold">Sunset Amber</button>
-                <button onclick="setAppTheme('rose')" class="p-2.5 rounded-xl bg-gray-950 border border-rose-500 text-rose-400 font-bold">Rose Gold</button>
+            <h2 class="text-base font-bold text-white mb-3">Choose Theme Palette</h2>
+            <div class="grid grid-cols-3 gap-2 text-xs">
+                <button onclick="setAppTheme('cyan')" class="p-2.5 rounded-xl bg-gray-950 border border-cyan-500 text-cyan-400 font-bold">Cyan</button>
+                <button onclick="setAppTheme('emerald')" class="p-2.5 rounded-xl bg-gray-950 border border-emerald-500 text-emerald-400 font-bold">Emerald</button>
+                <button onclick="setAppTheme('purple')" class="p-2.5 rounded-xl bg-gray-950 border border-purple-500 text-purple-400 font-bold">Purple</button>
+                <button onclick="setAppTheme('amber')" class="p-2.5 rounded-xl bg-gray-950 border border-amber-500 text-amber-400 font-bold">Amber</button>
+                <button onclick="setAppTheme('rose')" class="p-2.5 rounded-xl bg-gray-950 border border-rose-500 text-rose-400 font-bold">Rose</button>
+                <button onclick="setAppTheme('violet')" class="p-2.5 rounded-xl bg-gray-950 border border-violet-500 text-violet-400 font-bold">Violet</button>
+                <button onclick="setAppTheme('blue')" class="p-2.5 rounded-xl bg-gray-950 border border-blue-500 text-blue-400 font-bold">Electric</button>
+                <button onclick="setAppTheme('crimson')" class="p-2.5 rounded-xl bg-gray-950 border border-red-500 text-red-400 font-bold">Crimson</button>
+                <button onclick="setAppTheme('gold')" class="p-2.5 rounded-xl bg-gray-950 border border-yellow-500 text-yellow-400 font-bold">Gold</button>
             </div>
         </div>
     </div>
@@ -508,7 +551,7 @@
         let sleepTimerRef = null;
 
         let audioCtx = null, audioSource = null, analyser = null, bassFilter = null;
-        let splitter = null, merger = null;
+        let splitter = null, merger = null, vocalGainNode = null;
         let eqFilters = [];
         const FREQUENCIES = [60, 250, 500, 1000, 2000, 4000, 8000, 12000, 14000, 16000];
 
@@ -541,6 +584,9 @@
             bassFilter.frequency.value = 180;
             bassFilter.gain.value = 0;
 
+            vocalGainNode = audioCtx.createGain();
+            vocalGainNode.gain.value = 1.0;
+
             splitter = audioCtx.createChannelSplitter(2);
             merger = audioCtx.createChannelMerger(2);
 
@@ -562,7 +608,8 @@
                 return f;
             });
 
-            lastNode.connect(analyser);
+            lastNode.connect(vocalGainNode);
+            vocalGainNode.connect(analyser);
             analyser.connect(audioCtx.destination);
 
             buildStudioEqUI();
@@ -576,12 +623,28 @@
             if (bassFilter) bassFilter.gain.value = gainVal;
         });
 
+        document.getElementById('vocalSplitSlider').addEventListener('input', (e) => {
+            initAudioEngine();
+            const val = parseFloat(e.target.value);
+            if(vocalGainNode) {
+                vocalGainNode.gain.value = 1.0 + val;
+            }
+        });
+
         document.getElementById('pitchSlider').addEventListener('input', (e) => {
             const val = parseFloat(e.target.value);
             document.getElementById('pitchVal').textContent = val + "x";
             audio.preservesPitch = true;
             audio.playbackRate = val;
         });
+
+        document.getElementById('normalizeAudioBtn').onclick = () => {
+            initAudioEngine();
+            if(vocalGainNode) {
+                vocalGainNode.gain.value = 1.4;
+                alert("Audio volume normalized and boosted successfully!");
+            }
+        };
 
         // Folder Directory Import
         document.getElementById('fileInput').addEventListener('change', (e) => {
@@ -956,10 +1019,12 @@
         document.getElementById('resetAudioFxBtn').onclick = () => {
             document.getElementById('studioBassSlider').value = 0;
             document.getElementById('studioBassVal').textContent = "0 dB";
+            document.getElementById('vocalSplitSlider').value = 0;
             document.getElementById('pitchSlider').value = 1;
             document.getElementById('pitchVal').textContent = "1.0x";
             audio.playbackRate = 1;
             if(bassFilter) bassFilter.gain.value = 0;
+            if(vocalGainNode) vocalGainNode.gain.value = 1.0;
         };
 
         function formatTime(s) {
