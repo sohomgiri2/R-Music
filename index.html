@@ -144,14 +144,14 @@
             <button id="tabBtn-playerTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-bold transition-all text-theme-400 bg-theme-500/20 border border-theme-500/30 flex items-center space-x-2">
                 <i class="fa-solid fa-play"></i><span>Player</span>
             </button>
+            <button id="tabBtn-playlistTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
+                <i class="fa-solid fa-list-music"></i><span>Playlist Manager</span>
+            </button>
             <button id="tabBtn-studioTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
                 <i class="fa-solid fa-sliders"></i><span>Studio FX</span>
             </button>
             <button id="tabBtn-toolsTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
                 <i class="fa-solid fa-toolbox"></i><span>Tools</span>
-            </button>
-            <button id="tabBtn-drumPadTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
-                <i class="fa-solid fa-drum"></i><span>DJ Pads</span>
             </button>
             <button id="tabBtn-lyricsTab" class="nav-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all text-gray-400 hover:text-white flex items-center space-x-2">
                 <i class="fa-solid fa-align-left"></i><span>Lyrics</span>
@@ -187,6 +187,10 @@
             <i class="fa-solid fa-play text-base"></i>
             <span class="text-[9px] mt-0.5">Player</span>
         </button>
+        <button id="mobTab-playlistTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
+            <i class="fa-solid fa-list-music text-base"></i>
+            <span class="text-[9px] mt-0.5">Playlist</span>
+        </button>
         <button id="mobTab-studioTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
             <i class="fa-solid fa-sliders text-base"></i>
             <span class="text-[9px] mt-0.5">Studio</span>
@@ -194,10 +198,6 @@
         <button id="mobTab-toolsTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
             <i class="fa-solid fa-toolbox text-base"></i>
             <span class="text-[9px] mt-0.5">Tools</span>
-        </button>
-        <button id="mobTab-drumPadTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
-            <i class="fa-solid fa-drum text-base"></i>
-            <span class="text-[9px] mt-0.5">Pads</span>
         </button>
         <button id="mobTab-lyricsTab" class="mob-tab-btn text-gray-400 flex flex-col items-center transition-all">
             <i class="fa-solid fa-align-left text-base"></i>
@@ -209,51 +209,12 @@
         </button>
     </div>
 
-    <main class="flex-1 max-w-[1700px] w-full mx-auto p-3 sm:p-5">
+    <main class="flex-1 max-w-[1400px] w-full mx-auto p-3 sm:p-5">
 
-        <div id="playerTab" class="page-tab grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
-            <aside class="lg:col-span-3 flex flex-col space-y-4">
-                <div class="glass-card rounded-2xl p-4">
-                    <div class="flex items-center justify-between mb-3 px-1">
-                        <h2 class="text-xs uppercase font-extrabold tracking-wider text-gray-400">Library Controls</h2>
-                        <span id="songCount" class="text-[10px] bg-theme-500/20 text-theme-400 px-2.5 py-0.5 rounded-full font-mono border border-theme-500/30">0 Tracks</span>
-                    </div>
-
-                    <div class="space-y-1.5">
-                        <button id="sortAZBtn" class="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-theme-500/20 text-theme-400 hover:bg-theme-500/30 font-semibold text-xs border border-theme-500/30 transition-all">
-                            <span class="flex items-center space-x-2.5">
-                                <i class="fa-solid fa-arrow-down-a-z"></i>
-                                <span>Sort Songs (A - Z)</span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="glass-card rounded-2xl p-4 space-y-2.5">
-                    <h2 class="text-xs uppercase font-extrabold tracking-wider text-theme-400 flex items-center space-x-2">
-                        <i class="fa-solid fa-microphone-lines"></i>
-                        <span>Vocal / Music Isolator Engine</span>
-                    </h2>
-                    <select id="vocalFilterSelect" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500">
-                        <option value="normal">🎶 Full Stereo Song</option>
-                        <option value="vocalsOnly">🎤 Only Vocal Mode (Voice Isolator)</option>
-                        <option value="musicOnly">🎸 Only Music Mode (Karaoke / Instrumental)</option>
-                        <option value="vocalBoost">📣 Mid Vocal Booster</option>
-                    </select>
-                </div>
-
-                <div class="glass-card rounded-2xl p-4 space-y-2">
-                    <div class="flex justify-between items-center text-xs font-bold text-gray-300">
-                        <span>🔀 Crossfade Duration:</span>
-                        <span id="crossfadeVal" class="text-theme-400 font-mono">0s</span>
-                    </div>
-                    <input type="range" id="crossfadeSlider" min="0" max="5" value="0" step="1" class="w-full h-1 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
-                </div>
-            </aside>
-
-            <section class="lg:col-span-6 flex flex-col space-y-4">
-                <div class="glass-card rounded-3xl p-4 sm:p-6 relative overflow-hidden flex flex-col items-center justify-between min-h-[440px] shadow-2xl">
-                    <div class="w-full flex justify-between items-center z-10">
+        <div id="playerTab" class="page-tab flex justify-center">
+            <section class="max-w-xl w-full flex flex-col space-y-4">
+                <div class="glass-card rounded-3xl p-5 sm:p-7 relative overflow-hidden flex flex-col items-center justify-between shadow-2xl">
+                    <div class="w-full flex justify-between items-center z-10 mb-2">
                         <span id="sourceBadge" class="text-[9px] font-extrabold bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full border border-theme-500/30 uppercase tracking-wider">
                             OFFLINE ENGINE READY
                         </span>
@@ -262,7 +223,7 @@
                         </span>
                     </div>
 
-                    <div class="relative my-3 flex items-center justify-center w-full h-48 sm:h-56 z-10">
+                    <div class="relative my-2 flex items-center justify-center w-full h-48 sm:h-56 z-10">
                         <canvas id="particleCanvas" class="absolute inset-0 z-0 rounded-2xl w-full h-full opacity-90"></canvas>
                         <div id="djScratchWheel" class="relative w-36 h-36 sm:w-48 sm:h-48 rounded-full dj-turntable flex items-center justify-center border-4 border-gray-700 z-10 cursor-pointer" title="Scrape & Spin Disc">
                             <img id="albumArt" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='1'><circle cx='12' cy='12' r='10'/></svg>" alt="Cover Art" class="w-full h-full object-cover rounded-full opacity-60 animate-spin-slow paused pointer-events-none">
@@ -272,18 +233,18 @@
                         </div>
                     </div>
 
-                    <div class="w-full h-8 flex items-end justify-center space-x-1 z-10 px-4" id="visualizerBars"></div>
+                    <div class="w-full h-8 flex items-end justify-center space-x-1 z-10 px-4 my-2" id="visualizerBars"></div>
 
                     <div class="text-center z-10 w-full px-2 mt-1">
                         <h2 id="currentTitle" class="font-extrabold text-lg sm:text-xl text-white truncate">
                             R Music Workstation Pro
                         </h2>
                         <p id="currentArtist" class="text-xs text-gray-400 truncate mt-0.5">
-                            Import music folder to unlock 15+ features
+                            Import music folder to begin
                         </p>
                     </div>
 
-                    <div class="w-full z-10 space-y-1 mt-2">
+                    <div class="w-full z-10 space-y-1 mt-3">
                         <input type="range" id="progressBar" value="0" min="0" max="100" class="w-full h-1.5 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
                         <div class="flex justify-between text-[11px] text-gray-400 font-mono">
                             <span id="currentTime">00:00</span>
@@ -291,7 +252,7 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-around w-full z-10 my-2 text-xs text-gray-400 border-y border-gray-800/60 py-1.5">
+                    <div class="flex items-center justify-around w-full z-10 my-3 text-xs text-gray-400 border-y border-gray-800/60 py-2">
                         <button id="shuffleBtn" class="hover:text-theme-400 transition-colors" title="Shuffle"><i class="fa-solid fa-shuffle"></i></button>
                         <button id="loopABtn" class="px-2 py-0.5 rounded bg-gray-900 border border-gray-800 hover:text-white" title="Loop Point A">Set A</button>
                         <button id="loopBBtn" class="px-2 py-0.5 rounded bg-gray-900 border border-gray-800 hover:text-white" title="Loop Point B">Set B</button>
@@ -300,25 +261,25 @@
                     </div>
 
                     <div class="flex flex-col items-center space-y-3 w-full z-10">
-                        <div class="flex items-center justify-center space-x-6">
+                        <div class="flex items-center justify-center space-x-8">
                             <button id="prevBtn" title="Previous Track" class="text-gray-300 hover:text-white transition-colors p-2">
                                 <i class="fa-solid fa-backward-step text-xl sm:text-2xl"></i>
                             </button>
-                            <button id="playPauseBtn" title="Play / Pause" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-theme-500 hover:bg-theme-400 text-black flex items-center justify-center shadow-xl neon-glow active:scale-95 transition-all">
-                                <i class="fa-solid fa-play text-lg sm:text-xl ml-0.5"></i>
+                            <button id="playPauseBtn" title="Play / Pause" class="w-14 h-14 rounded-full bg-theme-500 hover:bg-theme-400 text-black flex items-center justify-center shadow-xl neon-glow active:scale-95 transition-all">
+                                <i class="fa-solid fa-play text-xl ml-0.5"></i>
                             </button>
                             <button id="nextBtn" title="Next Track" class="text-gray-300 hover:text-white transition-colors p-2">
                                 <i class="fa-solid fa-forward-step text-xl sm:text-2xl"></i>
                             </button>
                         </div>
 
-                        <div class="flex items-center justify-between w-full pt-2 border-t border-gray-800/80 px-2 text-xs">
-                            <div class="flex items-center space-x-2 w-28 sm:w-36">
+                        <div class="flex items-center justify-between w-full pt-3 border-t border-gray-800/80 px-2 text-xs">
+                            <div class="flex items-center space-x-2 w-32 sm:w-40">
                                 <i class="fa-solid fa-volume-high text-gray-400"></i>
                                 <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.8" class="w-full h-1 bg-gray-900 rounded-lg appearance-none cursor-pointer accent-theme-500">
                             </div>
 
-                            <div class="flex items-center space-x-1 bg-gray-900 border border-gray-800 rounded-lg px-2 py-0.5">
+                            <div class="flex items-center space-x-1 bg-gray-900 border border-gray-800 rounded-lg px-2 py-1">
                                 <span class="text-[10px] text-gray-400">Speed:</span>
                                 <select id="playbackRate" class="bg-transparent text-theme-400 font-bold text-xs focus:outline-none">
                                     <option value="0.5">0.5x</option>
@@ -333,29 +294,41 @@
                     </div>
                 </div>
             </section>
+        </div>
 
-            <aside class="lg:col-span-3 flex flex-col space-y-4">
-                <div class="glass-card rounded-2xl p-4 flex-1 flex flex-col max-h-[480px] relative">
-                    <div class="flex items-center justify-between mb-2">
-                        <h2 class="text-xs uppercase font-extrabold tracking-wider text-gray-400">Playlist Storage</h2>
-                        <button id="clearQueueBtn" title="Clear Playlist" class="text-xs text-red-400 hover:text-red-300">
-                            <i class="fa-solid fa-trash"></i> Clear Queue
+        <div id="playlistTab" class="page-tab hidden max-w-2xl mx-auto space-y-4">
+            <div class="glass-card rounded-2xl p-5 flex flex-col space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-sm uppercase font-extrabold text-theme-400 flex items-center space-x-2">
+                        <i class="fa-solid fa-list-music"></i>
+                        <span>Playlist Manager & Storage</span>
+                    </h2>
+                    <div class="flex items-center space-x-2">
+                        <span id="songCount" class="text-[10px] bg-theme-500/20 text-theme-400 px-2.5 py-1 rounded-full font-mono border border-theme-500/30">0 Tracks</span>
+                        <button id="clearQueueBtn" title="Clear Playlist" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-2.5 py-1 rounded-lg">
+                            <i class="fa-solid fa-trash"></i> Clear
                         </button>
                     </div>
+                </div>
 
-                    <div class="relative mb-3">
-                        <input type="text" id="songSearchInput" placeholder="🔍 Search track name..." class="w-full bg-gray-950/80 border border-gray-800 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-theme-500 pl-8">
-                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2 text-gray-500 text-xs"></i>
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <div class="relative flex-1">
+                        <input type="text" id="songSearchInput" placeholder="🔍 Search track name..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-theme-500 pl-8">
+                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-3 text-gray-500 text-xs"></i>
                     </div>
+                    <button id="sortAZBtn" class="px-4 py-2 rounded-xl bg-theme-500/20 text-theme-400 hover:bg-theme-500/30 font-semibold text-xs border border-theme-500/30 transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-arrow-down-a-z"></i>
+                        <span>Sort A-Z</span>
+                    </button>
+                </div>
 
-                    <div id="trackList" class="flex-1 overflow-y-auto space-y-1.5 pr-1">
-                        <div id="emptyState" class="text-center py-10 text-gray-500">
-                            <i class="fa-solid fa-compact-disc text-3xl mb-2 opacity-40"></i>
-                            <p class="text-xs">No songs found.<br>Click "Import Folder" to load tracks!</p>
-                        </div>
+                <div id="trackList" class="max-h-[380px] overflow-y-auto space-y-2 pr-1">
+                    <div id="emptyState" class="text-center py-12 text-gray-500">
+                        <i class="fa-solid fa-compact-disc text-4xl mb-3 opacity-40"></i>
+                        <p class="text-xs">No tracks found.<br>Click "Import Folder" from the top navigation to load music!</p>
                     </div>
                 </div>
-            </aside>
+            </div>
         </div>
 
         <div id="studioTab" class="page-tab hidden grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -448,31 +421,6 @@
                         <p>Format: <span class="text-white">Unknown</span></p>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div id="drumPadTab" class="page-tab hidden glass-card rounded-2xl p-6 max-w-xl mx-auto">
-            <h2 class="text-sm uppercase font-extrabold text-amber-400 mb-1 flex items-center space-x-2">
-                <i class="fa-solid fa-drum"></i>
-                <span>Live DJ Soundboard Pads</span>
-            </h2>
-            <div class="grid grid-cols-2 gap-3 mt-4">
-                <button id="sfxKickBtn" class="p-5 rounded-2xl bg-gray-900 hover:bg-gray-800 active:scale-95 transition-all border border-gray-800 flex flex-col items-center justify-center space-y-1">
-                    <i class="fa-solid fa-drum-steelpan text-2xl text-amber-400"></i>
-                    <span class="text-xs font-extrabold text-white">KICK BEAT</span>
-                </button>
-                <button id="sfxSnareBtn" class="p-5 rounded-2xl bg-gray-900 hover:bg-gray-800 active:scale-95 transition-all border border-gray-800 flex flex-col items-center justify-center space-y-1">
-                    <i class="fa-solid fa-explosion text-2xl text-theme-400"></i>
-                    <span class="text-xs font-extrabold text-white">SNARE HIT</span>
-                </button>
-                <button id="sfxHiHatBtn" class="p-5 rounded-2xl bg-gray-900 hover:bg-gray-800 active:scale-95 transition-all border border-gray-800 flex flex-col items-center justify-center space-y-1">
-                    <i class="fa-solid fa-bell text-2xl text-purple-400"></i>
-                    <span class="text-xs font-extrabold text-white">HI-HAT TICK</span>
-                </button>
-                <button id="sfxSynthBtn" class="p-5 rounded-2xl bg-gray-900 hover:bg-gray-800 active:scale-95 transition-all border border-gray-800 flex flex-col items-center justify-center space-y-1">
-                    <i class="fa-solid fa-bolt text-2xl text-rose-400"></i>
-                    <span class="text-xs font-extrabold text-white">SYNTH DROP</span>
-                </button>
             </div>
         </div>
 
@@ -635,28 +583,6 @@
             audio.playbackRate = val;
         });
 
-        document.getElementById('vocalFilterSelect').addEventListener('change', (e) => {
-            initAudioEngine();
-            const mode = e.target.value;
-            if(!audioCtx) return;
-
-            if (mode === 'musicOnly') {
-                bassFilter.type = "highpass";
-                bassFilter.frequency.value = 250;
-            } else if (mode === 'vocalsOnly') {
-                bassFilter.type = "bandpass";
-                bassFilter.frequency.value = 1000;
-            } else if (mode === 'vocalBoost') {
-                bassFilter.type = "peaking";
-                bassFilter.frequency.value = 2500;
-                bassFilter.gain.value = 6;
-            } else {
-                bassFilter.type = "lowshelf";
-                bassFilter.frequency.value = 180;
-                bassFilter.gain.value = parseFloat(document.getElementById('studioBassSlider').value);
-            }
-        });
-
         // Folder Directory Import
         document.getElementById('fileInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
@@ -704,7 +630,6 @@
             const customNote = document.getElementById('customLyricsInput').value;
             document.getElementById('lyricsDisplay').textContent = customNote ? customNote : `Now Playing:\n${track.title}`;
             
-            // Update Metadata Inspector
             if(track.fileObj) {
                 document.getElementById('metaInspectorBox').innerHTML = `
                     <p>File Name: <span class="text-white">${track.fileObj.name}</span></p>
@@ -720,23 +645,11 @@
             initAudioEngine();
             if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
             
-            const crossfadeSec = parseInt(document.getElementById('crossfadeSlider').value);
-            if(crossfadeSec > 0) {
-                audio.volume = 0;
-                audio.play();
-                let vol = 0;
-                const interval = setInterval(() => {
-                    vol += 0.1;
-                    if(vol >= 1) { audio.volume = 1; clearInterval(interval); }
-                    else { audio.volume = vol; }
-                }, (crossfadeSec * 1000) / 10);
-            } else {
-                audio.volume = 0.8;
-                audio.play();
-            }
+            audio.volume = 0.8;
+            audio.play();
 
             isPlaying = true;
-            document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause text-lg sm:text-xl"></i>';
+            document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause text-xl"></i>';
             document.getElementById('fsPlayPauseBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
             document.getElementById('albumArt').classList.remove('paused');
             document.getElementById('fsAlbumArt').classList.remove('paused');
@@ -747,7 +660,7 @@
             if (isPlaying) {
                 audio.pause();
                 isPlaying = false;
-                document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-play text-lg sm:text-xl ml-0.5"></i>';
+                document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-play text-xl ml-0.5"></i>';
                 document.getElementById('fsPlayPauseBtn').innerHTML = '<i class="fa-solid fa-play"></i>';
                 document.getElementById('albumArt').classList.add('paused');
                 document.getElementById('fsAlbumArt').classList.add('paused');
@@ -810,15 +723,13 @@
         };
 
         document.getElementById('volumeSlider').oninput = (e) => { audio.volume = e.target.value; };
-        document.getElementById('crossfadeSlider').oninput = (e) => { document.getElementById('crossfadeVal').textContent = e.target.value + "s"; };
+        document.getElementById('playbackRate').onchange = (e) => { audio.playbackRate = parseFloat(e.target.value); };
 
-        // Scratch Turntable Interaction Effect
         document.getElementById('djScratchWheel').onclick = () => {
             if(!isPlaying) return;
             audio.currentTime = Math.max(0, audio.currentTime - 2);
         };
 
-        // Sleep Timer Utility
         document.getElementById('sleepTimerBtn').onclick = () => {
             const mins = prompt("Enter Sleep Timer duration in minutes:", "15");
             if(!mins || isNaN(mins)) return;
@@ -842,7 +753,6 @@
             alert(`Sleep timer set for ${mins} minutes!`);
         };
 
-        // Fixed & Enhanced Audio Trimmer Engine
         document.getElementById('markStartBtn').onclick = () => {
             document.getElementById('trimStartInput').value = audio.currentTime.toFixed(1);
         };
@@ -881,7 +791,6 @@
                         }
                     }
 
-                    // Convert to WAV Blob
                     const wavBlob = bufferToWave(trimmedBuffer, frameCount);
                     const url = URL.createObjectURL(wavBlob);
                     const a = document.createElement('a');
@@ -899,7 +808,6 @@
             reader.readAsArrayBuffer(currentFile);
         };
 
-        // Helper function to convert AudioBuffer to WAV format blob
         function bufferToWave(abBuffer, len) {
             let numOfChan = abBuffer.numberOfChannels,
                 length = len * numOfChan * 2 + 44,
@@ -912,20 +820,18 @@
             function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
 
             setUint32(0x46464952); // "RIFF"
-            setUint32(length - 8); // file length - 8
+            setUint32(length - 8);
             setUint32(0x45564157); // "WAVE"
-
             setUint32(0x20746d66); // "fmt " chunk
-            setUint32(16); // length = 16
-            setUint16(1); // PCM (uncompressed)
+            setUint32(16);
+            setUint16(1);
             setUint16(numOfChan);
             setUint32(sampleRate);
-            setUint32(sampleRate * 2 * numOfChan); // avg. bytes/sec
-            setUint16(numOfChan * 2); // block-align
-            setUint16(16); // 16-bit
-
-            setUint32(0x61746164); // "data" - chunk
-            setUint32(length - pos - 4); // chunk length
+            setUint32(sampleRate * 2 * numOfChan);
+            setUint16(numOfChan * 2);
+            setUint16(16);
+            setUint32(0x61746164); // "data"
+            setUint32(length - pos - 4);
 
             for (let i = 0; i < abBuffer.numberOfChannels; i++) channels.push(abBuffer.getChannelData(i));
 
@@ -939,27 +845,6 @@
                 offset++;
             }
             return new Blob([buffer], { type: "audio/wav" });
-        }
-
-        // Live DJ Soundboard SFX
-        document.getElementById('sfxKickBtn').onclick = () => playSfxTone(120, 'sine', 0.2);
-        document.getElementById('sfxSnareBtn').onclick = () => playSfxTone(350, 'triangle', 0.15);
-        document.getElementById('sfxHiHatBtn').onclick = () => playSfxTone(800, 'square', 0.08);
-        document.getElementById('sfxSynthBtn').onclick = () => playSfxTone(520, 'sawtooth', 0.25);
-
-        function playSfxTone(freq, type, duration) {
-            initAudioEngine();
-            if(!audioCtx) return;
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = type;
-            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + duration);
         }
 
         document.getElementById('fullScreenPlayerBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.remove('hidden');
@@ -981,8 +866,14 @@
             filteredSongs.forEach((s) => {
                 const originalIndex = songs.findIndex(orig => orig.id === s.id);
                 const item = document.createElement('div');
-                item.className = `p-2.5 rounded-xl text-xs cursor-pointer flex items-center justify-between transition-all ${originalIndex === currentSongIndex ? 'bg-theme-500/20 text-theme-400 font-bold border border-theme-500/30' : 'hover:bg-gray-800/80 text-gray-300'}`;
-                item.innerHTML = `<p class="truncate font-semibold">${s.title}</p>`;
+                item.className = `p-3 rounded-xl text-xs cursor-pointer flex items-center justify-between transition-all ${originalIndex === currentSongIndex ? 'bg-theme-500/20 text-theme-400 font-bold border border-theme-500/30' : 'bg-gray-950/80 hover:bg-gray-900 text-gray-300 border border-gray-800/60'}`;
+                item.innerHTML = `
+                    <div class="flex items-center space-x-3 overflow-hidden">
+                        <i class="fa-solid fa-music text-theme-400"></i>
+                        <p class="truncate font-semibold">${s.title}</p>
+                    </div>
+                    <span class="text-[10px] text-gray-500 font-mono">${s.artist}</span>
+                `;
                 item.onclick = () => { loadSong(originalIndex); playAudio(); };
                 list.appendChild(item);
             });
@@ -1000,7 +891,7 @@
             btn.addEventListener('click', () => switchTab(btn.id.replace('tabBtn-', '')));
         });
 
-        ['playerTab', 'studioTab', 'toolsTab', 'drumPadTab', 'lyricsTab', 'aboutTab'].forEach(t => {
+        ['playerTab', 'playlistTab', 'studioTab', 'toolsTab', 'lyricsTab', 'aboutTab'].forEach(t => {
             const mobBtn = document.getElementById(`mobTab-${t}`);
             if (mobBtn) mobBtn.onclick = () => {
                 switchTab(t);
