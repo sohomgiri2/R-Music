@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>R Music - Web Audio Suite</title>
+    <title>R Music - Web Audio Suite Ultimate</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -95,13 +95,24 @@
             box-shadow: inset 0 0 20px rgba(0,0,0,0.9), 0 0 25px var(--glow);
         }
 
-        /* Fixed Equalizer Slider Dimensions */
+        /* Equalizer Fixed Slider Dimensions & Cross-browser Alignment */
+        .eq-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            width: 100%;
+        }
+
         input[type="range"].eq-slider {
-            writing-mode: bt-lr;
             -webkit-appearance: slider-vertical;
             appearance: slider-vertical;
-            width: 8px;
-            height: 90px;
+            writing-mode: bt-lr;
+            width: 16px;
+            height: 120px;
+            background: transparent;
+            cursor: pointer;
         }
         
         .mob-tab-active {
@@ -149,7 +160,7 @@
         </nav>
 
         <div class="flex items-center space-x-2">
-            <button id="fullScreenPlayerBtn" title="Pure Song Fullscreen Mode" class="w-8 h-8 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-theme-400 hover:text-white transition-all text-xs">
+            <button id="fullScreenPlayerBtn" title="Advanced Pure Fullscreen Mode" class="w-8 h-8 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-theme-400 hover:text-white transition-all text-xs">
                 <i class="fa-solid fa-expand"></i>
             </button>
 
@@ -159,8 +170,8 @@
 
             <label class="cursor-pointer bg-theme-500 hover:bg-theme-400 text-black font-extrabold px-3 py-1.5 rounded-full text-xs transition-all shadow-md neon-glow flex items-center space-x-1">
                 <i class="fa-solid fa-folder-plus"></i>
-                <span>Import Songs</span>
-                <input type="file" id="fileInput" multiple webkitdirectory directory accept="audio/*" class="hidden">
+                <span>Import Audio</span>
+                <input type="file" id="fileInput" multiple accept="audio/*" class="hidden">
             </label>
 
             <button id="openThemeModalBtn" title="Change Theme" class="w-8 h-8 rounded-full bg-gray-900 hover:bg-gray-800 border border-gray-800 flex items-center justify-center text-theme-400 transition-all">
@@ -262,7 +273,7 @@
                             R Music Workstation
                         </h2>
                         <p id="currentArtist" class="text-xs text-gray-400 truncate mt-0.5">
-                            Import folder or songs to start listening
+                            Import audio songs to start offline play
                         </p>
                     </div>
 
@@ -320,9 +331,9 @@
             <aside class="lg:col-span-3 flex flex-col space-y-4">
                 <div class="glass-card rounded-2xl p-4 flex-1 flex flex-col max-h-[480px] relative">
                     <div class="flex items-center justify-between mb-2">
-                        <h2 class="text-xs uppercase font-extrabold tracking-wider text-gray-400">Playlist</h2>
-                        <button id="clearQueueBtn" title="Clear Queue" class="text-xs text-red-400 hover:text-red-300">
-                            <i class="fa-solid fa-trash"></i>
+                        <h2 class="text-xs uppercase font-extrabold tracking-wider text-gray-400">Playlist Storage</h2>
+                        <button id="clearQueueBtn" title="Clear Storage Library" class="text-xs text-red-400 hover:text-red-300">
+                            <i class="fa-solid fa-trash"></i> Clear Saved
                         </button>
                     </div>
 
@@ -334,7 +345,7 @@
                     <div id="trackList" class="flex-1 overflow-y-auto space-y-1.5 pr-1">
                         <div id="emptyState" class="text-center py-10 text-gray-500">
                             <i class="fa-solid fa-compact-disc text-3xl mb-2 opacity-40"></i>
-                            <p class="text-xs">No songs imported yet.</p>
+                            <p class="text-xs">No saved songs found.<br>Click "Import Audio" to auto-sync!</p>
                         </div>
                     </div>
                 </div>
@@ -352,7 +363,7 @@
                         Reset EQ
                     </button>
                 </div>
-                <div id="studioEqContainer" class="grid grid-cols-5 sm:grid-cols-10 gap-1 sm:gap-2 h-48 items-center justify-items-center bg-gray-950 p-3 rounded-xl border border-gray-800 overflow-hidden"></div>
+                <div id="studioEqContainer" class="grid grid-cols-5 sm:grid-cols-10 gap-2 min-h-[180px] p-4 bg-gray-950 rounded-xl border border-gray-800 overflow-x-auto"></div>
             </div>
 
             <div class="glass-card rounded-2xl p-4 sm:p-5 space-y-4">
@@ -430,16 +441,33 @@
         </div>
     </main>
 
-    <div id="fullScreenPlayerModal" class="fixed inset-0 bg-black/95 z-50 hidden flex flex-col items-center justify-center p-6 space-y-6 backdrop-blur-2xl">
-        <button id="closeFullScreenBtn" class="absolute top-5 right-5 text-gray-400 hover:text-white p-2 text-2xl">
-            <i class="fa-solid fa-compress"></i>
-        </button>
-        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full dj-turntable flex items-center justify-center border-8 border-gray-800 neon-glow">
-            <img id="fsAlbumArt" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='1'><circle cx='12' cy='12' r='10'/></svg>" class="w-full h-full object-cover rounded-full opacity-70 animate-spin-slow paused">
+    <div id="fullScreenPlayerModal" class="fixed inset-0 bg-black/95 z-50 hidden flex flex-col items-center justify-between p-6 sm:p-10 backdrop-blur-3xl">
+        <div class="w-full flex justify-between items-center text-xs text-gray-400 border-b border-gray-800 pb-4">
+            <span class="flex items-center space-x-2 text-theme-400 font-extrabold uppercase tracking-widest text-[10px]">
+                <i class="fa-solid fa-compact-disc animate-spin-slow"></i>
+                <span>PURE IMMERSIVE MODE</span>
+            </span>
+            <button id="closeFullScreenBtn" class="text-gray-400 hover:text-white p-2 text-2xl transition-all">
+                <i class="fa-solid fa-compress"></i>
+            </button>
         </div>
-        <div class="text-center space-y-1">
-            <h2 id="fsTitle" class="text-2xl font-black text-white tracking-wide">Track Title</h2>
-            <p id="fsArtist" class="text-sm text-theme-400 font-semibold">Artist Name</p>
+
+        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full dj-turntable flex items-center justify-center border-8 border-gray-800 neon-glow my-auto">
+            <img id="fsAlbumArt" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='1'><circle cx='12' cy='12' r='10'/></svg>" class="w-full h-full object-cover rounded-full opacity-70 animate-spin-slow paused">
+            <div class="absolute inset-0 border-4 border-dashed border-theme-500/30 rounded-full animate-spin-slow"></div>
+        </div>
+
+        <div class="text-center space-y-2 max-w-lg w-full">
+            <h2 id="fsTitle" class="text-2xl sm:text-3xl font-black text-white tracking-wide truncate">Track Title</h2>
+            <p id="fsArtist" class="text-sm text-theme-400 font-semibold truncate">Artist Name</p>
+        </div>
+
+        <div class="w-full max-w-xl space-y-4 pt-4 border-t border-gray-800/80">
+            <div class="flex items-center justify-center space-x-8">
+                <button id="fsPrevBtn" class="text-gray-300 hover:text-white text-2xl"><i class="fa-solid fa-backward-step"></i></button>
+                <button id="fsPlayPauseBtn" class="w-14 h-14 rounded-full bg-theme-500 text-black flex items-center justify-center text-xl shadow-xl neon-glow"><i class="fa-solid fa-play"></i></button>
+                <button id="fsNextBtn" class="text-gray-300 hover:text-white text-2xl"><i class="fa-solid fa-forward-step"></i></button>
+            </div>
         </div>
     </div>
 
@@ -460,13 +488,26 @@
     </div>
 
     <script>
+        // IndexedDB persistent storage for Offline Automatic Retrieval
+        let db = null;
+        const request = indexedDB.open("RMusicTrackDB", 1);
+        request.onupgradeneeded = (e) => {
+            db = e.target.result;
+            if (!db.objectStoreNames.contains("audioTracks")) {
+                db.createObjectStore("audioTracks", { keyPath: "id" });
+            }
+        };
+        request.onsuccess = (e) => {
+            db = e.target.result;
+            loadStoredSongs();
+        };
+
         let songs = [];
         let currentSongIndex = -1;
         let isPlaying = false;
         let isShuffle = false;
         let isRepeat = false;
         let loopA = null, loopB = null;
-        let sleepTimer = null;
 
         let audioCtx = null, audioSource = null, analyser = null, bassFilter = null;
         let splitter = null, merger = null, vocalGainNode = null, musicGainNode = null;
@@ -488,7 +529,6 @@
             }
         }
 
-        // Initialize Web Audio Engine
         function initAudioEngine() {
             if (audioCtx) return;
             const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -498,7 +538,6 @@
             analyser = audioCtx.createAnalyser();
             analyser.fftSize = 256;
 
-            // Low-shelf Filter Dedicated for Bass Boost
             bassFilter = audioCtx.createBiquadFilter();
             bassFilter.type = "lowshelf";
             bassFilter.frequency.value = 180;
@@ -534,17 +573,15 @@
             initVisualizerBars();
         }
 
-        // Real Working Bass Boost Slider Event Listener
+        // Bass boost handler
         document.getElementById('studioBassSlider').addEventListener('input', (e) => {
             initAudioEngine();
             const gainVal = parseFloat(e.target.value);
             document.getElementById('studioBassVal').textContent = gainVal + " dB";
-            if (bassFilter) {
-                bassFilter.gain.value = gainVal;
-            }
+            if (bassFilter) bassFilter.gain.value = gainVal;
         });
 
-        // Vocal Separator Engine Mode Switcher
+        // Vocal Filter Mode
         document.getElementById('vocalFilterSelect').addEventListener('change', (e) => {
             initAudioEngine();
             const mode = e.target.value;
@@ -567,34 +604,68 @@
             }
         });
 
-        // Folder & Multi-file Import Handler
+        // File Import with Auto-Save into Local DB
         document.getElementById('fileInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
             files.forEach(f => {
                 if (f.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|flac)$/i.test(f.name)) {
-                    songs.push({
-                        id: "local_" + Date.now() + "_" + Math.random().toString(36).substr(2, 4),
-                        title: f.name.replace(/\.[^/.]+$/, ""),
-                        artist: "Local Track",
-                        url: URL.createObjectURL(f)
-                    });
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const trackData = {
+                            id: "local_" + Date.now() + "_" + Math.random().toString(36).substr(2, 4),
+                            title: f.name.replace(/\.[^/.]+$/, ""),
+                            artist: "Offline Audio",
+                            blob: event.target.result
+                        };
+
+                        if(db) {
+                            const tx = db.transaction("audioTracks", "readwrite");
+                            tx.objectStore("audioTracks").put(trackData);
+                        }
+
+                        trackData.url = URL.createObjectURL(f);
+                        songs.push(trackData);
+                        renderTrackList();
+                        if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
+                    };
+                    reader.readAsArrayBuffer(f);
                 }
             });
-            renderTrackList();
-            if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
         });
 
-        // Search Track Filter Event
+        // Load Stored Offline Songs on startup
+        function loadStoredSongs() {
+            if(!db) return;
+            const tx = db.transaction("audioTracks", "readonly");
+            const store = tx.objectStore("audioTracks");
+            const getAll = store.getAll();
+
+            getAll.onsuccess = () => {
+                const storedList = getAll.result;
+                if(storedList && storedList.length > 0) {
+                    songs = storedList.map(item => {
+                        const blob = new Blob([item.blob], { type: 'audio/mp3' });
+                        return {
+                            id: item.id,
+                            title: item.title,
+                            artist: item.artist,
+                            url: URL.createObjectURL(blob)
+                        };
+                    });
+                    renderTrackList();
+                    if(songs.length > 0) loadSong(0);
+                }
+            };
+        }
+
         document.getElementById('songSearchInput').addEventListener('input', (e) => {
             renderTrackList(e.target.value.trim().toLowerCase());
         });
 
-        // Alphabetical A-Z Sort Handler
         document.getElementById('sortAZBtn').onclick = () => {
             if (songs.length === 0) return;
             songs.sort((a, b) => a.title.localeCompare(b.title));
             renderTrackList();
-            alert("Songs sorted alphabetically (A-Z)!");
         };
 
         function loadSong(index) {
@@ -631,22 +702,27 @@
 
             isPlaying = true;
             document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause text-lg sm:text-xl"></i>';
+            document.getElementById('fsPlayPauseBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
             document.getElementById('albumArt').classList.remove('paused');
             document.getElementById('fsAlbumArt').classList.remove('paused');
         }
 
-        document.getElementById('playPauseBtn').onclick = () => {
+        function togglePlayPause() {
             if (songs.length === 0) return alert("Select or import songs first!");
             if (isPlaying) {
                 audio.pause();
                 isPlaying = false;
                 document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-play text-lg sm:text-xl ml-0.5"></i>';
+                document.getElementById('fsPlayPauseBtn').innerHTML = '<i class="fa-solid fa-play"></i>';
                 document.getElementById('albumArt').classList.add('paused');
                 document.getElementById('fsAlbumArt').classList.add('paused');
             } else {
                 playAudio();
             }
-        };
+        }
+
+        document.getElementById('playPauseBtn').onclick = togglePlayPause;
+        document.getElementById('fsPlayPauseBtn').onclick = togglePlayPause;
 
         document.getElementById('prevBtn').onclick = () => {
             if (songs.length === 0) return;
@@ -654,30 +730,34 @@
             if (idx < 0) idx = songs.length - 1;
             loadSong(idx); playAudio();
         };
+        document.getElementById('fsPrevBtn').onclick = () => document.getElementById('prevBtn').click();
 
         document.getElementById('nextBtn').onclick = () => {
             if (songs.length === 0) return;
             let idx = isShuffle ? Math.floor(Math.random() * songs.length) : (currentSongIndex + 1) % songs.length;
             loadSong(idx); playAudio();
         };
+        document.getElementById('fsNextBtn').onclick = () => document.getElementById('nextBtn').click();
 
         audio.onended = () => {
             if (isRepeat) { loadSong(currentSongIndex); playAudio(); }
             else { document.getElementById('nextBtn').click(); }
         };
 
-        // Clear Queue Engine
         document.getElementById('clearQueueBtn').onclick = () => {
+            if(db) {
+                const tx = db.transaction("audioTracks", "readwrite");
+                tx.objectStore("audioTracks").clear();
+            }
             songs = [];
             audio.pause();
             isPlaying = false;
             currentSongIndex = -1;
             document.getElementById('currentTitle').textContent = "R Music Workstation";
-            document.getElementById('currentArtist').textContent = "Import folder or songs to start listening";
+            document.getElementById('currentArtist').textContent = "Import songs to start listening";
             renderTrackList();
         };
 
-        // AB Loop
         document.getElementById('loopABtn').onclick = () => { loopA = audio.currentTime; alert(`Point A set at ${formatTime(loopA)}`); };
         document.getElementById('loopBBtn').onclick = () => { loopB = audio.currentTime; alert(`Point B set at ${formatTime(loopB)}`); };
         document.getElementById('clearABBtn').onclick = () => { loopA = null; loopB = null; };
@@ -702,11 +782,9 @@
         document.getElementById('playbackRate').onchange = (e) => { audio.playbackRate = parseFloat(e.target.value); };
         document.getElementById('crossfadeSlider').oninput = (e) => { document.getElementById('crossfadeVal').textContent = e.target.value + "s"; };
 
-        // Fullscreen Mode Controls
         document.getElementById('fullScreenPlayerBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.remove('hidden');
         document.getElementById('closeFullScreenBtn').onclick = () => document.getElementById('fullScreenPlayerModal').classList.add('hidden');
 
-        // Render Tracklist with Filter Option
         function renderTrackList(searchTerm = '') {
             const list = document.getElementById('trackList');
             const empty = document.getElementById('emptyState');
@@ -732,7 +810,6 @@
             document.getElementById('songCount').textContent = songs.length + " Tracks";
         }
 
-        // Tab Navigation
         function switchTab(tabId) {
             document.querySelectorAll('.page-tab').forEach(tab => tab.classList.add('hidden'));
             const activeTab = document.getElementById(tabId);
@@ -782,12 +859,12 @@
             container.innerHTML = '';
             FREQUENCIES.forEach((freq, idx) => {
                 const wrap = document.createElement('div');
-                wrap.className = 'flex flex-col items-center h-full justify-between';
+                wrap.className = 'eq-wrapper';
                 const label = freq >= 1000 ? (freq/1000) + 'k' : freq;
                 wrap.innerHTML = `
-                    <span class="text-[8px] text-gray-400 font-mono">${label}</span>
-                    <input type="range" min="-12" max="12" value="0" step="0.5" class="eq-slider appearance-none bg-gray-900 rounded-lg accent-theme-500">
-                    <span class="text-[8px] text-theme-400 font-bold font-mono band-val">0</span>
+                    <span class="text-[9px] text-gray-400 font-mono">${label}</span>
+                    <input type="range" min="-12" max="12" value="0" step="0.5" class="eq-slider accent-theme-500">
+                    <span class="text-[9px] text-theme-400 font-bold font-mono band-val">0</span>
                 `;
                 const slider = wrap.querySelector('input');
                 const valDisp = wrap.querySelector('.band-val');
