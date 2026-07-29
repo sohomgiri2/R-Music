@@ -331,8 +331,8 @@
                 <div class="glass-card rounded-2xl p-4 flex-1 flex flex-col max-h-[480px] relative">
                     <div class="flex items-center justify-between mb-2">
                         <h2 class="text-xs uppercase font-extrabold tracking-wider text-gray-400">Playlist Storage</h2>
-                        <button id="clearQueueBtn" title="Clear Storage Library" class="text-xs text-red-400 hover:text-red-300">
-                            <i class="fa-solid fa-trash"></i> Clear Saved
+                        <button id="clearQueueBtn" title="Clear Playlist" class="text-xs text-red-400 hover:text-red-300">
+                            <i class="fa-solid fa-trash"></i> Clear Queue
                         </button>
                     </div>
 
@@ -344,7 +344,7 @@
                     <div id="trackList" class="flex-1 overflow-y-auto space-y-1.5 pr-1">
                         <div id="emptyState" class="text-center py-10 text-gray-500">
                             <i class="fa-solid fa-compact-disc text-3xl mb-2 opacity-40"></i>
-                            <p class="text-xs">No saved songs found.<br>Click "Import Audio" to auto-sync!</p>
+                            <p class="text-xs">No songs found.<br>Click "Import Audio" to load songs!</p>
                         </div>
                     </div>
                 </div>
@@ -487,19 +487,6 @@
     </div>
 
     <script>
-        let db = null;
-        const request = indexedDB.open("RMusicTrackDB", 1);
-        request.onupgradeneeded = (e) => {
-            db = e.target.result;
-            if (!db.objectStoreNames.contains("audioTracks")) {
-                db.createObjectStore("audioTracks", { keyPath: "id" });
-            }
-        };
-        request.onsuccess = (e) => {
-            db = e.target.result;
-            loadStoredSongs();
-        };
-
         let songs = [];
         let currentSongIndex = -1;
         let isPlaying = false;
@@ -600,74 +587,28 @@
             }
         });
 
-        // FIXED FILE UPLOAD LOGIC (Async Queue to save all files safely)
-        document.getElementById('fileInput').addEventListener('change', async (e) => {
+        // Direct Multi-file/All audio selection support without saving to prevent crash
+        document.getElementById('fileInput').addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
-            for (let i = 0; i < files.length; i++) {
-                const f = files[i];
-                if (f.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|flac)$/i.test(f.name)) {
-                    await new Promise((resolve) => {
-                        const reader = new FileReader();
-                        reader.onload = function(event) {
-                            const trackData = {
-                                id: "local_" + Date.now() + "_" + i + "_" + Math.random().toString(36).substr(2, 5),
-                                title: f.name.replace(/\.[^/.]+$/, ""),
-                                artist: "Offline Audio",
-                                blob: event.target.result
-                            };
+            if(files.length === 0) return;
 
-                            if (db) {
-                                const tx = db.transaction("audioTracks", "readwrite");
-                                const store = tx.objectStore("audioTracks");
-                                store.put(trackData);
-                                
-                                tx.oncomplete = () => {
-                                    trackData.url = URL.createObjectURL(f);
-                                    songs.push(trackData);
-                                    renderTrackList();
-                                    if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
-                                    resolve();
-                                };
-                                tx.onerror = () => {
-                                    resolve();
-                                };
-                            } else {
-                                trackData.url = URL.createObjectURL(f);
-                                songs.push(trackData);
-                                renderTrackList();
-                                if (currentSongIndex === -1 && songs.length > 0) loadSong(0);
-                                resolve();
-                            }
-                        };
-                        reader.readAsArrayBuffer(f);
-                    });
+            files.forEach((f, i) => {
+                if (f.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|flac)$/i.test(f.name)) {
+                    const trackData = {
+                        id: "local_" + Date.now() + "_" + i + "_" + Math.random().toString(36).substr(2, 4),
+                        title: f.name.replace(/\.[^/.]+$/, ""),
+                        artist: "Local Audio",
+                        url: URL.createObjectURL(f)
+                    };
+                    songs.push(trackData);
                 }
+            });
+
+            renderTrackList();
+            if (currentSongIndex === -1 && songs.length > 0) {
+                loadSong(0);
             }
         });
-
-        function loadStoredSongs() {
-            if(!db) return;
-            const tx = db.transaction("audioTracks", "readonly");
-            const store = tx.objectStore("audioTracks");
-            const getAll = store.getAll();
-
-            getAll.onsuccess = () => {
-                const storedList = getAll.result;
-                if(storedList && storedList.length > 0) {
-                    songs = storedList.map(item => {
-                        const blob = new Blob([item.blob], { type: 'audio/mp3' });
-                        return {
-                            id: item.id,
-                            title: item.title,
-                            artist: item.artist,
-                            url: URL.createObjectURL(blob)
-                        };
-                    });
-                    renderTrackList();
-                    if(songs.length > 0) loadSong(0);
-                }
-            };
-        }
 
         document.getElementById('songSearchInput').addEventListener('input', (e) => {
             renderTrackList(e.target.value.trim().toLowerCase());
@@ -756,10 +697,6 @@
         };
 
         document.getElementById('clearQueueBtn').onclick = () => {
-            if(db) {
-                const tx = db.transaction("audioTracks", "readwrite");
-                tx.objectStore("audioTracks").clear();
-            }
             songs = [];
             audio.pause();
             isPlaying = false;
